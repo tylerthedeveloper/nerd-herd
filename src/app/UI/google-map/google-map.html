@@ -1,0 +1,55 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY&callback=initMap"></script>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!--<script src="./custom-js/map.js"></script> -->
+
+<div class="col-lg-9 col-md-offset-3" style="width: 55%;">
+<article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" >
+
+<p>aaa<p>
+<agm-map [latitude]="latitude" [longitude]="longitude" style="height: 300px;">
+  <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+</agm-map>
+
+
+</article>
+</div>
+<!--
+    [1] 17.06.19 16:54:14 404 GET /function (){_.Tk.call(this);this.b=!1;this.f=null}/maps/api/js/AuthenticationService.Authenticate
+ 
+    this creates a google map on the page with the given lat/lng from 
+    -->
+<!-- the component as the initial center of the map: -->
+
+
+
+<!--
+
+    style=" float: right;"
+
+<script>
+$(function () {
+
+    function initMap() {
+
+        var location = new google.maps.LatLng(50.0875726, 14.4189987);
+
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: location,
+            zoom: 16,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    }
+    google.maps.event.addDomListener(window, 'load', initMap);
+});
+</script>    
+<div class="col-lg-9" style="width: 55%;">
+    <div style="height:500px; width:500px;">  ommiting the height and width will not show the map
+            <div id="google-map"></div>
+    </div>
+</div>
+-->

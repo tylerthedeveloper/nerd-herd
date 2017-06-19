@@ -46,9 +46,42 @@
             </div>
         </div>
         <div class="row">
+                <google-map></google-map>
                 <blog-post></blog-post>
                 <blog-post></blog-post>
                 <blog-post></blog-post>
+
         </div>
     </div>
 </section>
+
+
+<!--<script src="./custom-js/map.js"></script> 
+<script>
+$(function () {
+
+    function initMap() {
+
+        var location = new google.maps.LatLng(50.0875726, 14.4189987);
+
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: location,
+            zoom: 16,
+            panControl: false,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+    }
+    google.maps.event.addDomListener(window, 'load', initMap);
+});
+/*
+<div class="col-lg-9" style="width: 55%;">
+    <div style="height:500px; width:500px;"> 
+            <div id="map"></div>
+    </div>
+</div>  
+
+</script>   
+-->
