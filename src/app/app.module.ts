@@ -8,15 +8,18 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 
-import { HomeComponent } from './UI/homepage/homepage.component';
-import { ContactComponent }  from './UI/contact/contact.component';
-import { GoogleMapComponent }  from './UI/google-map/google-map.component';
-import { NavBarComponent }  from './UI/nav/navbar.component';
-import { SignUpComponent }  from './UI/account/sign-up/sign-up.component';
-import { PageHeaderComponent }  from './UI/templates/page-header/page-header.component';
-import { SubscribeComponent }  from './UI/templates/subscribe/subscribe.component';
-import { ProfileBoxComponent }  from './UI/cards/profile-box/profile-box.component';
-import { BlogPostComponent }  from './UI/cards/blog-post/blog-post.component';
+import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent } from './UI/index';
+import { SignUpComponent }  from './account/sign-up/sign-up.component';
+import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
+import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
+//import { HomeComponent } from './UI/homepage/homepage.component';
+//import { ContactComponent }  from './UI/contact/contact.component';
+//import { GoogleMapComponent }  from './UI/google-map/google-map.component';
+//import { NavBarComponent }  from './UI/nav/navbar.component';
+//import { ProfileBoxComponent }  from './UI/cards/profile-box/profile-box.component';
+//import { BlogPostComponent }  from './UI/cards/blog-post/blog-post.component';
+//import { PageHeaderComponent }  from './UI/templates/page-header/page-header.component';
+//import { SubscribeComponent }  from './UI/templates/subscribe/subscribe.component';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, NgbModule.forRoot(), HttpModule,

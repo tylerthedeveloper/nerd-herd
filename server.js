@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
+const jsonServer = require('json-server');
 
 // Get our API routes
 const api = require('./server/routes/api');
@@ -17,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
-app.use('/api', api);
+//app.use('/api', api);
+app.use('/api', jsonServer.router('db.json'));
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

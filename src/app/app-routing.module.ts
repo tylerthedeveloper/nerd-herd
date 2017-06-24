@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ContactComponent } from './UI/contact/contact.component';
 import { HomeComponent } from './UI/homepage/homepage.component';
-import { SignUpComponent } from './UI/account/sign-up/sign-up.component';
+import { SignUpComponent } from './account/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
 //    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
