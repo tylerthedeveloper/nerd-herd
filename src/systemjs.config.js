@@ -28,12 +28,20 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       //'google-maps-angular2':      'npm:google-maps-angular2/dist',
       'angular2-google-maps/core': 'npm:angular2-google-maps/core/core.umd.js',
-      '@agm/core': 'node_modules/@agm/core/core.umd.js'
+      '@agm/core': 'node_modules/@agm/core/core.umd.js',
+      //'ng2-pop-over' : 'node_modules/ng2-pop-over/bundles/npm-module-seed.umd.js',
+      '@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
+      'ts': 'npm:plugin-typescript@4.0.10/lib/plugin.js',
+      'typescript': 'npm:typescript@2.0.2/lib/typescript.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
       app: {
         defaultExtension: 'js',
+        transpiler: 'ts',
+        typescriptOptions: {
+            tsconfig: true
+        },
         meta: {
           './*.js': {
             loader: 'systemjs-angular-loader.js'

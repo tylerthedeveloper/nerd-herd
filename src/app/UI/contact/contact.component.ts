@@ -6,6 +6,6 @@ import { PageHeaderComponent } from '../templates/page-header/page-header.compon
   templateUrl: './contact.html',
 })
 export class ContactComponent {
-  title = 'Contact us';
+  pageTitle: string = 'Contact us';
   bgImageUrl = 'https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/themes/hestia/assets/img/header.jpg';
 }
