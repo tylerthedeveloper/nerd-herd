@@ -1,17 +1,21 @@
-import { Injectable } from '@angular/core';
+import { Injectable,  } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
- 
+import { Observable } from 'rxjs/Observable';
 import { Post } from '../_models/post';
  
+import { environment } from '../../environments/environment';
+
+const API_URL = environment.apiUrl;
+
 @Injectable()
 export class PostService {
 
  //   private postUrl = '/api/posts';
-	private postUrl = 'http://localhost:3000/posts';
+	private postUrl = API_URL + 'api/posts';
 
     constructor(private http: Http) { }
  
-    getAll() {
+    getAll() :  Observable<Post[]>{
         return this.http.get(this.postUrl, this.jwt()).map((response: Response) => response.json());
     }
  

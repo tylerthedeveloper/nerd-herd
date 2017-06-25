@@ -17,11 +17,7 @@ export class FeedComponent {
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
-      //this.postService.getAll() ..? (heroes => this.heroes = heroes);
-      //this.posts = this.postService.getAll();
-        this.postService.getAll().subscribe(posts => {
-          this.posts = posts;
-        });
+        this.posts = this.postService.getAll();
     }
 
 

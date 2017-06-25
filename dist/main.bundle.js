@@ -167,8 +167,13 @@ var FeedComponent = (function () {
         this.postService = postService;
     }
     FeedComponent.prototype.ngOnInit = function () {
-        //this.postService.getAll() ..? (heroes => this.heroes = heroes);
+        //this.postService.getAll(). ..? (heroes => this.heroes = heroes);
         this.posts = this.postService.getAll();
+        /*
+        this.postService.getAll().subscribe(posts => {
+          this.posts = posts;
+        });
+        */
     };
     return FeedComponent;
 }());
@@ -189,7 +194,7 @@ var _a;
 /***/ "../../../../../src/app/UI/feed/feed.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n            \n                <li *ngFor=\"let post of posts | async\">\n                    <blog-post [author]=\"post.author\"></blog-post>\n                </li>\n            \n                <!--\n                <blog-post></blog-post>\n                <blog-post></blog-post>\n                <blog-post></blog-post>\n                -->\n\n<!--\n<section class=\"products section-gray\" id=\"products\" data-sorder=\"hestia_shop\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-8 col-md-offset-2 text-center\">\n                <h2 class=\"title\">Welcome</h2>\n            </div>\n        </div>\n        <div class=\"row\">\n            <ul class=\"list-group\">\n                <li class=\"list-group-item\" *ngFor=\"let post of posts | async\">\n                    <blog-post [author]=\"post.author\"></blog-post>\n                </li>\n            </ul>                \n\n        </div>\n    </div>\n</section>\n-->"
+module.exports = "<li *ngFor=\"let post of posts | async\">\n    <blog-post [author]=\"post.author\"></blog-post>\n</li>\n            "
 
 /***/ }),
 

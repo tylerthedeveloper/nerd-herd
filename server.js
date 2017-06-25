@@ -22,8 +22,8 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/api', api);
-app.use('/users', users);
-app.use('/posts', posts);
+app.use('/api/users', users);
+app.use('/api/posts', posts);
 //app.use('/api', jsonServer.router('db.json'));
 
 // Catch all other routes and return the index file
