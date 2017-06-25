@@ -6,7 +6,8 @@ import { Post } from '../_models/post';
 @Injectable()
 export class PostService {
 
-    private postUrl = '/api/posts';
+ //   private postUrl = '/api/posts';
+	private postUrl = 'http://localhost:4200/api/posts';
 
     constructor(private http: Http) { }
  

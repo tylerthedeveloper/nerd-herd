@@ -8,10 +8,12 @@ import { HttpModule } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 
-import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent } from './UI/index';
+import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, FeedComponent } from './UI/index';
 import { SignUpComponent }  from './account/sign-up/sign-up.component';
 import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
 import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
+import { PostService } from './_services/index';
+
 //import { HomeComponent } from './UI/homepage/homepage.component';
 //import { ContactComponent }  from './UI/contact/contact.component';
 //import { GoogleMapComponent }  from './UI/google-map/google-map.component';
@@ -28,9 +30,10 @@ import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
                       libraries: ["places"]
                     }),
                   ],
+  providers: [ PostService ],
   declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
-                  SignUpComponent ],
+                  SignUpComponent, FeedComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
