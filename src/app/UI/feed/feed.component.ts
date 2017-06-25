@@ -18,7 +18,10 @@ export class FeedComponent {
 
     ngOnInit(): void {
       //this.postService.getAll() ..? (heroes => this.heroes = heroes);
-      this.posts = this.postService.getAll();
+      //this.posts = this.postService.getAll();
+        this.postService.getAll().subscribe(posts => {
+          this.posts = posts;
+        });
     }
 
 
