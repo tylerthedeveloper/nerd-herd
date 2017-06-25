@@ -2,10 +2,15 @@
 <html>
   <head>
     <title>Angular QuickStart</title>
-    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <!-- 
     <link rel="stylesheet" href="styles.css">
+     <script>
+      document.write('<base href="' + String(document.location).replace('index.html','') + '">')
+      </script>
+     -->
     <link rel='stylesheet' id='siteorigin-panels-front-css'  href='https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/plugins/siteorigin-panels/css/front.css?ver=2.4.6' type='text/css' media='all' />
     <link rel='stylesheet' id='dashicons-css'  href='https://demot-vertigostudio.netdna-ssl.com/hestia/wp-includes/css/dashicons.min.css?ver=4.7.5' type='text/css' media='all' />
     <link rel='stylesheet' id='font-awesome-css'  href='https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/plugins/menu-icons/includes/library/icon-picker/css/types/font-awesome.min.css?ver=4.6.1' type='text/css' media='all' />
@@ -23,17 +28,16 @@
     <link rel='stylesheet' id='scss-css'  href='https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/cache/busting/89/sccss.css?ver=1495804360' type='text/css' media='all' />
     <link rel='stylesheet' id='jetpack_css-css'  href='https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/plugins/jetpack/css/jetpack.css?ver=4.0.4' type='text/css' media='all' />
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
 
+    <!-- Polyfill(s) for older browsers 
+    <script src="node_modules/core-js/client/shim.min.js"></script>
     <script src="node_modules/zone.js/dist/zone.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
-
     <script>
       System.import('main.js').catch(function(err){ console.error(err); });
     </script>
+    -->
   </head>
 
   <body>
