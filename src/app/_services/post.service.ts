@@ -11,7 +11,7 @@ const API_URL = environment.apiUrl;
 export class PostService {
 
  //   private postUrl = '/api/posts';
-	private postUrl = API_URL + 'api/posts';
+	private postUrl = API_URL + '/api/posts';
 
     constructor(private http: Http) { }
  

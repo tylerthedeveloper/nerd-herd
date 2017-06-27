@@ -9,10 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 
 import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, FeedComponent } from './UI/index';
-import { SignUpComponent }  from './account/sign-up/sign-up.component';
+import { CallbackComponent, SignUpComponent }  from './account/index';
 import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
 import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
-import { PostService } from './_services/index';
+import { AuthService, PostService } from './_services/index';
 
 //import { HomeComponent } from './UI/homepage/homepage.component';
 //import { ContactComponent }  from './UI/contact/contact.component';
@@ -30,10 +30,10 @@ import { PostService } from './_services/index';
                       libraries: ["places"]
                     }),
                   ],
-  providers: [ PostService ],
+  providers: [ PostService, AuthService ],
   declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
-                  SignUpComponent, FeedComponent ],
+                  SignUpComponent, FeedComponent, CallbackComponent ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

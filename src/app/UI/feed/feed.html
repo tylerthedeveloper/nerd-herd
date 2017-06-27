@@ -1,4 +1,3 @@
-<li *ngFor="let post of posts | async">
-    <blog-post [author]="post.author"></blog-post>
-</li>
+    <blog-post *ngFor="let post of posts | async" [author]="post.author"></blog-post>
+
             
