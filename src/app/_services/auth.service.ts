@@ -48,12 +48,13 @@ export class AuthService {
       // When Auth0 hash parsed, get profile
       this.auth0.parseHash((err, authResult) => {
         if (authResult && authResult.accessToken && authResult.idToken) {
-          window.location.hash = '';
-          this._getProfile(authResult);
-          this.router.navigate(['/']);
-        } else if (err) {
-          this.router.navigate(['/']);
-          console.error(`Error: ${err.error}`);
+            window.location.hash = '';
+            this._getProfile(authResult);
+            this.router.navigate(['/']);
+        } 
+        else if (err) {
+            this.router.navigate(['/']);
+            console.error(`Error: ${err.error}`);
         }
       });
     }
