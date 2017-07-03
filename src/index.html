@@ -39,13 +39,27 @@
     </script>
     -->
   </head>
+  <!--
   <script src="https://cdn.auth0.com/js/auth0/8.0.4/auth0.min.js"></script>
-  <!--<script type="text/javascript">
+    <script type="text/javascript">
     var webAuth = new auth0.WebAuth({
       domain:       'ewf.auth0.com',
       clientID:     'RKnMDMN8GcRgqrwsvL-PVsU0vgqM25t8'
     });
   </script>-->
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
+    authDomain: "ewf-nh.firebaseapp.com",
+    databaseURL: "https://ewf-nh.firebaseio.com",
+    projectId: "ewf-nh",
+    storageBucket: "",
+    messagingSenderId: "1056076336153"
+  };
+  firebase.initializeApp(config);
+</script>
   <body>
     <my-app>Loading AppComponent content here ...</my-app>
   </body>

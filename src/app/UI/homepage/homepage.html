@@ -9,6 +9,19 @@
 </div>
 -->
 
+ <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
+    authDomain: "ewf-nh.firebaseapp.com",
+    databaseURL: "https://ewf-nh.firebaseio.com",
+    projectId: "ewf-nh",
+    storageBucket: "",
+    messagingSenderId: "1056076336153"
+  };
+  firebase.initializeApp(config);
+</script>
 
 <section class="products section-gray" id="products" data-sorder="hestia_shop">
     <div class="container">
@@ -48,10 +61,18 @@
             </div>
         </div>
         <div class="row">
-               
+            <div class="col-lg-9 col-md-offset-3" style="width: 55%;">
+                <div> {{ (user | async)?.uid }} </div>
+                <div> {{ (user | async)?.displayName }} </div>
+                <div> {{ (user | async)?.email }} </div>
+                <div> {{ (user | async)?.photoURL }} </div>
+                <div> {{ (user | async)?.providerId }} </div>
+                <button (click)="login()">Login</button>
+                <button (click)="logout()">Logout</button>
+            </div>
                 <!-- <a *ngIf="!authService.authenticated" (click)="authService.login()">Log In</a>  -->
                 <!-- <google-map></google-map> -->
-                <feed></feed>
+                <!-- <feed></feed> -->
         </div>
     </div>
 </section>

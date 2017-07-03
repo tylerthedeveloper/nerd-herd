@@ -4,9 +4,14 @@ import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+
 //import { routing }        from './app-routing';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
+import { environment } from '../environments/environment';
 
 import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, FeedComponent } from './UI/index';
 import { CallbackComponent, SignUpComponent }  from './account/index';
@@ -14,22 +19,14 @@ import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
 import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
 import { AuthService, PostService } from './_services/index';
 
-//import { HomeComponent } from './UI/homepage/homepage.component';
-//import { ContactComponent }  from './UI/contact/contact.component';
-//import { GoogleMapComponent }  from './UI/google-map/google-map.component';
-//import { NavBarComponent }  from './UI/nav/navbar.component';
-//import { ProfileBoxComponent }  from './UI/cards/profile-box/profile-box.component';
-//import { BlogPostComponent }  from './UI/cards/blog-post/blog-post.component';
-//import { PageHeaderComponent }  from './UI/templates/page-header/page-header.component';
-//import { SubscribeComponent }  from './UI/templates/subscribe/subscribe.component';
-
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, NgbModule.forRoot(), HttpModule,
                   AgmCoreModule.forRoot({
                       apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
                       libraries: ["places"]
-                    }),
-                  ],
+                    }), AngularFireModule.initializeApp(environment.firebase),
+                    AngularFireAuthModule, AngularFireDatabaseModule
+                ],
   providers: [ PostService, AuthService ],
   declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,

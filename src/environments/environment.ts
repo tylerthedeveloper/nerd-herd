@@ -7,6 +7,14 @@ export const environment = {
   
   production: false, //not in production
   
-  apiUrl: 'http://localhost:3000' // URL of development API
+  apiUrl: 'http://localhost:4200', // URL of development API
   
+  firebase: {
+    apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
+    authDomain: "ewf-nh.firebaseapp.com",
+    databaseURL: "https://ewf-nh.firebaseio.com",
+    projectId: "ewf-nh",
+    storageBucket: "",
+    messagingSenderId: "1056076336153"
+  }
 };
