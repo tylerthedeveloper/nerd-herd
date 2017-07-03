@@ -17,7 +17,7 @@ import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, F
 import { CallbackComponent, SignUpComponent }  from './account/index';
 import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
 import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
-import { AuthService, PostService } from './_services/index';
+import { AuthService, PostService, AFService } from './_services/index';
 
 @NgModule({
   imports:      [ BrowserModule, AppRoutingModule, NgbModule.forRoot(), HttpModule,
@@ -27,7 +27,7 @@ import { AuthService, PostService } from './_services/index';
                     }), AngularFireModule.initializeApp(environment.firebase),
                     AngularFireAuthModule, AngularFireDatabaseModule
                 ],
-  providers: [ PostService, AuthService ],
+  providers: [ PostService, AuthService, AFService ],
   declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                   SignUpComponent, FeedComponent, CallbackComponent ],
