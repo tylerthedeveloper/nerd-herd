@@ -5,7 +5,7 @@ import { PostService } from '../../_services/post.service'
 import { Post } from '../../_models/post';
 
 @Component({
-  selector: 'feed',
+  selector: 'post-feed',
   templateUrl: './feed.html',
   providers: [ PostService ]
 })

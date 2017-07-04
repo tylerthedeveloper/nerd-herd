@@ -32,7 +32,10 @@
       //'ng2-pop-over' : 'node_modules/ng2-pop-over/bundles/npm-module-seed.umd.js',
       '@ng-bootstrap/ng-bootstrap': 'node_modules/@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
       'ts': 'npm:plugin-typescript@4.0.10/lib/plugin.js',
-      'typescript': 'npm:typescript@2.0.2/lib/typescript.js'
+      'typescript': 'npm:typescript@2.0.2/lib/typescript.js',
+
+      '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {

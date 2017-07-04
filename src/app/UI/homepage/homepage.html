@@ -22,19 +22,30 @@
   };
   firebase.initializeApp(config);
 </script>
-
 <section class="products section-gray" id="products" data-sorder="hestia_shop">
     <div class="container">
-        <div class="row">
+        <!--
+            <div class="row">
             <div class="col-md-8 col-md-offset-2 text-center">
                 <h2 class="title">Welcome</h2>
             </div>
         </div>
+        -->
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="top: 100px;">
                 <profile-box></profile-box>
             </div>
-            <div class="col-md-2 col-md-offset-7">
+            <div class="col-lg-7" style="top: 50px;">
+                <md-tab-group>
+                    <md-tab label="Posts" style="position: absolute; height:600px" flex layout-fill>
+                        <post-feed></post-feed>
+                    </md-tab>
+                    <md-tab label="Projects">
+                        <h1>Project feed</h1>
+                    </md-tab>
+                </md-tab-group>
+            </div>
+            <div class="col-md-2" style="top: 100px;">
                 <div class="col-md-1" style="float:right; position: fixed;">
                     <div style="float:right; position: fixed;">
                         <div class=" shop-item">
@@ -59,10 +70,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-                <feed></feed> 
-                <!-- <google-map></google-map> -->
         </div>
     </div>
 </section>

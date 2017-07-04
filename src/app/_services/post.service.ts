@@ -21,7 +21,8 @@ export class PostService {
             authorID: this.user.uid,            
             author: this.user.displayName,
             title: title,
-            content: content
+            content: content,
+            timestamp: firebase.database.ServerValue.TIMESTAMP
             /*
             id: 1,
             date: string;

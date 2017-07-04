@@ -2,7 +2,7 @@
 import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ContactComponent, HomeComponent, FeedComponent } from './UI/index';
-import { CallbackComponent, SignUpComponent } from './account/index';
+import { SignUpComponent } from './account/index';
 
 const appRoutes: Routes = [
 //    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -11,7 +11,6 @@ const appRoutes: Routes = [
     //{ path: 'login', component: LoginComponent },
     { path: 'sign-up', component: SignUpComponent },
     { path: 'contact', component: ContactComponent },
-    { path: 'callback', component: CallbackComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
  //   { path: '**', redirectTo: '' }
 ];
