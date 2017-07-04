@@ -1,4 +1,48 @@
 import { Injectable,  } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Post } from '../_models/post';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+import { AFService } from '../_services/af.service';
+
+@Injectable()
+export class PostService {
+    
+    posts: FirebaseListObservable<any>;
+    user: firebase.User;
+
+    constructor(db: AngularFireDatabase, public afService : AFService) {
+        //this.user = firebase.auth().currentUser;
+//        this.user = this.afService.user
+        this.posts = db.list('/posts');
+        this.afService.getUser().subscribe(user => this.user = user);
+    }
+
+    addPost(title: string, content: string) {  // , author: string) {
+        this.posts.push({ 
+            authorID: this.user.uid,            
+            author: this.user.displayName,
+            title: title,
+            content: content
+            /*
+            id: 1,
+            date: string;
+            picture: string;
+            tags : Category[];
+            */
+        });
+    }
+
+    updatePost(key: string, newText: string) {
+        this.posts.update(key, { text: newText });
+    }
+
+    deletePost(key: string) {    
+        this.posts.remove(key); 
+    }
+}
+/*
+import { Injectable,  } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../_models/post';
@@ -46,3 +90,4 @@ export class PostService {
         }
     }
 }
+*/

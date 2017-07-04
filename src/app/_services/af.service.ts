@@ -12,6 +12,10 @@ export class AFService {
     this.user = afAuth.authState;
   }
 
+  getUser() {
+      return this.afAuth.authState;
+  }
+
   loginWithGoogle() {
     return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function (result) {
         var token = result.credential.accessToken; // This gives you a Google Access Token. 

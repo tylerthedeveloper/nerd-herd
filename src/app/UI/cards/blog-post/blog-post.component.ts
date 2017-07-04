@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 })
 export class BlogPostComponent {
   @Input() author : string;
-  //title = 'Contact us';
-  //bgImageUrl = 'https://demot-vertigostudio.netdna-ssl.com/hestia/wp-content/themes/hestia/assets/img/header.jpg';
+  @Input() title : string;
+  @Input() content : string;
+
 }

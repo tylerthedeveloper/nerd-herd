@@ -1,3 +1,14 @@
-    <blog-post *ngFor="let post of posts | async" [author]="post.author"></blog-post>
+    
+<div class="col-lg-9 col-md-offset-3" style="width: 55%;">
+    <div><label> Title </label><input type="text" #titleContent /> </div>
+    <div><label> Text </label><input type="text" #postContent /> </div>
+    <button (click)="post(titleContent.value, postContent.value)"> Post </button>
+ </div>
+
+<blog-post *ngFor="let post of posts | async" 
+        [author]="post.author"
+        [title]="post.title"
+        [content]="post.content">
+</blog-post>
 
             

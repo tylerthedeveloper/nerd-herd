@@ -17,8 +17,11 @@ export class FeedComponent {
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
-        this.posts = this.postService.getAll();
+        this.posts = this.postService.posts;
     }
 
+    post(title: string, content: string) {
+        this.postService.addPost(title, content);
+    }
 
 }

@@ -13,9 +13,8 @@ import * as firebase from 'firebase/app';
 export class NavBarComponent {
   navx ='<sign-up></sign-up>';  
   loggedIn : boolean;
-  user: Observable<firebase.User>;
+  user: firebase.User;
   constructor(public afService : AFService) {
-    this.user = afService.user;
     this.afService.afAuth.authState.subscribe(
       (auth) => {
         if (auth != null) {
