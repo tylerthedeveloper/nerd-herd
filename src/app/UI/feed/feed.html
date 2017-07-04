@@ -1,8 +1,52 @@
-    
+<!-- Nav tabs -->
 <div class="col-lg-9 col-md-offset-3" style="width: 55%;">
-    <div><label> Title </label><input type="text" #titleContent /> </div>
-    <div><label> Text </label><input type="text" #postContent /> </div>
-    <button (click)="post(titleContent.value, postContent.value)"> Post </button>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs md-pills pills-default" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#panel31" role="tab"><i class="fa fa-user fa-2x"></i><br> Profile</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel32" role="tab"><i class="fa fa-heart fa-2x"></i><br> Follow</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#panel33" role="tab"><i class="fa fa-envelope fa-2x"></i><br> Contact</a>
+    </li>
+</ul>
+<!-- Tab panels -->
+<div class="tab-content">
+    <!--Panel 1-->
+    <div class="tab-pane fade in show active" id="panel31" role="tabpanel">
+        <br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+    </div>
+    <!--/.Panel 1-->
+    <!--Panel 2-->
+    <div class="tab-pane fade" id="panel32" role="tabpanel">
+        <br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+    </div>
+    <!--/.Panel 2-->
+    <!--Panel 3-->
+    <div class="tab-pane fade" id="panel33" role="tabpanel">
+        <br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora, placeat ratione porro voluptate odit minima.</p>
+    </div>
+    <!--/.Panel 3-->
+</div>
+</div>
+<div class="col-lg-9 col-md-offset-3" style="width: 55%;">
+	<article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
+        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
+                <label for="pirate-forms-contact-subject"></label>
+                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
+        </div>
+        <div class="col-sm-12 col-lg-12 form_field_wrap contact_message_wrap  ">
+                <textarea #postContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
+        </div>
+        <button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';" class="pull-right"> Post </button>
+    </article>
  </div>
 
 <blog-post *ngFor="let post of posts | async" 

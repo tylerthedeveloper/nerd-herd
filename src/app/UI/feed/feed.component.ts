@@ -12,16 +12,22 @@ import { Post } from '../../_models/post';
 
 export class FeedComponent {
 
+    //postTitle: string;
     posts : Observable<Post[]>;
 
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
+        //this.postTitle  = "";
         this.posts = this.postService.posts;
     }
 
     post(title: string, content: string) {
         this.postService.addPost(title, content);
+        //this.clearPost();
     }
 
+    private clearPost() : void {
+        //this.postTitle = "";
+    }
 }

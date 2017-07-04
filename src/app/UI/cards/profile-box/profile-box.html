@@ -5,19 +5,24 @@
 					<img width="50px" height="50px" src="../../../assets/cat.png"/>
 				</div>
 			<div class="content">
-				<h6 class="category"><a href="https://demo.themeisle.com/hestia/product-category/trending/" rel="tag"> Name </a></h6>
-					<div>
-						<p> School </p>
-						<p> Job </p>
+				<div *ngIf="user | async as user; else loggedOut">
+					<h6 class="category"  > {{ user.displayName }} </h6>
+						<div>
+							<p> School </p>
+							<p> Job </p>
+						</div>
+					<div class="card-description" style="float: left">
+							<p> ### </p>
+							<p> # Followers </p>
 					</div>
-				<div class="card-description" style="float: left">
-						<p> ### </p>
-						<p> # Followers </p>
+					<div class="card-description" style="float: right">
+							<p> ### </p>
+							<p> # Posts </p>
+					</div>
 				</div>
-				<div class="card-description" style="float: right">
-						<p> ### </p>
-						<p> # Posts </p>
-				</div>
+				<ng-template #loggedOut> 
+					<h6 class="category" #loggedOut >Sign up now </h6> 
+				</ng-template>
 			</div>
 		</div>
 	</div>

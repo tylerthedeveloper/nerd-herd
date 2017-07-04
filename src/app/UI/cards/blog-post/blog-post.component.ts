@@ -5,8 +5,8 @@ import { Component, Input } from '@angular/core';
   templateUrl: './blog-post.html',
 })
 export class BlogPostComponent {
-  @Input() author : string;
-  @Input() title : string;
-  @Input() content : string;
+    @Input() author : string;
+    @Input() title : string;
+    @Input() content : string;
 
 }

@@ -13,6 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 import { environment } from '../environments/environment';
 
+//import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, FeedComponent } from './UI/index';
 import { CallbackComponent, SignUpComponent }  from './account/index';
 import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
@@ -25,7 +26,7 @@ import { AuthService, PostService, AFService } from './_services/index';
                       apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
                       libraries: ["places"]
                     }), AngularFireModule.initializeApp(environment.firebase),
-                    AngularFireAuthModule, AngularFireDatabaseModule
+                    AngularFireAuthModule, AngularFireDatabaseModule, //MDBBootstrapModule.forRoot() 
                 ],
   providers: [ PostService, AuthService, AFService ],
   declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,

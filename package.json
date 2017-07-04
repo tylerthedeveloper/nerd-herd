@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.26",
+    "angular-bootstrap-md": "^4.0.5",
     "angular2-jwt": "^0.2.3",
     "angularfire2": "^4.0.0-rc.1",
     "auth0-js": "^8.8.0",

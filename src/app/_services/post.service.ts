@@ -12,8 +12,6 @@ export class PostService {
     user: firebase.User;
 
     constructor(db: AngularFireDatabase, public afService : AFService) {
-        //this.user = firebase.auth().currentUser;
-//        this.user = this.afService.user
         this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => this.user = user);
     }
