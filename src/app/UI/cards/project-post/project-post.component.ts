@@ -3,10 +3,10 @@ import * as firebase from 'firebase/app';
 import { HelperService } from '../../../_services/helpers.service';
 
 @Component({
-  selector: 'blog-post',
-  templateUrl: './blog-post.html',
+  selector: 'project-post',
+  templateUrl: './project-post.html',
 })
-export class BlogPostComponent {
+export class ProjectPostComponent {
     @Input() author : string;
     @Input() title : string;
     @Input() content : string;
@@ -14,12 +14,11 @@ export class BlogPostComponent {
     convertedTimeSince : string;
 
     ngOnInit(): void {
-        this.convertedTimeSince  = HelperService.convertTime(this.timeSince);
-      //this.convertedTimeSince  = this.convertTime(this.timeSince);
+      this.convertedTimeSince  = HelperService.convertTime(this.timeSince);
     }
-
+  
     /*
-    convertTime(timestamp : number ) : string {
+    convertTime(timestamp : number) : string {
       
         var msPerMinute = 60 * 1000;
         var msPerHour = msPerMinute * 60;

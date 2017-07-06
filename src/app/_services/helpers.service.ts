@@ -1,26 +1,8 @@
-import { Component, Input } from '@angular/core';
-import * as firebase from 'firebase/app';
-import { HelperService } from '../../../_services/helpers.service';
 
-@Component({
-  selector: 'blog-post',
-  templateUrl: './blog-post.html',
-})
-export class BlogPostComponent {
-    @Input() author : string;
-    @Input() title : string;
-    @Input() content : string;
-    @Input() timeSince : number;   
-    convertedTimeSince : string;
+export class HelperService {
+    
+    public static convertTime(timestamp : number) : string {
 
-    ngOnInit(): void {
-        this.convertedTimeSince  = HelperService.convertTime(this.timeSince);
-      //this.convertedTimeSince  = this.convertTime(this.timeSince);
-    }
-
-    /*
-    convertTime(timestamp : number ) : string {
-      
         var msPerMinute = 60 * 1000;
         var msPerHour = msPerMinute * 60;
         var msPerDay = msPerHour * 24;
@@ -53,5 +35,4 @@ export class BlogPostComponent {
             return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';   
         }
     }
-    */
 }

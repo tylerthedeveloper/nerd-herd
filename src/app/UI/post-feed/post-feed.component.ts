@@ -6,11 +6,11 @@ import { Post } from '../../_models/post';
 
 @Component({
   selector: 'post-feed',
-  templateUrl: './feed.html',
+  templateUrl: './post-feed.html',
   providers: [ PostService ]
 })
 
-export class FeedComponent {
+export class PostFeedComponent {
 
     //postTitle: string;
     posts : Observable<Post[]>;

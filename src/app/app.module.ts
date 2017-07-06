@@ -1,4 +1,4 @@
-import { NgModule }      from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AgmCoreModule } from '@agm/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,26 +12,26 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent }  from './app.component';
 import { environment } from '../environments/environment';
 
+
+import { MaterialModule } from '@angular/material';
+import { CommonModule } from '@angular/common';
 import 'hammerjs';
-import { MaterialDesignModule } from './ng-md.module';
-import { NavBarComponent, GoogleMapComponent, ContactComponent, HomeComponent, FeedComponent } from './UI/index';
-import { SignUpComponent }  from './account/index';
-import { PageHeaderComponent, SubscribeComponent } from './UI/templates/index';
-import { ProfileBoxComponent, BlogPostComponent } from './UI/cards/index';
+
 import { AuthService, PostService, AFService } from './_services/index';
+import { UIModule } from './UI/ui.app.module';
 
 @NgModule({
-  imports:      [ BrowserModule, AppRoutingModule, NgbModule.forRoot(), HttpModule,
+  imports:      [ BrowserModule, AppRoutingModule, CommonModule, 
+                  NgbModule.forRoot(), HttpModule, UIModule,
                   AgmCoreModule.forRoot({
                       apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
                       libraries: ["places"]
-                    }), AngularFireModule.initializeApp(environment.firebase),
-                    AngularFireAuthModule, AngularFireDatabaseModule, MaterialDesignModule //MDBBootstrapModule.forRoot() 
-                ],
+                    }), AngularFireModule.initializeApp(environment.firebase), 
+                    AngularFireAuthModule, AngularFireDatabaseModule,  MaterialModule
+ ],
   providers: [ PostService, AuthService, AFService ],
-  declarations: [ AppComponent, NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
-                  SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
-                  SignUpComponent, FeedComponent ],
+  declarations: [ AppComponent ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

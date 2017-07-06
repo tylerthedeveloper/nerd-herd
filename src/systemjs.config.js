@@ -35,6 +35,7 @@
       'typescript': 'npm:typescript@2.0.2/lib/typescript.js',
 
       '@angular/material': 'npm:@angular/material/bundles/material.umd.js',
+      'hammerjs': 'npm:hammerjs/hammer.js',
 
     },
     // packages tells the System loader how to load when no filename and/or no extension
