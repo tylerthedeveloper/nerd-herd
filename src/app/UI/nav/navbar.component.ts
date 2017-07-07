@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AFService } from '../../_services/af.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -14,26 +15,23 @@ export class NavBarComponent {
   navx ='<sign-up></sign-up>';  
   loggedIn : boolean;
   user: firebase.User;
-  constructor(public afService : AFService) {
-    this.afService.afAuth.authState.subscribe(
+  constructor(public afService : AFService, private router: Router) {
+    this.afService.getUser().subscribe(
       (auth) => {
-        if (auth != null) {
-          //this.user = db.list.object('users/' + auth.uid);
-          this.loggedIn = true;
-        }
-        else 
-          this.loggedIn = false;        
+        this.user = auth;
+        if (auth != null) this.loggedIn = true;
+        else this.loggedIn = false;        
       });  
   }
   
-  login() {
-    this.afService.loginWithGoogle();
-    //this.loggedIn = true;
+  // call auth service to logout
+  login() : firebase.Promise<any> {
+    return this.afService.loginWithGoogle(); 
   }
 
-  logout() {
-    this.afService.logout();
-    //this.loggedIn = false;
+  // call auth service to logout
+  logout() : firebase.Promise<any> {
+    return this.afService.logout();
   }
 
 }
