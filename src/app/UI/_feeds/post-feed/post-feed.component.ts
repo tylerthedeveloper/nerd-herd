@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import { PostService } from '../../_services/post.service'
-import { Post } from '../../_models/post';
+import { PostService } from '../../../_services/post.service'
+import { Post } from '../../../_models/post';
 
 @Component({
   selector: 'post-feed',
@@ -18,7 +18,6 @@ export class PostFeedComponent {
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
-        //this.postTitle  = "";
         this.posts = this.postService.posts;
     }
 

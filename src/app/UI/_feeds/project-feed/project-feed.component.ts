@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
-import { ProjectService } from '../../_services/project.service'
-import { Project } from '../../_models/project';
+import { ProjectService } from '../../../_services/project.service'
+import { Project } from '../../../_models/project';
 
 @Component({
   selector: 'project-feed',

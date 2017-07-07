@@ -1,0 +1,20 @@
+<article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
+        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
+                <label for="pirate-forms-contact-subject"></label>
+                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
+        </div>
+        <div class="col-sm-10  form_field_wrap contact_message_wrap  ">
+                <textarea #projectContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
+        </div>
+        <button (click)="addProject(titleContent.value, projectContent.value); 
+                                titleContent.value =''; 
+                                projectContent.value ='';" 
+                                class="pull-right"> Post 
+        </button>
+</article>
+
+<blog-post *ngFor="let project of projects | async"  
+                [author]="project.author" [timeSince]="project.timestamp"
+                [title]="project.title" [content]="project.content">
+</blog-post>
+                        
