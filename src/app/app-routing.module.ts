@@ -8,7 +8,7 @@ import { SignUpComponent } from './account/index';
 const appRoutes: Routes = [
 //    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'home', component: HomeComponent },    
-    { path: 'profile/:id', component: ProfileComponent },
+    { path: 'profile/:uid', component: ProfileComponent },
     //{ path: 'feed', component: FeedComponent },
     //{ path: 'login', component: LoginComponent },
     //{ path: 'sign-up', component: SignUpComponent },

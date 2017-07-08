@@ -17,7 +17,7 @@ import { MaterialModule } from '@angular/material';
 import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
-import { AuthService, PostService, AFService } from './_services/index';
+import { AuthService, PostService, AFService, ProfileService } from './_services/index';
 import { UIModule } from './UI/ui.app.module';
 
 @NgModule({
@@ -29,7 +29,7 @@ import { UIModule } from './UI/ui.app.module';
                     }), AngularFireModule.initializeApp(environment.firebase), 
                     AngularFireAuthModule, AngularFireDatabaseModule,  MaterialModule
  ],
-  providers: [ PostService, AuthService, AFService ],
+  providers: [ PostService, AuthService, AFService, ProfileService ],
   declarations: [ AppComponent ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   bootstrap:    [ AppComponent ]

@@ -1,3 +1,41 @@
 <p>
   profile works!
 </p>
+
+<p>
+  {{ _user.uid }}
+</p>
+
+<p>
+  {{ _user.name }}
+</p>
+<img src="{{ _user.photoUrl }}" width="100" height="100"/>
+<p>
+  {{ _user.email }}
+</p>
+
+<p>
+  {{ _user.gitUsername }}
+</p>
+
+<p>
+  {{ _user.age }}
+</p>
+
+<p>
+  {{ _user.school }}
+</p>
+
+<p>
+  {{ _user.job }}
+</p>
+
+<p>
+  {{ _user.location }}
+</p>
+
+<input type="text" placeholder="github" #git>
+<button (click)="updateProfile(git.value)">
+  update profile 
+  </button>
+  
