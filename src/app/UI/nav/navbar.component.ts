@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AFService } from '../../_services/af.service';
 import { Observable } from 'rxjs/Observable';
-import { Router } from "@angular/router";
+import { RouterModule, Routes, Router} from '@angular/router';
 import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'nav-bar',
+  styleUrls: ['./navbar.css'],
   templateUrl: './navbar.html',
   providers: [ AFService ]
 })
