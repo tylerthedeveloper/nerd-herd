@@ -1,26 +1,59 @@
-<!-- Nav tabs -->
-<article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
-        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
-                <label for="pirate-forms-contact-subject"></label>
-                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
-        </div>
-        <div class="col-sm-12 col-lg-12 form_field_wrap contact_message_wrap  ">
-                <textarea #postContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
-        </div>
-        <button (click)="post(titleContent.value, postContent.value); 
-                                titleContent.value =''; 
-                                postContent.value ='';" 
-                                class="pull-right"> Post 
-        </button>
-</article>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" style="top: 100px;">
+                <profile-box></profile-box>
+            </div>
+            <div class="col-lg-7">
+                <feed-tab></feed-tab>
+                <article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
+                        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
+                                <label for="pirate-forms-contact-subject"></label>
+                                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
+                        </div>
+                        <div class="col-sm-12 col-lg-12 form_field_wrap contact_message_wrap  ">
+                                <textarea #postContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
+                        </div>
+                        <button (click)="post(titleContent.value, postContent.value); 
+                                                titleContent.value =''; 
+                                                postContent.value ='';" 
+                                                class="pull-right"> Post 
+                        </button>
+                </article>
 
-<blog-post *ngFor="let post of posts | async"  
-                [author]="post.author" [timeSince]="post.timestamp"
-                [title]="post.title" [content]="post.content">
-</blog-post>
-                        
-<!-- end nav tabs -->
+                <blog-post *ngFor="let post of posts | async"  
+                                [author]="post.author" [timeSince]="post.timestamp"
+                                [title]="post.title" [content]="post.content">
+                </blog-post>              
+            </div>
+            <div class="col-md-2" style="top: 100px;">
+                <div class="col-md-1" style="float:right; position: fixed;">
+                    <div style="float:right; position: fixed;">
+                        <div class=" shop-item">
+                            <div class="card card-product">
+                                <div class="content">
+                                    <h6 class="category"><a href="https://demo.themeisle.com/hestia/product-category/trending/" rel="tag"> Name </a></h6>
+                                        <div>
+                                            <p> School </p>
+                                            <p> Job </p>
+                                        </div>
+                                    <div class="card-description" style="float: left">
+                                            <p> ### </p>
+                                            <p> # Followers </p>
+                                    </div>
+                                    <div class="card-description" style="float: right">
+                                            <p> ### </p>
+                                            <p> # Posts </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+             
 
 
 <!-- 

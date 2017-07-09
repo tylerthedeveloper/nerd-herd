@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialDesignModule } from '../ng-md.module';
 import { RouterModule, Router } from '@angular/router';
 
-import { NavBarComponent, GoogleMapComponent, } from './index';
+import { NavBarComponent, GoogleMapComponent, FeedTabComponent } from './index';
 import { PostFeedComponent, ProjectFeedComponent, PeopleFeedComponent } from './_feeds/index';
 import { ContactComponent, HomeComponent, ProfileComponent } from './_pages/index';
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
@@ -17,12 +17,12 @@ import { ProfileBoxComponent, BlogPostComponent, ProjectPostComponent, UserFeedC
     declarations:  [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                   PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, ProfileComponent,
-                  UserFeedCardComponent, PeopleFeedComponent],
+                  UserFeedCardComponent, PeopleFeedComponent, FeedTabComponent],
     exports: [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                 SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                 PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, CommonModule,
                  NgbModule, MaterialDesignModule, ProfileComponent, RouterModule, FormsModule, 
-                 UserFeedCardComponent, PeopleFeedComponent],
+                 UserFeedCardComponent, PeopleFeedComponent, FeedTabComponent],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })
