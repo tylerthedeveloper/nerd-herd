@@ -1,0 +1,4 @@
+<user-feed-card *ngFor="let user of users | async"  
+                [name]="user.name" [photoUrl]="user.photoUrl"
+                [email]="user.email">
+</user-feed-card>

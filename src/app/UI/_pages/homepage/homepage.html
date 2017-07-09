@@ -25,9 +25,12 @@
             <div class="col-md-3" style="top: 100px;">
                 <profile-box></profile-box>
             </div>
-            <div class="col-lg-7" style="top: 50px;">
-                <md-tab-group>
-                    <md-tab label="Posts" style="position: absolute; height:600px" flex layout-fill>
+            <div class="col-lg-7" >
+                <md-tab-group style="position: absolute; height:500px">
+                    <md-tab label="People" flex layout-fill>
+                        <people-feed></people-feed>                         
+                    </md-tab>
+                    <md-tab label="Posts"  flex layout-fill>
                         <post-feed></post-feed> 
                     </md-tab>
                     <md-tab label="Projects">

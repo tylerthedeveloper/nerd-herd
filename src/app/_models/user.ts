@@ -2,16 +2,12 @@
 
 
 export class User {
-    id: number;
+    constructor(public uid: string,
+                public name: string,
+                public email: string,
+                public gitUsername: string,
+                private photoUrl: string) {}
     
-    //website
-    username: string;
-    password: string;
-
-    //demographic
-    firstName: string;
-    lastName: string;
-    email: string;
     school: string;
     job: string;
     proPic: string;

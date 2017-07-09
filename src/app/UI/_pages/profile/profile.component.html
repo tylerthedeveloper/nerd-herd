@@ -1,22 +1,44 @@
+<!--
 <p>
-  profile works!
+  {{ (userModel) ? userModel.uid : "" }}
 </p>
 
 <p>
-  {{ _user.uid }}
+  {{ userModel.name }}
 </p>
+<img src="{{ userModel.photoUrl }}" width="100" height="100"/>
+<p>
+  {{ userModel.email }}
+</p>
+<p>
+  {{ userModel.gitUsername }}
+</p>
+-->
+<div>
+<form>
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name"
+              [(ngModel)]="userModel.name" name="name">
+    </div>
 
-<p>
-  {{ _user.name }}
-</p>
-<img src="{{ _user.photoUrl }}" width="100" height="100"/>
-<p>
-  {{ _user.email }}
-</p>
+    <div class="form-group">
+      <label for="email">email</label>
+      <input type="text" id="email"
+              [(ngModel)]="userModel.email" name="email">
+    </div>
 
-<p>
-  {{ _user.gitUsername }}
-</p>
+    <div class="form-group">
+      <label for="gitUsername">gitUsername</label>
+      <input type="text" id="gitUsername"
+              [(ngModel)]="userModel.gitUsername" name="gitUsername">
+      <a href="https://github.com/{{userModel.gitUsername}}"> git link </a>
+    </div>
+
+    <button class="btn btn-success" (click)="updateProfile()">Submit</button>
+  </form>
+</div>
+<!--
 
 <p>
   {{ _user.age }}
@@ -33,9 +55,4 @@
 <p>
   {{ _user.location }}
 </p>
-
-<input type="text" placeholder="github" #git>
-<button (click)="updateProfile(git.value)">
-  update profile 
-  </button>
-  
+-->
