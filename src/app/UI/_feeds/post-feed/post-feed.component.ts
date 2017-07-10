@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PostService } from '../../../_services/post.service'
 import { Post } from '../../../_models/post';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'post-feed',
@@ -12,8 +13,8 @@ import { Post } from '../../../_models/post';
 
 export class PostFeedComponent {
 
-    //postTitle: string;
     posts : Observable<Post[]>;
+    private subject = new Subject<any>();
 
     constructor(private postService: PostService) { }
 

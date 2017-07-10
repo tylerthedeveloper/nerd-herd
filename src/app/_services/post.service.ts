@@ -4,6 +4,7 @@ import { Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AFService } from '../_services/af.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class PostService {
@@ -11,6 +12,7 @@ export class PostService {
     posts: FirebaseListObservable<any>;
     user: firebase.User;
     
+    private subject = new Subject<any>();
     constructor(private db: AngularFireDatabase, public afService : AFService) {
         //this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => this.user = user);
