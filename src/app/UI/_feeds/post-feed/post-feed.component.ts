@@ -18,15 +18,17 @@ export class PostFeedComponent {
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
-        this.posts = this.postService.posts;
+        this.posts = this.postService.getAllPosts();
     }
 
     post(title: string, content: string) {
         this.postService.addPost(title, content);
-        //this.clearPost();
+    }
+
+    getPostsByUser(userID: string): void {
+        this.posts = this.postService.getPostsByUser(userID);
     }
 
     private clearPost() : void {
-        //this.postTitle = "";
     }
 }

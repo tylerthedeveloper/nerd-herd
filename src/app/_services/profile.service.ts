@@ -17,6 +17,6 @@ export class ProfileService {
   }
 
   getUserFromDb(uid : string)  {
-    return this.database.object('/users/' + uid).take(1);
+    return this.database.object(`/users/${uid}`).take(1);
   }
 }

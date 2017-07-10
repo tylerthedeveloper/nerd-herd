@@ -10,9 +10,9 @@ export class PostService {
     
     posts: FirebaseListObservable<any>;
     user: firebase.User;
-
-    constructor(db: AngularFireDatabase, public afService : AFService) {
-        this.posts = db.list('/posts');
+    
+    constructor(private db: AngularFireDatabase, public afService : AFService) {
+        //this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => this.user = user);
     }
 
@@ -38,6 +38,21 @@ export class PostService {
 
     deletePost(key: string) {    
         this.posts.remove(key); 
+    }
+
+    getAllPosts(): Observable<any> {
+        return this.db.list('/posts', {
+            query: { orderByChild: 'timestamp' }});
+        //return this.db.database.ref('/posts').limitToFirst(50);
+    }
+
+    getPostsByUser(userID : string): Observable<any> {
+        return this.db.list('/posts', {
+            query: { 
+                        orderByChild: "authorID",
+                        equalTo: userID
+                    }
+            });
     }
 }
 /*

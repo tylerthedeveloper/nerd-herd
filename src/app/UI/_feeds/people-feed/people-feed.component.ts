@@ -17,6 +17,4 @@ export class PeopleFeedComponent {
     constructor(private profileService: ProfileService) {
         this.users = this.profileService.getAllUsers();
     }
-
-
 }
