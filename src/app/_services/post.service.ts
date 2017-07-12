@@ -8,19 +8,19 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class PostService {
-    
+
     posts: FirebaseListObservable<any>;
     user: firebase.User;
-    
+
     private subject = new Subject<any>();
     constructor(private db: AngularFireDatabase, public afService : AFService) {
-        //this.posts = db.list('/posts');
+        this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => this.user = user);
     }
 
     addPost(title: string, content: string) {  // , author: string) {
-        this.posts.push({ 
-            authorID: this.user.uid,            
+        this.posts.push({
+            authorID: this.user.uid,
             author: this.user.displayName,
             title: title,
             content: content,
@@ -38,8 +38,8 @@ export class PostService {
         this.posts.update(key, { text: newText });
     }
 
-    deletePost(key: string) {    
-        this.posts.remove(key); 
+    deletePost(key: string) {
+        this.posts.remove(key);
     }
 
     getAllPosts(): Observable<any> {
@@ -50,7 +50,7 @@ export class PostService {
 
     getPostsByUser(userID : string): Observable<any> {
         return this.db.list('/posts', {
-            query: { 
+            query: {
                         orderByChild: "authorID",
                         equalTo: userID
                     }
@@ -62,7 +62,7 @@ import { Injectable,  } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../_models/post';
- 
+
 import { environment } from '../../environments/environment';
 
 const API_URL = environment.apiUrl;
@@ -74,29 +74,29 @@ export class PostService {
 	private postUrl = API_URL + '/api/posts';
 
     constructor(private http: Http) { }
- 
+
     getAll() :  Observable<Post[]>{
         return this.http.get(this.postUrl, this.jwt()).map((response: Response) => response.json());
     }
- 
+
     getById(id: number) {
         return this.http.get(this.postUrl + '/' + id, this.jwt()).map((response: Response) => response.json());
     }
- 
+
     create(post: Post) {
         return this.http.post(this.postUrl, post, this.jwt()).map((response: Response) => response.json());
     }
- 
+
     update(post: Post) {
         return this.http.put(this.postUrl + '/' + post.id, post, this.jwt()).map((response: Response) => response.json());
     }
- 
+
     delete(id: number) {
         return this.http.delete(this.postUrl + '/'  + id, this.jwt()).map((response: Response) => response.json());
     }
- 
+
     // private helper methods
- 
+
     private jwt() {
         // create authorization header with jwt token
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));

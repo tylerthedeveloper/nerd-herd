@@ -1,79 +1,28 @@
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3" style="top: 100px;">
-                <profile-box></profile-box>
-            </div>
-            <div class="col-lg-7">
-                <feed-tab></feed-tab>
-                    <button (click)="getPostsByUser(N96jKmUPptNHyNkWbvJ7jZocBis1)"> </button>
-                    <article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
-                        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
-                                <label for="pirate-forms-contact-subject"></label>
-                                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
-                        </div>
-                        <div class="col-sm-12 col-lg-12 form_field_wrap contact_message_wrap  ">
-                                <textarea #postContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
-                        </div>
-                        <button (click)="post(titleContent.value, postContent.value); 
-                                                titleContent.value =''; 
-                                                postContent.value ='';" 
-                                                class="pull-right"> Post 
-                        </button>
-                </article>
-
-                <blog-post *ngFor="let post of posts | async"  
-                                [author]="post.author" [timeSince]="post.timestamp"
-                                [title]="post.title" [content]="post.content">
-                </blog-post>              
-            </div>
-            <div class="col-md-2" style="top: 100px;">
-                <div class="col-md-1" style="float:right; position: fixed;">
-                    <div style="float:right; position: fixed;">
-                        <div class=" shop-item">
-                            <div class="card card-product">
-                                <div class="content">
-                                    <h6 class="category"><a href="https://demo.themeisle.com/hestia/product-category/trending/" rel="tag"> Name </a></h6>
-                                        <div>
-                                            <p> School </p>
-                                            <p> Job </p>
-                                        </div>
-                                    <div class="card-description" style="float: left">
-                                            <p> ### </p>
-                                            <p> # Followers </p>
-                                    </div>
-                                    <div class="card-description" style="float: right">
-                                            <p> ### </p>
-                                            <p> # Posts </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-4" style="top: 100px;">
+            <profile-box></profile-box>
+        </div>
+        <div class="col-12 col-md-8 col-lg-8">
+            <!-- <feed-tab></feed-tab> -->
+            <!-- <button (click)="getPostsByUser(N96jKmUPptNHyNkWbvJ7jZocBis1)"> </button> -->
+            <form class="postForm">
+                <md-input-container style="width:50%;">
+                    <input mdInput type="text" required placeholder="Title" #titleContent>
+                </md-input-container>
+                <md-input-container style="width:100%;">
+                    <input mdInput type="text" required placeholder="Your Message" #postContent>
+                </md-input-container>
+                <button md-raised-button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';"class="pull-right">
+                    Post
+                </button>
+            </form>
+            <md-card *ngFor="let post of posts | async" style="margin-bottom:20px;">
+                <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                <md-card-title>{{post.title}}</md-card-title>
+                <md-card-subtitle>{{post.author}}</md-card-subtitle>
+                <md-card-content>{{post.content}}</md-card-content>
+            </md-card>
         </div>
     </div>
-
-             
-
-
-<!-- 
-<div class="col-lg-9 col-md-offset-3" style="width: 55%;">
-	<article id="post-17" class="card card-raised card-blog post-17 status-publish format-standard has-post-thumbnail sticky hentry category-appearance tag-appearance tag-guide" style=" float: right;">
-        <div class="col-sm-4 col-lg-4 form_field_wrap contact_subject_wrap pirate_forms_three_inputs  ">
-                <label for="pirate-forms-contact-subject"></label>
-                <input id="pirate-forms-contact-subject" name="pirate-forms-contact-subject" required class="form-control" type="text" value="" placeholder="title" #titleContent>
-        </div>
-        <div class="col-sm-12 col-lg-12 form_field_wrap contact_message_wrap  ">
-                <textarea #postContent id="pirate-forms-contact-message" name="pirate-forms-contact-message" required class="form-control" placeholder="Your message"></textarea>
-        </div>
-        <button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';" class="pull-right"> Post </button>
-    </article>
- </div>
-
-<blog-post *ngFor="let post of posts | async" 
-        [author]="post.author"
-        [title]="post.title"
-        [content]="post.content">
-</blog-post>
--->
+</div>
