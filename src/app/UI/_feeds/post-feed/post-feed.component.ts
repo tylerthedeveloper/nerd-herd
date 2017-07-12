@@ -8,7 +8,8 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'post-feed',
   templateUrl: './post-feed.html',
-  providers: [ PostService ]
+  providers: [ PostService ],
+  styleUrls: ['./post-feed.css']
 })
 
 export class PostFeedComponent {

@@ -1,0 +1,105 @@
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+<script>
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
+    authDomain: "ewf-nh.firebaseapp.com",
+    databaseURL: "https://ewf-nh.firebaseio.com",
+    projectId: "ewf-nh",
+    storageBucket: "",
+    messagingSenderId: "1056076336153"
+};
+firebase.initializeApp(config);
+</script>
+
+<md-toolbar>
+    <button md-button [routerLink]="['/home']" routerLinkActive="active">
+        <md-icon class="dark"> home </md-icon>
+    </button>
+    <button md-button *ngIf="loggedIn" [routerLink]="['/profile', user.uid]" routerLinkActive="active">
+        <md-icon class="dark"> profile </md-icon>
+    </button>
+    <button md-button [routerLink]="['/posts']" routerLinkActive="active">
+        <md-icon class="dark"> posts </md-icon>
+    </button>
+    <button md-button [routerLink]="['/people']" routerLinkActive="active">
+        <md-icon class="dark"> people </md-icon>
+    </button>
+    <button md-button [routerLink]="['/projects']" routerLinkActive="active">
+        <md-icon class="dark"> projects </md-icon>
+    </button>
+    <button md-button style="float:right;">
+        <md-icon class="dark">
+            <span *ngIf="!loggedIn; else logswitch" (click)="login()">Login / Signup</span>
+            <ng-template #logswitch> <span (click)="logout()">logout </span> </ng-template>
+        </md-icon>
+    </button>
+    <button md-button style="float:right;" [routerLink]="['/contact']" routerLinkActive="active">
+        <md-icon class="dark"> contact </md-icon>
+    </button>
+</md-toolbar>
+<!--
+<ng-template #logout> <span *ngIf="loggedIn" (click)="logout()">logout </span> </ng-template>
+-->
+
+<!--
+<nav class="navbar navbar-default navbar-fixed-top navbar-color-on-scroll navbar-transparent">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
+<span class="sr-only">Toggle Navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<div class="title-logo-wrapper">
+<a class="navbar-brand" href="https://demo.themeisle.com/hestia/" title="Hestia"><h1>Hestia</h1></a>
+</div>
+</div>
+<div id="main-navigation" class="collapse navbar-collapse">
+<ul id="menu-main-menu" class="nav navbar-nav navbar-right">
+<li id="menu-item-99" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-99">
+<a title="Home" routerLink="home"><i class="_mi _before dashicons dashicons-cart" aria-hidden="true" style="font-size:1.3em;"></i>
+<span>home</span></a>
+</li>
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28">
+<a title="Blog" href=""><i class="_mi _before dashicons dashicons-editor-ul" aria-hidden="true"></i>
+<span>Blog</span></a>
+</li>
+<li id="menu-item-197" class="btn btn-round btn-rose menu-item menu-item-type-custom menu-item-object-custom menu-item-197">
+<a title="Profile" [routerLink]="['/home']">
+<i class="_mi _before dashicons dashicons-download" aria-hidden="true"></i>
+<span [routerLink]="['/home']"> Profile</span>
+</a>
+</li>
+<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-28">
+<a title="Contact" routerLink="contact"><i class="_mi _before dashicons dashicons-editor-ul" aria-hidden="true"></i>
+<span>Contact</span></a>
+</li>
+<li id="menu-item-199" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-199">
+<a title="Contact" href=""><i class="_mi _before dashicons dashicons-email" aria-hidden="true"></i>
+<span>About us</span></a>
+</li>
+<li id="menu-item-197" class="btn btn-round btn-rose menu-item menu-item-type-custom menu-item-object-custom menu-item-197">
+<a title="Login or Signup">
+<i class="_mi _before dashicons dashicons-download" aria-hidden="true"></i>
+<span *ngIf="!loggedIn" (click)="login()">Login / Signup</span>
+<span *ngIf="loggedIn" (click)="logout()">logout </span>
+</a>
+
+</li>
+<li><button type="button" class="btn btn-secondary" placement="bottom"
+[ngbPopover]="navx" popoverTitle="Login or Sign up">
+Popover
+</button></li>
+</ul>
+</div>
+</div>
+</nav>
+-->

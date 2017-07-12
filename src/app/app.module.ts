@@ -14,24 +14,26 @@ import { environment } from '../environments/environment';
 
 
 import { MaterialModule } from '@angular/material';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
-import {  PostService, AFService, ProfileService } from './_services/index';
+import { PostService, AFService, ProfileService } from './_services/index';
 import { UIModule } from './UI/ui.app.module';
 
 @NgModule({
-  imports:      [ BrowserModule, AppRoutingModule, CommonModule, 
-                  NgbModule.forRoot(), HttpModule, UIModule,
-                  AgmCoreModule.forRoot({
-                      apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
-                      libraries: ["places"]
-                    }), AngularFireModule.initializeApp(environment.firebase), 
-                    AngularFireAuthModule, AngularFireDatabaseModule,  MaterialModule
- ],
-  providers: [ PostService, AFService, ProfileService ],
-  declarations: [ AppComponent ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  bootstrap:    [ AppComponent ]
+    imports:[
+        BrowserModule, AppRoutingModule, CommonModule,
+        NgbModule.forRoot(), HttpModule, UIModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
+            libraries: ["places"]
+        }), AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule, AngularFireDatabaseModule, MaterialModule
+    ],
+    providers: [ PostService, AFService, ProfileService ],
+    declarations: [ AppComponent ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
