@@ -14,15 +14,13 @@ import { Subject } from 'rxjs/Subject';
 
 export class PeopleFeedComponent {
 
-    //users : Observable<User[]>;
-
     constructor(private userStore: UserStore) {
     }
 
     ngOnInit(): void {
     }
 
-    getUserByName(name: string) {
-        //this.profileService.nameSubject.next(name); 
+    onSearchUserByName(name: string) {
+        this.userStore.SearchUserByName(name);
     }
 }

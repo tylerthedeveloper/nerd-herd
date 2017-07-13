@@ -9,10 +9,13 @@ import { BehaviorSubject } from "rxjs/Rx";
 export class UserStore {
 
     //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([]));
+    //this._todos.getValue().push(newTodo)
+    //private _todos: BehaviorSubject<User[]>; 
     private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
 
     constructor(private userService: UserService) {
         this.loadInitialData();
+        //this._todos = <BehaviorSubject<User[]>>new BehaviorSubject([]);
     }
 
     get users() {
@@ -20,23 +23,21 @@ export class UserStore {
     }
 
     loadInitialData() {
-        this.userService.getAllUsers()
-            .subscribe(
-                res => {
-                    console.log(res);
-                    this._users.next(res);
+        this.userService.getAllUsers().subscribe(
+                res => { console.log(res);
+                        this._users.next(res);
                 },
                 err => console.log("Error retrieving Todos")
             );
-
     }
 
-    addTodo(newUser : User): Observable<User> {
+    addUser(newUser : User): Observable<User> {
 
         let obs = this.userService.updateProfile(newUser);
         obs.subscribe(
                 res => {
-                    this._users.next(newUser);
+                    this._users.next(res);
+                    //this._todos.next(res);
                 });
 
         return obs;
