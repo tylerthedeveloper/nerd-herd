@@ -2,14 +2,15 @@
 
 
 export class Post {
-    id: number;
-    author: string;
-    date: string;
-    text: string;
+    constructor(authorID: string,
+                author: string,
+                title: string,
+                content: string,
+                timestamp: string) {}
+
     picture: string;
     tags : Category[];
 
-    constructor(author: string) {}
 }
 
 enum Category {

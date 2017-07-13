@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfileService } from '../../../_services/index';
-import { User } from '../../../_models/user';
+import { UserService } from '../../../_services/index';
+import { Post, User } from "../../../_models/index";
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/take';
 
@@ -14,17 +14,17 @@ export class ProfileComponent implements OnInit {
   
   //alert("make a MD dialog component -> hello new user, please continue to update your profile!");
   userModel = new User("","","","","");
-  constructor(private route: ActivatedRoute, public profileService: ProfileService) {}
+  constructor(private route: ActivatedRoute, public userService: UserService) {}
 
   ngOnInit() {
     let userUid : string = this.route.snapshot.paramMap.get('uid');
-    this.profileService.getUserFromDb(userUid).subscribe((user) => {
+    this.userService.getUserFromDb(userUid).subscribe((user) => {
       this.userModel = user;
     });
   }
 
   updateProfile() {
-    this.profileService.updateProfile(this.userModel);
+    this.userService.updateProfile(this.userModel);
   }
   
 }

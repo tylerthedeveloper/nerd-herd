@@ -18,7 +18,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
-import { PostService, AFService, ProfileService } from './_services/index';
+import { PostService, AFService, UserService } from './_services/index';
+import { UserStore } from './_stores/user.store';
 import { UIModule } from './UI/ui.app.module';
 
 @NgModule({
@@ -31,7 +32,7 @@ import { UIModule } from './UI/ui.app.module';
         }), AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule, AngularFireDatabaseModule, MaterialModule
     ],
-    providers: [ PostService, AFService, ProfileService ],
+    providers: [ PostService, AFService, UserService, UserStore ],
     declarations: [ AppComponent ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap:    [ AppComponent ]
