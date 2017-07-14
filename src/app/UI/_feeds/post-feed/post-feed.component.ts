@@ -28,7 +28,7 @@ export class PostFeedComponent {
     }
 
     getPostsByUser(userID: string): void {
-        this.posts = this.postService.getPostsByUser(userID);
+        this.posts = this.postService.getPostsByUserID(userID);
     }
 
     private clearPost() : void {

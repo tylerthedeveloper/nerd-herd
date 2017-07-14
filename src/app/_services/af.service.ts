@@ -42,6 +42,6 @@ export class AFService {
             email: user.email,
             photoUrl: user.photoURL,
             uid: user.uid,
-        });
+        }).then(() => this.router.navigate(['/home']));
     }
 }
