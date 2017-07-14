@@ -9,11 +9,7 @@ import 'rxjs/add/observable/fromPromise';
 @Injectable()
 export class UserService {
 
-  nameSubject: Subject<any>;
-
-  constructor(private database: AngularFireDatabase) { 
-        this.nameSubject = new Subject();
-  }
+  constructor(private database: AngularFireDatabase) {}
 
   getAllUsers() { 
       return this.database.list('/users');
@@ -23,7 +19,19 @@ export class UserService {
       return Observable.fromPromise(this.database.object(`/users/${user.uid}`).update(user));
   }
 
-  getUserFromDb(uid : string)  {
+  getUserByID(uid : string)  {
     return this.database.object(`/users/${uid}`).take(1);
+  }
+
+  getUserByName(name : string)  {
+      if(name !== "") { 
+        return this.database.list('/users', {
+          query: {
+            orderByChild: 'name',
+            equalTo: name
+          }
+        }).take(1);
+    }
+    else return this.getAllUsers();
   }
 }

@@ -8,40 +8,49 @@ import { BehaviorSubject } from "rxjs/Rx";
 @Injectable()
 export class UserStore {
 
-    //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([]));
-    //this._todos.getValue().push(newTodo)
+    //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([])); ////immutable
     //private _todos: BehaviorSubject<User[]>; 
-    private _users: BehaviorSubject<User[]> = new BehaviorSubject([]);
-
+    private _users: BehaviorSubject<User[]>;
+    
     constructor(private userService: UserService) {
+        this._users = new BehaviorSubject([]);
         this.loadInitialData();
-        //this._todos = <BehaviorSubject<User[]>>new BehaviorSubject([]);
     }
 
-    get users() {
-        return this._users.asObservable();
+    get users() : BehaviorSubject<User[]> {
+        return this._users;
     }
 
     loadInitialData() {
         this.userService.getAllUsers().subscribe(
-                res => { console.log(res);
-                        this._users.next(res);
-                },
-                err => console.log("Error retrieving Todos")
-            );
+            res => this._users.next(res),
+            err => console.log("Error retrieving Todos")
+        );
     }
 
-    addUser(newUser : User): Observable<User> {
+    searchUserByName(userName : string): Observable<Array<User>> {
+        let obs = this.userService.getUserByName(userName);
+        obs.subscribe( res => this._users.next(res));
+        return obs;
+    }
 
+    searchUserByUserId(userName : string): Observable<Array<User>> {
+        let obs = this.userService.getUserByID(userName);
+        obs.subscribe( res => this._users.next(Array(res)));
+        return obs;
+    }
+
+    /*
+    onGetUser(newUser : User): Observable<User> {
         let obs = this.userService.updateProfile(newUser);
         obs.subscribe(
                 res => {
                     this._users.next(res);
                     //this._todos.next(res);
                 });
-
         return obs;
     }
+    */
 
     /*
     deleteTodo(deleted:Todo): Observable {

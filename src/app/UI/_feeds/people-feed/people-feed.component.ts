@@ -9,7 +9,6 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'people-feed',
   templateUrl: './people-feed.html',
-  //providers: [ ProfileService ]
 })
 
 export class PeopleFeedComponent {
@@ -21,6 +20,10 @@ export class PeopleFeedComponent {
     }
 
     onSearchUserByName(name: string) {
-        this.userStore.SearchUserByName(name);
+        this.userStore.searchUserByName(name);
+    }
+
+    onSearchUserById(name: string) {
+        this.userStore.searchUserByUserId(name);
     }
 }

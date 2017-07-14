@@ -1,7 +1,12 @@
-
-<button (click)="getUserByName('N96jKmUPptNHyNkWbvJ7jZocBis1')"> </button>
-
+<div>
+    
+<input #name />
+<button (click)="onSearchUserByName(name.value)"> </button>
+<div>
 <user-feed-card *ngFor="let user of userStore.users | async"  
                 [name]="user.name" [photoUrl]="user.photoUrl"
                 [email]="user.email">
 </user-feed-card>
+</div>
+
+</div>
