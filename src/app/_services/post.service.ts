@@ -35,7 +35,7 @@ export class PostService {
         }
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
-        this.db.database.ref(`user-posts/${this.user.uid}/${postKey}`).push(postData);
+        this.db.database.ref(`user-posts/${this.user.uid}/${postKey}`).set(postData);
     }
 
     updatePost(key: string, newText: string) {

@@ -15,8 +15,8 @@ import { Observable } from 'rxjs/Observable';
 export class ProfileComponent implements OnInit {
   
   //alert("make a MD dialog component -> hello new user, please continue to update your profile!");
-  //_posts : Observable<Post[]>;
-  _posts: Observable<any>;
+  _posts : Observable<any[]>;
+  //_posts: Observable<any>;
   userModel = new User("","","","","");
   constructor(private route: ActivatedRoute, public userService: UserService, 
               private postService : PostService) {}
@@ -26,27 +26,9 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserByID(userUid).subscribe((user) => {
       this.userModel = user;
     });
-
-
-
-    var x = this.postService.getPostsByUserID(userUid)
-             .flatMap(list => list)
-                      .map(keyContainer => { 
-                        console.log(Object.keys(keyContainer))
-                        return keyContainer[0]["author"] } );
-
-       console.log(x)                 
-    var nestedPosts = this.postService.getPostsByUserID(userUid)
-     .flatMap(list => list)
-      .map((data: any) => {
-        for(var key in data) {
-          var infoJSON = data[key];
-          //console.log(infoJSON.author);
-          //return JSON.parse(Object.keys(data)[0]);   
-          return Array(infoJSON);
-        }
-      })
-    this._posts = nestedPosts;
+    
+    this._posts = this.postService.getPostsByUserID(userUid);
+    
   }
 
   updateProfile() {
@@ -54,3 +36,43 @@ export class ProfileComponent implements OnInit {
   }
   
 }
+
+    /*
+    
+    var nestedPosts = this.postService.getPostsByUserID(userUid)
+    
+      .map((list) => list.map((data : any ) => {
+          console.log(Object.keys(data)[0]);
+        }
+      ));
+    this._posts = nestedPosts;
+    // let nestedPosts2 = this.postService.getPostsByUserID(userUid);
+    // let nestedPosts2Obs = nestedPosts2.map(keyContainer => JSON.parse(Object.keys(keyContainer)[0]));
+
+    this._posts = this.postService.getPostsByUserID(userUid)
+                      .map(data => {
+                         for(var key in data) 
+                        console.log(data[key]);
+                        //console.log(Object.keys(keyContainer)[0])
+                        //var infoJSON = data[key];
+                        return JSON.parse(Object.keys(data)[0])});
+*/
+
+/*
+
+        let collection: Array<any> = [];
+    var nestedPosts = this.postService.getPostsByUserID(userUid)
+     .flatMap(list => list)
+      .map((data: any) => {
+        //console.log(data);       
+        //var innerKey = Object.keys(data)[0];   
+        collection.push(Object.keys(data)[0]);   
+        //console.log(data[innerKey]);       
+        //console.log(data[innerKey]["author"]);       
+        //return data[innerKey];    
+      }) //.subscribe(posts => this._posts = posts);
+      //alert(nestedPosts);
+    //this._posts = Array(nestedPosts);
+    //this._posts = Observable.of(collection);
+    */
+    //this._posts = this.postService.getAllPosts();
