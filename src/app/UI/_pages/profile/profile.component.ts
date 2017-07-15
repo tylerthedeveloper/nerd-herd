@@ -15,6 +15,7 @@ import { Observable } from 'rxjs/Observable';
 export class ProfileComponent implements OnInit {
   
   //alert("make a MD dialog component -> hello new user, please continue to update your profile!");
+  //_posts : Observable<Post[]>;
   _posts: Observable<any>;
   userModel = new User("","","","","");
   constructor(private route: ActivatedRoute, public userService: UserService, 
@@ -26,14 +27,25 @@ export class ProfileComponent implements OnInit {
       this.userModel = user;
     });
 
+
+
+    var x = this.postService.getPostsByUserID(userUid)
+             .flatMap(list => list)
+                      .map(keyContainer => { 
+                        console.log(Object.keys(keyContainer))
+                        return keyContainer[0]["author"] } );
+
+       console.log(x)                 
     var nestedPosts = this.postService.getPostsByUserID(userUid)
      .flatMap(list => list)
       .map((data: any) => {
-        console.log(data);       
-        var innerKey = Object.keys(data)[0];       
-        console.log(data[innerKey].author);       
-      });
-
+        for(var key in data) {
+          var infoJSON = data[key];
+          //console.log(infoJSON.author);
+          //return JSON.parse(Object.keys(data)[0]);   
+          return Array(infoJSON);
+        }
+      })
     this._posts = nestedPosts;
   }
 
