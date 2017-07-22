@@ -16,6 +16,15 @@ export class PostService {
     constructor(private db: AngularFireDatabase, public afService : AFService) {
         this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => this.user = user);
+         if(navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                console.log(position.coords)
+                firebase.database().ref(`users/${this.user.uid}`).update({ 
+                        latitude : position.coords.latitude,
+                        longitude : position.coords.latitude
+                });
+            });
+         }
     }
 
     addPost(title: string, content: string) {
