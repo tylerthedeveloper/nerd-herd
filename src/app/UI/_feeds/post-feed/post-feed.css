@@ -5,5 +5,17 @@
 
 button {
     width: 100%;
-    background-color: rgb(228, 159, 5);
+    background-color: #ff8a65;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+md-card {
+    margin-bottom:20px;
+    position: static;
+}
+
+img {
+    width:40px;
+    height:40px;
 }

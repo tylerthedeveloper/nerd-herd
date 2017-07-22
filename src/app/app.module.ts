@@ -20,6 +20,7 @@ import 'hammerjs';
 
 import { PostService, AFService, ProfileService } from './_services/index';
 import { UIModule } from './UI/ui.app.module';
+import { DataSource } from '@angular/cdk';
 
 @NgModule({
     imports:[

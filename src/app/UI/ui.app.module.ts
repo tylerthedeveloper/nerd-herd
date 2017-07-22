@@ -10,19 +10,21 @@ import { NavBarComponent, GoogleMapComponent } from './index';
 import { PostFeedComponent, ProjectFeedComponent, PeopleFeedComponent } from './_feeds/index';
 import { ContactComponent, HomeComponent, ProfileComponent } from './_pages/index';
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
-import { ProfileBoxComponent, BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
+import { BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
+import { ProfileBoxComponent, FriendsListComponent } from './components/index';
+import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
-    imports : [CommonModule, NgbModule.forRoot(), MaterialDesignModule, RouterModule, FormsModule ],
+    imports : [CommonModule, NgbModule.forRoot(), MaterialDesignModule, RouterModule, FormsModule, CdkTableModule ],
     declarations:  [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                   PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, ProfileComponent,
-                  UserFeedCardComponent, PeopleFeedComponent ],
+                  UserFeedCardComponent, PeopleFeedComponent, FriendsListComponent ],
     exports: [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                 SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                 PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, CommonModule,
                  NgbModule, MaterialDesignModule, ProfileComponent, RouterModule, FormsModule,
-                 UserFeedCardComponent, PeopleFeedComponent ],
+                 UserFeedCardComponent, PeopleFeedComponent, FriendsListComponent ],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })

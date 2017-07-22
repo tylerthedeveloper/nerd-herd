@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { ProfileService } from '../../../_services/profile.service'
@@ -8,11 +8,11 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'people-feed',
   templateUrl: './people-feed.html',
-  providers: [ ProfileService ]
+  providers: [ ProfileService ],
+  styleUrls: ['./people-feed.css']
 })
 
 export class PeopleFeedComponent {
-
     users : Observable<User[]>;
     nameSubject: Subject<any>;
 
@@ -25,6 +25,6 @@ export class PeopleFeedComponent {
     }
 
     getUserByName(name: string) {
-        this.profileService.nameSubject.next(name); 
+        this.profileService.nameSubject.next(name);
     }
 }

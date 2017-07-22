@@ -1,7 +1,22 @@
 
-<button (click)="getUserByName('N96jKmUPptNHyNkWbvJ7jZocBis1')"> </button>
-
-<user-feed-card *ngFor="let user of users | async"  
-                [name]="user.name" [photoUrl]="user.photoUrl"
-                [email]="user.email">
-</user-feed-card>
+<!-- <button (click)="getUserByName('N96jKmUPptNHyNkWbvJ7jZocBis1')"> </button> -->
+<div class="container">
+    <div class="row">
+        <h1>Find other engineers</h1>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="example-container mat-elevation-z8">
+                <friends-list></friends-list>
+            </div>
+        </div>
+        <div class="col-12 col-md-8">
+            <md-grid-list cols="2" rowHeight="200px">
+                <md-grid-tile md-gutter="4px" *ngFor="let user of users | async">
+                    <md-grid-tile-header>{{ user.name }}</md-grid-tile-header>
+                    <p>{{ user.email }}</p>
+                </md-grid-tile>
+            </md-grid-list>
+        </div>
+    </div>
+</div>
