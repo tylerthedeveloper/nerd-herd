@@ -11,36 +11,29 @@ export class PostService {
 
     posts: FirebaseListObservable<any>;
     user: firebase.User;
+    location: Position;
 
-    private subject = new Subject<any>();
     constructor(private db: AngularFireDatabase, public afService : AFService) {
         this.posts = db.list('/posts');
-        this.afService.getUser().subscribe(user => this.user = user);
-         if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                console.log(position.coords)
-                firebase.database().ref(`users/${this.user.uid}`).update({ 
-                        latitude : position.coords.latitude,
-                        longitude : position.coords.latitude
+        this.afService.getUser().subscribe(user => {
+            if(user) { 
+                this.user = user;
+                //if( !user.location ) --> get Firebase user !!!
+                this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { this.location = location;
+                    console.log(location);
                 });
-            });
-         }
+            }
+        });
     }
 
     addPost(title: string, content: string) {
+        
         var postData = {  
             authorID: this.user.uid,            
             author: this.user.displayName,
             title: title,
             content: content,
             timestamp: firebase.database.ServerValue.TIMESTAMP
-            /*
-            id: 1,
-            date: string;
-            picture: string;
-            tags : Category[];
-            */
-        
         }
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);

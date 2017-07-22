@@ -26,15 +26,13 @@ export class AFService {
             this.addUser(user).then( () => this.router.navigate(['/posts']));
             //this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
       }).catch(function (error) {
-        //var errorCode = error.code;
-        var errorMessage = error.message;
-        alert( errorMessage );
+        alert( error.name + " : " + error.message + " : " + error.stack);
       });
     }
 
     
     logout() : firebase.Promise<any> {
-      return this.afAuth.auth.signOut();
+      return this.afAuth.auth.signOut().then(() => this.router.navigate(['/posts']));
     }
 
     // add google info to db
@@ -45,7 +43,34 @@ export class AFService {
                 photoUrl: user.photoURL,
                 uid: user.uid,
             }).then(() => this.router.navigate(['/posts']));
+    }
+
+
+    public getOrUpdateUserLocation(uid : string) : Observable<any> {
+        if(navigator.geolocation) {
+            return Observable.create((observer : any) => {
+                navigator.geolocation.getCurrentPosition(position => {
+                    observer.next(position);
+                    firebase.database().ref(`users/${uid}`).update({ 
+                        latitude : position.coords.latitude,
+                        longitude : position.coords.latitude
+                    });
+                });
+            });
+        }
+    }
+}
+
             /*
+
+
+
+                    firebase.database().ref(`users/${uid}`).update({ 
+                            latitude : position.coords.latitude,
+                            longitude : position.coords.latitude
+                    });
+
+
         var location;         
         if(navigator.geolocation){
             var location : any = {
@@ -77,5 +102,3 @@ export class AFService {
                 uid: user.uid
             }).then(() => this.router.navigate(['/home']));}
             */
-    }
-}

@@ -7,6 +7,13 @@ export class User {
                 public email: string,
                 public gitUsername: string,
                 private photoUrl: string) {}
+
+
+    public location : any = {
+        "latitude" :  "",
+        "longitude" : ""
+    };
+        
     //public projects: Post[]
     school: string;
     job: string;
