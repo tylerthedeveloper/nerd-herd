@@ -4,8 +4,6 @@
             <profile-box></profile-box>
         </div>
         <div class="col-12 col-md-8 col-lg-8">
-            <!-- <feed-tab></feed-tab> -->
-            <!-- <button (click)="getPostsByUser(N96jKmUPptNHyNkWbvJ7jZocBis1)"> </button> -->
             <form class="postForm">
                 <md-input-container style="width:50%;">
                     <input mdInput type="text" required placeholder="Title" #titleContent>
@@ -17,8 +15,8 @@
                     Post
                 </button>
             </form>
-            <md-card *ngFor="let post of posts | async" style="margin-bottom:20px;">
-                <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+            <md-card color="primary" *ngFor="let post of posts | async">
+                <img md-card-image src="../../../assets/cat.png"/>
                 <md-card-title>{{post.title}}</md-card-title>
                 <md-card-subtitle>{{post.author}}</md-card-subtitle>
                 <md-card-content>{{post.content}}</md-card-content>

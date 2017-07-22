@@ -7,7 +7,8 @@ import { Project } from '../../../_models/project';
 @Component({
   selector: 'project-feed',
   templateUrl: './project-feed.html',
-  providers: [ ProjectService ]
+  providers: [ ProjectService ],
+  styleUrls: ['./project-feed.css']
 })
 
 export class ProjectFeedComponent {
