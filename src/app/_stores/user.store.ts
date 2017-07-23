@@ -4,37 +4,53 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from "rxjs/Subject";
 import { User } from "../_models";
 import { BehaviorSubject } from "rxjs/Rx";
+import { StateStore } from "./state.store";
+import { AngularFireAuth } from "angularfire2/auth";
 
 @Injectable()
-export class UserStore {
+export class UserStore extends StateStore {
 
     //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([])); ////immutable
-    //private _todos: BehaviorSubject<User[]>; 
     private _users: BehaviorSubject<User[]>;
-    
-    constructor(private userService: UserService) {
-        this._users = new BehaviorSubject([]);
-        this.loadInitialData();
+    //private location : any = [];
+    public locatio: Position;
+    //loc: any;
+
+    constructor(public afAuth: AngularFireAuth,
+                public userService: UserService) {
+        
+                    super(afAuth, userService);
+                    this._users = new BehaviorSubject([]);
+                    //this.locatio = this.location;
+
+                    this.loadInitialData();
     }
 
     get users() : BehaviorSubject<User[]> {
         return this._users;
     }
-
+    
+    loadInitialData() {
+        this.userService.getAllUsersByLocation(this.location).subscribe(
+            res => this._users.next(res),
+            err => console.log("Error retrieving Todos")
+        );
+    }
+    /*
     loadInitialData() {
         this.userService.getAllUsers().subscribe(
             res => this._users.next(res),
             err => console.log("Error retrieving Todos")
         );
     }
-
-    searchUserByName(userName : string): Observable<Array<User>> {
+    */
+    storeSearchUserByName(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByName(userName);
         obs.subscribe( res => this._users.next(res));
         return obs;
     }
 
-    searchUserByUserId(userName : string): Observable<Array<User>> {
+    storeSearchUserByUserId(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByID(userName);
         obs.subscribe( res => this._users.next(Array(res)));
         return obs;

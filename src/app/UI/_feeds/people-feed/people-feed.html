@@ -1,5 +1,5 @@
 
-<!-- <button (click)="getUserByName('N96jKmUPptNHyNkWbvJ7jZocBis1')"> </button> -->
+<!-- <button (click)="onSearchUserByName('N96jKmUPptNHyNkWbvJ7jZocBis1')"> </button> -->
 <div class="container">
     <div class="row">
         <h1>Find other engineers</h1>
@@ -12,7 +12,7 @@
         </div>
         <div class="col-12 col-md-8">
             <md-grid-list cols="2" rowHeight="200px">
-                <md-grid-tile md-gutter="4px" *ngFor="let user of users | async">
+                <md-grid-tile md-gutter="4px" *ngFor="let user of userStore.users | async">
                     <md-grid-tile-header>{{ user.name }}</md-grid-tile-header>
                     <p>{{ user.email }}</p>
                 </md-grid-tile>

@@ -53,17 +53,17 @@
         }
       },
       rxjs: {
-        defaultExtension: 'js'
+         defaultExtension: 'js'
       },
       'google-maps-angular2': {
-        defaultExtension: 'js',
-        main: 'index.js',
-        format: 'cjs'
+          defaultExtension: 'js',
+          main: 'index.js',
+          format: 'cjs'
       },
       'geofire': {
-        main: 'dist/geofire.js', 
-        defaultExtension: 'js', 
-        meta: {'dist/geofire.js': {format: 'global'}} 
+          main: 'dist/geofire.js', 
+          defaultExtension: 'js', 
+          meta: {'dist/geofire.js': {format: 'global'}} 
     },
     }
   });
