@@ -28,13 +28,13 @@ export class UserStore {
         );
     }
 
-    searchUserByName(userName : string): Observable<Array<User>> {
+    storeSearchUserByName(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByName(userName);
         obs.subscribe( res => this._users.next(res));
         return obs;
     }
 
-    searchUserByUserId(userName : string): Observable<Array<User>> {
+    storeSearchUserByUserId(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByID(userName);
         obs.subscribe( res => this._users.next(Array(res)));
         return obs;
