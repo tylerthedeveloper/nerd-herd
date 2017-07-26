@@ -1,59 +1,98 @@
-<div>
-<form>
-    <div class="form-group">
-      <label for="name">Name</label>
-      <input type="text" id="name"
-              [(ngModel)]="userModel.name" name="name">
+<div class="container">
+    <div class="row profile-top">
     </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <md-card class="example-card">
+                <div class="profile-image">
+                    <img class="main-profile-pic" src="../../../assets/blank-profile-picture.png" />
+                </div>
+                <div class="profile-image-two">
 
-    <div class="form-group">
-      <label for="email">email</label>
-      <input type="text" id="email"
-              [(ngModel)]="userModel.email" name="email">
-    </div>
+                </div>
+                <md-card-content *ngIf="!edit">
+                    <h2>{{userModel.name}}</h2>
+                    <ul>
+                        <li>
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.email}}
+                        </li>
+                        <li>
+                            <i class="fa fa-github" aria-hidden="true"></i> {{userModel.gitUsername}}
+                        </li>
+                    </ul>
+                </md-card-content>
+                <md-card-content *ngIf="edit">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="name"
+                                [(ngModel)]="userModel.name" name="name">
+                            </md-input-container>
+                        </div>
 
-    <div class="form-group">
-      <label for="gitUsername">gitUsername</label>
-      <input type="text" id="gitUsername"
-              [(ngModel)]="userModel.gitUsername" name="gitUsername">
-      <a href="https://github.com/{{userModel.gitUsername}}"> git link </a>
-    </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="email"
+                                [(ngModel)]="userModel.email" name="email">
+                            </md-input-container>
+                        </div>
 
-    <button class="btn btn-success" (click)="updateProfile()">Submit</button>
-  </form>
-
-  <div> Posts </div>
-  <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
-                <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
-                <md-card-title>{{post.$key }}</md-card-title>
-                <md-card-subtitle>{{post.author}}</md-card-subtitle>
-                <md-card-content>{{post.content}}</md-card-content>
+                        <div class="form-group">
+                            <label for="gitUsername">Github Username:</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="gitUsername"
+                                [(ngModel)]="userModel.gitUsername" name="gitUsername">
+                            </md-input-container>
+                        </div>
+                        <button md-raised-button (click)="updateProfile()">Submit</button>
+                    </form>
+                    <!-- <a href="https://github.com/{{userModel.gitUsername}}"> git link </a> -->
+                </md-card-content>
+                <md-card-footer *ngIf="!edit">
+                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="editProfile()"></i>
+                </md-card-footer>
             </md-card>
-
-  <div> projects </div>
-
-  <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
-      <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
-      <md-card-title>{{project.$key }}</md-card-title>
-      <md-card-subtitle>{{project.author}}</md-card-subtitle>
-      <md-card-content>{{project.content}}</md-card-content>
-  </md-card>
+            <friends-list></friends-list>
+        </div>
+        <div class="col-12 col-md-8">
+            <md-tab-group>
+                <md-tab label="Posts">
+                    <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
+                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                        <md-card-title>{{post.$key }}</md-card-title>
+                        <md-card-subtitle>{{post.author}}</md-card-subtitle>
+                        <md-card-content>{{post.content}}</md-card-content>
+                    </md-card>
+                </md-tab>
+                <md-tab label="Projects">
+                    <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
+                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                        <md-card-title>{{project.$key }}</md-card-title>
+                        <md-card-subtitle>{{project.author}}</md-card-subtitle>
+                        <md-card-content>{{project.content}}</md-card-content>
+                    </md-card>
+                </md-tab>
+            </md-tab-group>
+        </div>
+    </div>
 </div>
 <!--
 
 <p>
-  {{ _user.age }}
+{{ _user.age }}
 </p>
 
 <p>
-  {{ _user.school }}
+{{ _user.school }}
 </p>
 
 <p>
-  {{ _user.job }}
+{{ _user.job }}
 </p>
 
 <p>
-  {{ _user.location }}
+{{ _user.location }}
 </p>
 -->

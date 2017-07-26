@@ -9,7 +9,7 @@ import { UIModule } from './UI/ui.app.module';
 
 const appRoutes: Routes = [
 //    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'home', component: HomeComponent },  
+    // { path: 'home', component: HomeComponent },
     //children: [    { path: 'posts', component: PostFeedComponent, outlet: 'posts' }]},
     { path: 'profile/:uid', component: ProfileComponent },
     { path: 'posts', component: PostFeedComponent },
@@ -18,10 +18,10 @@ const appRoutes: Routes = [
     //{ path: 'login', component: LoginComponent },
     //{ path: 'sign-up', component: SignUpComponent },
     { path: 'contact', component: ContactComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/posts', pathMatch: 'full' },
     //{ path: '**', redirectTo: 'home' }
 ];
- 
+
  @NgModule({
   imports: [ RouterModule.forRoot(appRoutes) ],
   exports: [ RouterModule ]
