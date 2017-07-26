@@ -1,1 +1,11 @@
- // @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import '~@angular/material/core/theming/all-theme';
+@import 'sass-material-colors-classes';
+@include md-core();
+
+$app-primary: md-palette($md-indigo);
+$app-accent:  md-palette($md-green, 500);
+$app-warn:    md-palette($md-red);
+
+$app-theme: md-light-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
