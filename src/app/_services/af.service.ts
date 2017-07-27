@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
-import {GeoFire} from 'geofire';
 
 @Injectable()
 export class AFService {

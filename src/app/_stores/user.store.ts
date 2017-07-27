@@ -13,27 +13,33 @@ export class UserStore extends StateStore {
     //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([])); ////immutable
     private _users: BehaviorSubject<User[]>;
     //private location : any = [];
-    public locatio: Position;
+    public _location: Position;
     //loc: any;
 
     constructor(public afAuth: AngularFireAuth,
                 public userService: UserService) {
         
                     super(afAuth, userService);
+        
                     this._users = new BehaviorSubject([]);
-                    //this.locatio = this.location;
-
-                    this.loadInitialData();
+                    this.location.subscribe((pos: Position) => { 
+                             console.log("hiii");
+                        
+                        this._location = pos;
+                        this.loadInitialData(pos.coords);
+                    });
     }
 
     get users() : BehaviorSubject<User[]> {
         return this._users;
     }
     
-    loadInitialData() {
-        this.userService.getAllUsersByLocation(this.location).subscribe(
+    loadInitialData(coords: Coordinates) {
+        console.log("hiii");
+        console.log(coords);
+        this.userService.getAllUsersByLocation(coords, 15).subscribe(
             res => this._users.next(res),
-            err => console.log("Error retrieving Todos")
+            err => console.log("Error retrieving location")
         );
     }
     /*
