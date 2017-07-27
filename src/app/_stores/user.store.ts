@@ -35,10 +35,13 @@ export class UserStore extends StateStore {
     }
     
     loadInitialData(coords: Coordinates) {
-        console.log("hiii");
-        console.log(coords);
-        this.userService.getAllUsersByLocation(coords, 15).subscribe(
-            res => this._users.next(res),
+        //console.log("hiii");
+        //console.log(coords);
+        this.userService.getAllUsersByLocation(coords, 5000).subscribe(
+            res => {
+                this._users.next(Array(res));
+                console.log("herrr " + JSON.stringify(res));
+            },
             err => console.log("Error retrieving location")
         );
     }

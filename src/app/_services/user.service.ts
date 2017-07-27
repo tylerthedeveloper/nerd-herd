@@ -53,15 +53,27 @@ export class UserService {
       });
 
     var userLocs : Array<string> = [];
-            console.log("hiii");
+      console.log("hiii");
    
-    return Observable.create((observer : any) => {
+    var drr = Observable.create((observer : any) => {
         var self = this.database;
         geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
             //userLocs.push(key);  
             console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-            observer.next(self.object(`/users/${key}`).take(1));
+            var x = self.object(`/users/${key}`).subscribe(user => {
+            console.log(user);
+              observer.next(user);
+               
+            });
+            
+              //console.log(x);
+            //return observer.next(x);
         })});
+          
+
+        return drr;
+
+
 
     //var userLocs : Array<string> = [];
     //return this.database.list('/users');
@@ -73,9 +85,9 @@ export class UserService {
                 console.log("pub get or update  1");
           
             navigator.geolocation.getCurrentPosition(position => {
-                //observer.next(position);
                 console.log("pub get or update  2");
-                //this.updateLocation(uid, position.coords);
+                this.updateLocation(uid, position.coords);
+                observer.next(position);
             });
         });
     }
