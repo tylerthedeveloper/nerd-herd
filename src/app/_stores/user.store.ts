@@ -1,17 +1,20 @@
 import { Injectable } from "@angular/core";
 import { UserService } from "../_services";
 import { Observable } from 'rxjs/Observable';
-import { Subject } from "rxjs/Subject";
+import { Subject,  } from "rxjs/Subject";
 import { User } from "../_models";
-import { BehaviorSubject } from "rxjs/Rx";
+import { BehaviorSubject  } from "rxjs/Rx";
 import { StateStore } from "./state.store";
 import { AngularFireAuth } from "angularfire2/auth";
+//import 'rxjs/add/observable/of';
+//import 'rxjs/add/operator/asObservable';
+
 
 @Injectable()
 export class UserStore extends StateStore {
 
     //private _users: BehaviorSubject<List<Todo>> = new BehaviorSubject(List([])); ////immutable
-    private _users: BehaviorSubject<User[]>;
+    private _users: BehaviorSubject<Array<User>>;
     //private location : any = [];
     public _location: Position;
     //loc: any;
@@ -35,15 +38,23 @@ export class UserStore extends StateStore {
     }
     
     loadInitialData(coords: Coordinates) {
-        //console.log("hiii");
         //console.log(coords);
+        var uarr = new Array<any>();
+        console.log("LID");
+        //this._users =  this.userService.getAllUsersByLocation(coords, 5000).toArray(); //.asObservable();
+        
         this.userService.getAllUsersByLocation(coords, 5000).subscribe(
             res => {
-                this._users.next(Array(res));
+                console.log("LID2");
                 console.log("herrr " + JSON.stringify(res));
+
+                
+                //this._todos.next(List(todos));
+                this._users.next(new Array(res));
             },
             err => console.log("Error retrieving location")
         );
+        
     }
     /*
     loadInitialData() {

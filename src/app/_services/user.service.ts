@@ -46,7 +46,7 @@ export class UserService {
     else return this.getAllUsers();
   }
 
-  getAllUsersByLocation(location: any, radius: number) : FirebaseListObservable<any> { 
+  getAllUsersByLocation(location: any, radius: number) : Observable<any> { //: FirebaseListObservable<any> { 
     var geoQuery = this.geoFire.query({
         center: [location.latitude, location.longitude],
         radius: radius //kilometers
@@ -55,12 +55,12 @@ export class UserService {
     var userLocs : Array<string> = [];
       console.log("hiii");
    
-    var drr = Observable.create((observer : any) => {
+    return Observable.create((observer : any) => {
         var self = this.database;
         geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
             //userLocs.push(key);  
             console.log(key + " entered query at " + location + " (" + distance + " km from center)");
-            var x = self.object(`/users/${key}`).subscribe(user => {
+            self.object(`/users/${key}`).subscribe(user => {
             console.log(user);
               observer.next(user);
                
@@ -70,11 +70,6 @@ export class UserService {
             //return observer.next(x);
         })});
           
-
-        return drr;
-
-
-
     //var userLocs : Array<string> = [];
     //return this.database.list('/users');
   }
