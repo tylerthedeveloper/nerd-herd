@@ -47,10 +47,9 @@ export class UserStore extends StateStore {
             res => {
                 console.log("LID2");
                 console.log("herrr " + JSON.stringify(res));
-
-                
                 //this._todos.next(List(todos));
-                this._users.next(new Array(res));
+                    //var x = this._users.getValue().push //.map((user : any) => new Array(user));
+                this._users.next(this._users.getValue().concat(new Array(res))); //new Array(res));
             },
             err => console.log("Error retrieving location")
         );
