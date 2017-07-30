@@ -31,10 +31,10 @@ firebase.initializeApp(config);
 </md-toolbar>
 <div class="navbar">
     <md-toolbar class="main-nav">
-        <button md-button [routerLink]="['/home']" routerLinkActive="active">
+        <!-- <button md-button [routerLink]="['/home']" routerLinkActive="active">
             <md-icon class="dark"> HOME </md-icon>
-        </button>
-        <button md-button *ngIf="loggedIn" [routerLink]="['/profile', user.uid]" routerLinkActive="active">
+        </button> -->
+        <button md-button class="btn-3" *ngIf="loggedIn" [routerLink]="['/profile', user.uid]" routerLinkActive="active">
             <md-icon class="dark"> PROFILE </md-icon>
         </button>
         <button md-button [routerLink]="['/posts']" routerLinkActive="active">

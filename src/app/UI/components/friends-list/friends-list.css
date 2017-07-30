@@ -32,3 +32,7 @@
 .mat-table {
     overflow: auto;
 }
+
+h3 {
+    text-align: center;
+}

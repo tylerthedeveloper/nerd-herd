@@ -13,13 +13,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  
+
   //alert("make a MD dialog component -> hello new user, please continue to update your profile!");
   //_posts: Observable<any>;
   _posts : Observable<any[]>;
   _projects : Observable<any[]>;
   userModel = new User("","","","","");
-  constructor(private route: ActivatedRoute, public userService: UserService, 
+  constructor(private route: ActivatedRoute, public userService: UserService,
               private postService : PostService,
               private projectService : ProjectService) {}
 
@@ -31,19 +31,25 @@ export class ProfileComponent implements OnInit {
 
     this._posts = this.postService.getPostsByUserID(userUid);
     this._projects = this.projectService.getProjectsByUserID(userUid);
-    
+
   }
 
   updateProfile() {
     this.userService.updateProfile(this.userModel);
+    this.edit = false;
   }
-  
+
+  public edit = false;
+  editProfile(): void {
+   this.edit = true;
+  }
+
 }
 
     /*
-    
+
     var nestedPosts = this.postService.getPostsByUserID(userUid)
-    
+
       .map((list) => list.map((data : any ) => {
           console.log(Object.keys(data)[0]);
         }
@@ -54,7 +60,7 @@ export class ProfileComponent implements OnInit {
 
     this._posts = this.postService.getPostsByUserID(userUid)
                       .map(data => {
-                         for(var key in data) 
+                         for(var key in data)
                         console.log(data[key]);
                         //console.log(Object.keys(keyContainer)[0])
                         //var infoJSON = data[key];
@@ -67,12 +73,12 @@ export class ProfileComponent implements OnInit {
     var nestedPosts = this.postService.getPostsByUserID(userUid)
      .flatMap(list => list)
       .map((data: any) => {
-        //console.log(data);       
-        //var innerKey = Object.keys(data)[0];   
-        collection.push(Object.keys(data)[0]);   
-        //console.log(data[innerKey]);       
-        //console.log(data[innerKey]["author"]);       
-        //return data[innerKey];    
+        //console.log(data);
+        //var innerKey = Object.keys(data)[0];
+        collection.push(Object.keys(data)[0]);
+        //console.log(data[innerKey]);
+        //console.log(data[innerKey]["author"]);
+        //return data[innerKey];
       }) //.subscribe(posts => this._posts = posts);
       //alert(nestedPosts);
     //this._posts = Array(nestedPosts);
@@ -104,7 +110,7 @@ export class ProfileComponent implements OnInit {
 */
 
 /* current project status
-  t 
+  t
   j
   y
   j

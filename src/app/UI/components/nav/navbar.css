@@ -13,23 +13,26 @@
 }
 
 .navbar {
-    background-color: #4db6ac;
-    font-family: 'Roboto', sans-serif;
-    border-top: 8px solid #00867d;
+    background-color: #2e7d32;
+    border-top: 8px solid #005005;
+    color: white;
 }
 
 button {
     height: 45px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
 }
 
 .bottom-nav {
     position: fixed !important;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
     width: 100%;
-    background-color: #4db6ac;
+    background-color: #2e7c31;
     font-family: 'Roboto', sans-serif;
-    border-top: 8px solid #00867d;
+    border-top: 8px solid #004f04;
+    color: white;
 }
 
 .bottom-nav-btn {

@@ -1,3 +1,29 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import '~https://fonts.googleapis.com/icon?family=Material+Icons';
+@import url('https://fonts.googleapis.com/css?family=Kanit');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+
+h1, h2, h3, button {
+    font-family: 'Kanit', sans-serif;
+}
+
+li, p, label {
+    font-family: 'Roboto', sans-serif;
+}
+
+.row {
+    margin-bottom: 50px;
+}
+
+md-ink-bar.mat-ink-bar {
+    background-color: #1b3039;
+}
+
+.mat-tab-label {
+    width: 50%;
+    font-size: 16px;
+}
+
+.mat-tab-label:focus {
+    background-color: rgba(40, 112, 49, 0.3);
+}

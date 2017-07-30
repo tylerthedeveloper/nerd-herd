@@ -63,6 +63,7 @@ export class UserStore extends StateStore {
         );
     }
     */
+  
     storeSearchUserByName(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByName(userName);
         obs.subscribe( res => this._users.next(res));
