@@ -44,16 +44,11 @@ export class AFService {
             }).then(() => this.router.navigate(['/posts']));
     }
 
-
     public getOrUpdateUserLocation(uid : string) : Observable<any> {
-        if(navigator.geolocation) {
+        if(navigator.geolocation) {      
             return Observable.create((observer : any) => {
                 navigator.geolocation.getCurrentPosition(position => {
                     observer.next(position);
-                    firebase.database().ref(`users/${uid}`).update({ 
-                        latitude : position.coords.latitude,
-                        longitude : position.coords.latitude
-                    });
                 });
             });
         }
