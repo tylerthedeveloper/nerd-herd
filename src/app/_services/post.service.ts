@@ -26,6 +26,12 @@ export class PostService {
         });
     }
 
+    getAllPosts(): Observable<any> {
+        return this.db.list('/posts', {
+            query: { orderByChild: 'timestamp' }});
+        //return this.db.database.ref('/posts').limitToFirst(50);
+    }
+    
     addPost(title: string, content: string) {
         
         var postData = {  
@@ -48,11 +54,6 @@ export class PostService {
         this.posts.remove(key); 
     }
 
-    getAllPosts(): Observable<any> {
-        return this.db.list('/posts', {
-            query: { orderByChild: 'timestamp' }});
-        //return this.db.database.ref('/posts').limitToFirst(50);
-    }
 
     getPostsByUserID(userID : string): Observable<any> {
         return this.db.list(`/user-posts/${this.user.uid}`);
