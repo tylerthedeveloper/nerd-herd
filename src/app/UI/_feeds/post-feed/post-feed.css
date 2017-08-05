@@ -1,5 +1,5 @@
 .postForm {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 100px;
 }
 
@@ -15,7 +15,42 @@ md-card {
     position: static;
 }
 
+md-card.submit-post-card.mat-card {
+    /*height: 400px;*/
+}
+
+.post-top {
+    /*padding-left: 20px;*/
+    text-align: center;
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    background-color: #445963;
+    width: 175px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
 img {
     width:40px;
     height:40px;
+}
+
+.post-search {
+    margin-bottom: 40px;
+}
+
+.searchBtn {
+    margin-left: 20px;
+    width: 50px;
+}
+
+.searchInput {
+    width: 50%;
+}
+
+textarea {
+    /*resize: none;*/
 }

@@ -16,6 +16,13 @@ export class ProjectFeedComponent {
     //postTitle: string;
     projects : Observable<Project[]>;
 
+    projectTypes = [
+        {value: 'question-0', viewValue: 'Web Dev'},
+        {value: 'interview-1', viewValue: 'Mobile'},
+        {value: 'social-2', viewValue: 'Open Source'},
+        {value: 'conference-3', viewValue: 'Research'}
+    ];
+
     constructor(private projectService: ProjectService) { }
 
     ngOnInit(): void {

@@ -9,9 +9,15 @@
             </div>
         </div>
         <div class="col-12 col-md-8">
+            <div class="user-search">
+                <md-input-container>
+                    <input mdInput #name placeholder="Search users" />
+                </md-input-container>
+                <button md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
+            </div>
             <md-grid-list cols="2" rowHeight="200px">
-                <md-grid-tile md-gutter="4px" *ngFor="let user of userStore.users | async">
-                    <md-grid-tile-header>{{ user.name }}</md-grid-tile-header>
+                <md-grid-tile md-gutter="20px" *ngFor="let user of userStore.users | async">
+                    <md-grid-tile-header><img src="{{ user.photoUrl }}" />{{ user.name }}</md-grid-tile-header>
                     <p>{{ user.email }}</p>
                 </md-grid-tile>
             </md-grid-list>
@@ -26,11 +32,11 @@
 
 <!--
 <div>
-    
+
 <input #name />
 <button (click)="onSearchUserByName(name.value)"> </button>
 <div>
-<user-feed-card *ngFor="let user of userStore.users | async"  
+<user-feed-card *ngFor="let user of userStore.users | async"
                 [name]="user.name" [photoUrl]="user.photoUrl"
                 [email]="user.email">
 </user-feed-card>
