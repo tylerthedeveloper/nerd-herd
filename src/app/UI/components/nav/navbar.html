@@ -18,20 +18,21 @@ var config = {
 firebase.initializeApp(config);
 </script>
 <span class="top-space"></span>
-<md-toolbar class="bottom-nav">
-    <button md-button [routerLink]="['/posts']" routerLinkActive="active">
-        <md-icon class="dark"> POSTS </md-icon>
-    </button>
-    <button md-button [routerLink]="['/people']" routerLinkActive="active">
-        <md-icon class="dark"> PEOPLE </md-icon>
-    </button>
-    <button md-button [routerLink]="['/projects']" routerLinkActive="active">
-        <md-icon class="dark"> PROJECTS </md-icon>
-    </button>
-</md-toolbar>
-<div class="navbar">
-    <md-toolbar class="main-nav">
-        <!-- <button md-button [routerLink]="['/home']" routerLinkActive="active">
+<div class="nav-spacing">
+    <md-toolbar class="bottom-nav">
+        <button md-button [routerLink]="['/posts']" routerLinkActive="active">
+            <md-icon class="dark"> POSTS </md-icon>
+        </button>
+        <button md-button [routerLink]="['/people']" routerLinkActive="active">
+            <md-icon class="dark"> PEOPLE </md-icon>
+        </button>
+        <button md-button [routerLink]="['/projects']" routerLinkActive="active">
+            <md-icon class="dark"> PROJECTS </md-icon>
+        </button>
+    </md-toolbar>
+    <div class="navbar">
+        <md-toolbar class="main-nav">
+            <!-- <button md-button [routerLink]="['/home']" routerLinkActive="active">
             <md-icon class="dark"> HOME </md-icon>
         </button> -->
         <button md-button class="btn-3" *ngIf="loggedIn" [routerLink]="['/profile', user.uid]" routerLinkActive="active">
@@ -56,4 +57,5 @@ firebase.initializeApp(config);
             <md-icon class="dark"> CONTACT </md-icon>
         </button>
     </md-toolbar>
+</div>
 </div>

@@ -3,9 +3,9 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-4">
-            <md-card class="example-card">
+            <md-card>
                 <div class="profile-image">
-                    <img class="main-profile-pic" src="../../../assets/blank-profile-picture.png" />
+                    <img class="main-profile-pic" src="{{userModel.photoUrl}}" />
                 </div>
                 <div class="profile-image-two">
 
@@ -60,7 +60,7 @@
             <md-tab-group>
                 <md-tab label="Posts">
                     <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
-                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                        <!-- <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/> -->
                         <md-card-title>{{post.$key }}</md-card-title>
                         <md-card-subtitle>{{post.author}}</md-card-subtitle>
                         <md-card-content>{{post.content}}</md-card-content>
@@ -68,7 +68,7 @@
                 </md-tab>
                 <md-tab label="Projects">
                     <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
-                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                        <!-- <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/> -->
                         <md-card-title>{{project.$key }}</md-card-title>
                         <md-card-subtitle>{{project.author}}</md-card-subtitle>
                         <md-card-content>{{project.content}}</md-card-content>

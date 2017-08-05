@@ -5,5 +5,19 @@
 
 button {
     width: 100%;
-    /*background-color: rgb(228, 159, 5);*/
+    background-color: #1c313a;
+    color: white;
+}
+
+.project-search {
+    margin-bottom: 40px;
+}
+
+.searchBtn {
+    margin-left: 20px;
+    width: 50px;
+}
+
+.searchInput {
+    width: 50%;
 }

@@ -1,26 +1,66 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-4 col-lg-4" style="top: 100px;">
-            <profile-box></profile-box>
+        <h1>Nerd forum</h1>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-4">
+            <!-- <profile-box></profile-box> -->
+            <md-card class="submit-post-card">
+                <md-card-title>
+                    <h3>Share your thoughts</h3>
+                </md-card-title>
+                <md-card-content>
+                    <form class="postForm">
+                        <table>
+                            <td>
+                                <md-input-container class="form-full-width">
+                                    <input mdInput type="text" required placeholder="Title" #titleContent>
+                                </md-input-container>
+                            </td>
+                            <td>
+                                <md-select class="form-full-width" placeholder="Category">
+                                    <md-option *ngFor="let type of postTypes" [value]="type.value">
+                                        {{ type.viewValue }}
+                                    </md-option>
+                                </md-select>
+                            </td>
+                        </table>
+                        <md-input-container class="form-full-width">
+                            <textarea mdInput required placeholder="Your Message" #postContent></textarea>
+                        </md-input-container>
+                        <button md-raised-button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';">
+                            Post
+                        </button>
+                    </form>
+                </md-card-content>
+            </md-card>
         </div>
         <div class="col-12 col-md-8 col-lg-8">
-            <form class="postForm">
-                <md-input-container style="width:50%;">
-                    <input mdInput type="text" required placeholder="Title" #titleContent>
+            <div class="post-search">
+                <md-input-container class="searchInput">
+                    <input mdInput #name placeholder="Search posts" />
                 </md-input-container>
-                <md-input-container style="width:100%;">
-                    <input mdInput type="text" required placeholder="Your Message" #postContent>
-                </md-input-container>
-                <button md-raised-button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';"class="pull-right">
-                    Post
-                </button>
-            </form>
-            <md-card color="primary" *ngFor="let post of posts | async">
-                <img md-card-image src="../../../assets/cat.png"/>
-                <md-card-title>{{post.title}}</md-card-title>
-                <md-card-subtitle>{{post.author}}</md-card-subtitle>
-                <md-card-content>{{post.content}}</md-card-content>
-            </md-card>
+                <md-select  placeholder="Category">
+                    <md-option *ngFor="let type of postTypeSearch" [value]="type.value">
+                        {{ type.viewValue }}
+                    </md-option>
+                </md-select>
+                <md-select  placeholder="Radius">
+                    <md-option *ngFor="let type of postRadiusSearch" [value]="type.value">
+                        {{ type.viewValue }}
+                    </md-option>
+                </md-select>
+                <button class="searchBtn" md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
+            </div>
+            <div *ngFor="let post of posts | async">
+                <div class="post-top">{{post.timestamp | date: 'EEEE M/d HH:mm'}}</div>
+                <md-card color="primary">
+                    <!-- <img md-card-image src="../../../assets/cat.png"/> -->
+                    <md-card-title>{{post.title}}</md-card-title>
+                    <md-card-subtitle>{{post.author}}</md-card-subtitle>
+                    <md-card-content>{{post.content}}</md-card-content>
+                </md-card>
+            </div>
         </div>
     </div>
 </div>
