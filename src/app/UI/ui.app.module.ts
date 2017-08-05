@@ -12,10 +12,10 @@ import { ContactComponent, HomeComponent, ProfileComponent } from './_pages/inde
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
 import { BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
 import { ProfileBoxComponent, FriendsListComponent } from './components/index';
-import { CdkTableModule } from '@angular/cdk';
+//import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
-    imports : [CommonModule, NgbModule.forRoot(), MaterialDesignModule, RouterModule, FormsModule, CdkTableModule ],
+    imports : [CommonModule, NgbModule.forRoot(), MaterialDesignModule, RouterModule, FormsModule ], //CdkTableModule
     declarations:  [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
                   SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
                   PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, ProfileComponent,

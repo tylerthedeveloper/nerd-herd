@@ -1,7 +1,7 @@
 
 import { NgModule }             from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ContactComponent, HomeComponent, ProfileComponent } from './UI/_pages/index';
+import { ContactComponent, HomeComponent, ProfileComponent, UserProfileComponent } from './UI/_pages/index';
 import { PostFeedComponent, PeopleFeedComponent, ProjectFeedComponent} from './UI/_feeds/index';
 
 //import { SignUpComponent } from './account/index';
@@ -14,6 +14,7 @@ const appRoutes: Routes = [
     { path: 'profile/:uid', component: ProfileComponent },
     { path: 'posts', component: PostFeedComponent },
     { path: 'people', component: PeopleFeedComponent },
+    { path: 'people/:uid', component: UserProfileComponent},
     { path: 'projects', component: ProjectFeedComponent  },
     //{ path: 'login', component: LoginComponent },
     //{ path: 'sign-up', component: SignUpComponent },

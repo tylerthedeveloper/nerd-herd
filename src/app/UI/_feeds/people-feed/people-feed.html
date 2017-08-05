@@ -11,16 +11,13 @@
         <div class="col-12 col-md-8">
             <md-grid-list cols="2" rowHeight="200px">
                 <md-grid-tile md-gutter="4px" *ngFor="let user of userStore.users | async">
+                <a [routerLink]="['/people', user.uid]" routerLinkActive="active">
                     <md-grid-tile-header>{{ user.name }}</md-grid-tile-header>
                     <p>{{ user.email }}</p>
+                </a>
                 </md-grid-tile>
             </md-grid-list>
         </div>
-        <!--
-                <div *ngFor="let user of userStore.users | async">
-                    <p>{{ user.email }}</p>
-                </div>                    
-        -->
     </div>
 </div>
 
