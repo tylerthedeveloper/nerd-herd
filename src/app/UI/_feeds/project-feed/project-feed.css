@@ -21,3 +21,44 @@ button {
 .searchInput {
     width: 50%;
 }
+
+.category-select-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 70px;
+    margin-top: 20px;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+    background-color: #2e7c31;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.circle:hover {
+    background-color: #445963;
+    transition:all 0.3s ease;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.circle:visited {
+    background-color: #445963;
+}
+
+i {
+    margin-top: 15px;
+}
+
+.category-text {
+    color: black;
+    padding-top: 25px;
+    font-family: 'Roboto', sans-serif;
+}

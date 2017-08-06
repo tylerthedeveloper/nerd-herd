@@ -46,6 +46,24 @@
                 </md-select>
                 <button class="searchBtn" md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
             </div>
+            <div class="category-select-container">
+                <div class="circle" id="connect" (click)="setCategory('connect')">
+                    <i class="fa fa-connectdevelop fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Connect</div>
+                </div>
+                <div class="circle" id="social" (click)="setCategory('social')">
+                    <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Social</div>
+                </div>
+                <div class="circle" id="question" (click)="setCategory('question')">
+                    <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Question</div>
+                </div>
+                <div class="circle" id="interviewPrep" (click)="setCategory('interviewPrep')">
+                    <i class="fa fa-black-tie fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Interview Prep</div>
+                </div>
+            </div>
             <div *ngFor="let project of projects | async">
                 <div class="post-top">{{project.timestamp | date: 'EEEE M/d HH:mm'}}</div>
                 <md-card style="margin-bottom:20px;">

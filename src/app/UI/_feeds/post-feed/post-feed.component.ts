@@ -39,6 +39,8 @@ export class PostFeedComponent {
         {value: 'radius-5', viewValue: 'All'}
     ];
 
+    category = "";
+
     constructor(private postService: PostService) { }
 
     ngOnInit(): void {
@@ -54,5 +56,16 @@ export class PostFeedComponent {
     }
 
     private clearPost() : void {
+    }
+
+    setCategory(category: string) {
+        if (this.category) {
+            document.getElementById(this.category).style.backgroundColor="#2e7c31";
+            this.category = category;
+            document.getElementById(category).style.backgroundColor="#445963"
+        } else {
+            this.category = category;
+            document.getElementById(category).style.backgroundColor="#445963"
+        }
     }
 }

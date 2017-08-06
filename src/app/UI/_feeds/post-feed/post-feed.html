@@ -40,17 +40,30 @@
                 <md-input-container class="searchInput">
                     <input mdInput #name placeholder="Search posts" />
                 </md-input-container>
-                <md-select  placeholder="Category">
-                    <md-option *ngFor="let type of postTypeSearch" [value]="type.value">
-                        {{ type.viewValue }}
-                    </md-option>
-                </md-select>
-                <md-select  placeholder="Radius">
+                <md-select class="radius" placeholder="Radius">
                     <md-option *ngFor="let type of postRadiusSearch" [value]="type.value">
                         {{ type.viewValue }}
                     </md-option>
                 </md-select>
-                <button class="searchBtn" md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
+                <!-- <button class="searchBtn" md-raised-button (click)="onSearchUserByName(name.value)">Search</button> -->
+            </div>
+            <div class="category-select-container">
+                <div class="circle" id="connect" (click)="setCategory('connect')">
+                    <i class="fa fa-connectdevelop fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Connect</div>
+                </div>
+                <div class="circle" id="social" (click)="setCategory('social')">
+                    <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Social</div>
+                </div>
+                <div class="circle" id="question" (click)="setCategory('question')">
+                    <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Question</div>
+                </div>
+                <div class="circle" id="interviewPrep" (click)="setCategory('interviewPrep')">
+                    <i class="fa fa-black-tie fa-2x" aria-hidden="true"></i>
+                    <div class="category-text">Interview Prep</div>
+                </div>
             </div>
             <div *ngFor="let post of posts | async">
                 <div class="post-top">{{post.timestamp | date: 'EEEE M/d HH:mm'}}</div>
