@@ -8,23 +8,71 @@ import { RouterModule, Router } from '@angular/router';
 
 import { NavBarComponent, GoogleMapComponent } from './index';
 import { PostFeedComponent, ProjectFeedComponent, PeopleFeedComponent } from './_feeds/index';
-import { ContactComponent, HomeComponent, ProfileComponent } from './_pages/index';
+import { ContactComponent, HomeComponent, ProfileComponent, UserProfileComponent } from './_pages/index';
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
 import { BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
 import { ProfileBoxComponent, FriendsListComponent } from './components/index';
-//import { CdkTableModule } from '@angular/cdk';
+import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
-    imports : [CommonModule, NgbModule.forRoot(), MaterialDesignModule, RouterModule, FormsModule ], //CdkTableModule
-    declarations:  [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
-                  SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
-                  PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, ProfileComponent,
-                  UserFeedCardComponent, PeopleFeedComponent, FriendsListComponent ],
-    exports: [ NavBarComponent, ProfileBoxComponent,BlogPostComponent, HomeComponent,
-                SubscribeComponent, ContactComponent, PageHeaderComponent, GoogleMapComponent,
-                PostFeedComponent, ProjectFeedComponent, ProjectPostComponent, CommonModule,
-                 NgbModule, MaterialDesignModule, ProfileComponent, RouterModule, FormsModule,
-                 UserFeedCardComponent, PeopleFeedComponent, FriendsListComponent ],
+    imports : [
+                    CommonModule,
+                    NgbModule.forRoot(),
+                    MaterialDesignModule,
+                    RouterModule, 
+                    FormsModule, 
+                    CdkTableModule
+            ],
+    declarations:  [ 
+                        //pages
+                        HomeComponent,
+                        PostFeedComponent, 
+                        ProfileComponent,
+                        UserFeedCardComponent, 
+                        ProjectFeedComponent, 
+                        UserProfileComponent,
+                        ContactComponent, 
+
+                        //small components
+                        NavBarComponent, 
+                        ProfileBoxComponent,
+                        BlogPostComponent, 
+                        SubscribeComponent, 
+                        PageHeaderComponent, 
+                        GoogleMapComponent,
+                        ProjectPostComponent, 
+                        PeopleFeedComponent, 
+                        FriendsListComponent
+                    ],
+    exports: [ 
+                    //angular modules
+                    RouterModule, 
+                    FormsModule,
+                    CommonModule,
+                    NgbModule, 
+                    MaterialDesignModule, 
+
+
+                    //pages
+                    HomeComponent,
+                    ContactComponent, 
+                    PostFeedComponent, 
+                    ProjectFeedComponent, 
+                    ProfileComponent, 
+                    UserProfileComponent,
+
+                    //helpers
+                    NavBarComponent, 
+                    ProfileBoxComponent,
+                    SubscribeComponent, 
+                    BlogPostComponent,
+                    PageHeaderComponent, 
+                    GoogleMapComponent,
+                    ProjectPostComponent, 
+                    UserFeedCardComponent, 
+                    PeopleFeedComponent, 
+                    FriendsListComponent, 
+                ],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })
