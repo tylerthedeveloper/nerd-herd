@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { PostService } from '../../../_services/post.service'
-import { Post } from '../../../_models/post';
+import { Category, Post } from '../../../_models/post';
 import { Subject } from 'rxjs/Subject';
 
 @Component({
@@ -48,11 +48,15 @@ export class PostFeedComponent {
     }
 
     post(title: string, content: string) {
-        this.postService.addPost(title, content);
+        this.postService.addPost(title, content, Category.Idea);
     }
 
     getPostsByUser(userID: string): void {
         this.posts = this.postService.getPostsByUserID(userID);
+    }
+
+    getPostsByCategory(category: string): void {
+        this.posts = this.postService.getPostsByCategory(category);
     }
 
     private clearPost() : void {

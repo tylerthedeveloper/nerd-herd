@@ -5,7 +5,6 @@ import { Subject } from "rxjs/Subject";
 import { User } from "../_models";
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-//import {GeoFire} from 'geofire';
 
 @Injectable()
 export class StateStore {

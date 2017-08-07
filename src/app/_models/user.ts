@@ -1,5 +1,3 @@
-import { Post, Project } from '../_models/index';
-
 
 export class User {
     constructor(public uid: string,
