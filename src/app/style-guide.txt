@@ -10,3 +10,4 @@ Secondary dark: #1b3039
 
 fonts:
 font-family: 'Roboto', sans-serif;
+font-family: 'Kanit', sans-serif;

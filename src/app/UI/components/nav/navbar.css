@@ -18,6 +18,10 @@
     color: white;
 }
 
+.nav-spacing {
+    margin-bottom: 50px;
+}
+
 button {
     height: 45px;
     font-family: 'Kanit', sans-serif;

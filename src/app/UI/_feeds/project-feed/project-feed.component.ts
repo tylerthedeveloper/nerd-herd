@@ -15,6 +15,14 @@ export class ProjectFeedComponent {
 
     //postTitle: string;
     projects : Observable<Project[]>;
+    category = "";
+
+    projectTypes = [
+        {value: 'question-0', viewValue: 'Web Dev'},
+        {value: 'interview-1', viewValue: 'Mobile'},
+        {value: 'social-2', viewValue: 'Open Source'},
+        {value: 'conference-3', viewValue: 'Research'}
+    ];
 
     constructor(private projectService: ProjectService) { }
 
@@ -27,5 +35,16 @@ export class ProjectFeedComponent {
     }
 
     private clearProject() : void {
+    }
+
+    setCategory(category: string) {
+        if (this.category) {
+            document.getElementById(this.category).style.backgroundColor="#2e7c31";
+            this.category = category;
+            document.getElementById(category).style.backgroundColor="#445963"
+        } else {
+            this.category = category;
+            document.getElementById(category).style.backgroundColor="#445963"
+        }
     }
 }

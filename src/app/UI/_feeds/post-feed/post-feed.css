@@ -1,5 +1,5 @@
 .postForm {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 100px;
 }
 
@@ -15,7 +15,75 @@ md-card {
     position: static;
 }
 
+md-card.submit-post-card.mat-card {
+    /*height: 400px;*/
+}
+
+.post-top {
+    /*padding-left: 20px;*/
+    text-align: center;
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    background-color: #445963;
+    width: 175px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
 img {
     width:40px;
     height:40px;
+}
+
+.searchInput {
+    width: 50%;
+}
+
+.radius {
+    width:20%;
+    margin-left: 20px;
+}
+
+.category-select-container {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-bottom: 70px;
+    margin-top: 20px;
+}
+
+.circle {
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+    background-color: #2e7c31;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+.circle:hover {
+    background-color: #445963;
+    transition:all 0.3s ease;
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.circle:visited {
+    background-color: #445963;
+}
+
+i {
+    margin-top: 15px;
+}
+
+.category-text {
+    color: black;
+    padding-top: 25px;
+    font-family: 'Roboto', sans-serif;
 }
