@@ -16,18 +16,16 @@ export class StateStore {
 
     constructor(protected afAuth: AngularFireAuth, 
                 protected userService: UserService) {
-
                     this.initializeStore();
-    
     }
 
      public initializeStore() : void {
                 let localAuth = this.afAuth.auth.currentUser;
                 let localAuthID = localAuth.uid;
-                this.location = this.userService.getOrUpdateUserLocation(localAuthID).take(1);
-                //this.userService.getOrUpdateUserLocation(localAuthID).take(1).subscribe(location => this.location = location);
-                this.userFBAuth = Observable.create(localAuth); 
                 this.userID = localAuthID;
-                this.userFBCustom = this.userService.getUserByID(localAuth.uid).take(1).map(user => user.json() as User);
+                this.userFBAuth = Observable.create(localAuth); 
+                this.userFBCustom = this.userService.getUserByID(localAuthID).take(1)
+                                        .map(user => user.json() as User);
+                this.location = this.userService.getOrUpdateUserLocation(localAuthID).take(1);
     }
 }

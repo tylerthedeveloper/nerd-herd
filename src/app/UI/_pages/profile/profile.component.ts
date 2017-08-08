@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserByID(userUid).subscribe((user) => {
       this.userModel = user;
     });
-    console.log(this.userModel);
+    //console.log(this.userModel);
     this._posts = this.postService.getPostsByUserID(userUid);
     this._projects = this.projectService.getProjectsByUserID(userUid);
 

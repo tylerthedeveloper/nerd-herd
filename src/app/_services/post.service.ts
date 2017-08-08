@@ -3,7 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Category, Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { AFService } from '../_services/af.service';
+import { AFService } from './af.service';
+import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
@@ -13,7 +14,9 @@ export class PostService {
     user: firebase.User;
     location: Position;
 
-    constructor(private db: AngularFireDatabase, public afService : AFService) {
+    constructor(private db: AngularFireDatabase, 
+                public afService : AFService,
+                public userService : UserService) {
         this.posts = db.list('/posts');
         this.afService.getUser().subscribe(user => {
             if(user) { 
@@ -30,11 +33,11 @@ export class PostService {
         return this.db.list('/posts', { query: { orderByChild: 'timestamp' }});
     }
     
-    addPost(title: string, content: string, category: Category) {
+    addPost(title: string, content: string, category: string) {
         
         ////
         ///temp value!!!!!
-        category = Category.Idea;
+        category = "idea";
         /////
         ///
         var postData = {  
@@ -48,7 +51,8 @@ export class PostService {
         var catstring = this.getCategoryString(category);
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
-        this.db.database.ref(`user-posts/${this.user.uid}/${postKey}`).set(postData);
+        this.db.database.ref(`user-posts-ids/${this.user.uid}/${postKey}`).set(postData);
+        this.db.database.ref(`user-posts-names/${this.user.displayName}/${postKey}`).set(postData);
         this.db.database.ref(`post-categories/${catstring}/${postKey}`).set(postData);
     }
 
@@ -61,14 +65,39 @@ export class PostService {
     }
 
     getPostsByUserID(userID : string): Observable<any> {
-        return this.db.list(`/user-posts/${this.user.uid}`);
+        return this.db.list(`/user-posts-ids/${userID}`);
+    }
+
+    getPostsByUserName(name : string): Observable<any> {
+        /*
+        Observable.create((observer : any) => {
+            this.userService.getUserByName(name).first().subscribe(user => {
+                //console.log(user[0].uid);
+                observer.next(new Array(this.db.list(`/user-posts/${user[0].uid}`)));        
+            });
+        });
+        */
+        return this.db.list(`/user-posts-names/${name}`);        
+        
     }
 
     getPostsByCategory(category : string): Observable<any> {
         return this.db.list(`/post-categories/${category}`);
     }
     
-    private getCategoryString(category:  Category) : string {
+    getPostsByUserTitle(title : string): Observable<any> {
+        if(title !== "") { 
+            return this.db.list('/posts', {
+            query: {
+                orderByChild: 'title',
+                equalTo: title
+            }
+            }).take(1);
+        }
+    }
+
+    private getCategoryString(category: string) : string {
+        /*
         switch(category) {
             case Category.Project:
                 return "project";
@@ -81,5 +110,7 @@ export class PostService {
             case Category.Meetup:
                 return "meetup";
         }
+        */
+        return "idea";
     }
 }

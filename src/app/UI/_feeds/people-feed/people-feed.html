@@ -16,14 +16,14 @@
                 <button md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
             </div>
             <md-grid-list cols="2" rowHeight="200px">
-
-                <md-grid-tile md-gutter="4px" *ngFor="let user of userStore.users | async">
-                    <a [routerLink]="['/people', user.uid]"  routerLinkActive="active">                    
+                <md-grid-tile   md-gutter="4px" *ngFor="let user of userStore.users | async"
+                                [routerLink]="['/people', user.uid]"
+                                routerLinkActive="active">
                       <md-grid-tile-header>
-                        <img src="{{ user.photoUrl }}" />{{ user.name }}
+                          <img src="{{ user.photoUrl }}" />
+                          {{ user.name }}
                       </md-grid-tile-header>
-                        <p>{{ user.email }}</p>
-                    </a>
+                    <p>{{ user.email }}</p>
                 </md-grid-tile>
             </md-grid-list>
         </div>

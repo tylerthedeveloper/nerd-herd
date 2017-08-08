@@ -16,29 +16,25 @@ export class UserProfileComponent implements OnInit {
 
   _posts : Observable<any[]>;
   _projects : Observable<any[]>;
-  //userProfile : User;
+  userProfile : User;
 
-  @Input() userProfile : User;
-
-
+  /*
   set profile(userProfile: User) {
     this.userProfile = userProfile; 
     console.log("setter");
   }
- 
   get profile(): User { return this.userProfile; }
-
+  */
 
   constructor(public userService: UserService,
               private postService : PostService,
               private projectService : ProjectService,
               private route: ActivatedRoute) {
 
-  let userUid : string = this.route.snapshot.paramMap.get('uid');
-    this.userService.getUserByID(userUid).subscribe((user) => {
-      this.userProfile = user;
-    });
-              //this.route.queryParams.subscribe(params =>  console.log(JSON.stringify(params)));
+              let userUid : string = this.route.snapshot.paramMap.get('uid');
+              this.userService.getUserByID(userUid).subscribe((user) => {
+                  this.userProfile = user;
+              });
     } 
 
   ngOnInit() {

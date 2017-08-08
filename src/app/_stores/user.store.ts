@@ -16,11 +16,14 @@ export class UserStore extends StateStore {
                 public userService: UserService) {
         
                     super(afAuth, userService);
-        
                     this._users = new BehaviorSubject([]);
-                    this.location.subscribe((pos: Position) => { 
-                        //this._location = pos;
-                        this.loadInitialData(pos.coords);
+                    //this.location.subscribe((pos: Position) => this.loadInitialData(pos.coords));
+                    this.location.subscribe(
+                        (pos: any) => {
+                            if ( pos.coords )  
+                                this.loadInitialData(pos.coords)
+                            else               
+                                this.loadInitialData(pos)
                     });
     }
 
@@ -29,13 +32,9 @@ export class UserStore extends StateStore {
     }
     
     loadInitialData(coords: Coordinates) {
-        console.log(coords);
-        //console.log("LID");
-        
+        //console.log(coords);
         this.userService.getAllUsersByLocation(coords, 5000).subscribe(
             res => {
-                console.log("LID2");
-                console.log("herrr " + JSON.stringify(res));
                     //var x = this._users.getValue().push //.map((user : any) => new Array(user));
                 this._users.next(this._users.getValue().concat(new Array(res))); //new Array(res));
             },
@@ -46,13 +45,13 @@ export class UserStore extends StateStore {
   
     storeSearchUserByName(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByName(userName);
-        obs.subscribe( res => this._users.next(res));
+        obs.subscribe( res => this._users.next(res) );
         return obs;
     }
 
     storeSearchUserByUserId(userName : string): Observable<Array<User>> {
         let obs = this.userService.getUserByID(userName);
-        obs.subscribe( res => this._users.next(Array(res)));
+        obs.subscribe( res => this._users.next(Array(res)) );
         return obs;
     }
 
