@@ -37,12 +37,13 @@ export const Category = [
 ]
 */
 export const Category = {
-    "All" : postButtonsArrayIdConstant + "All",
+    //"All" : postButtonsArrayIdConstant + "All",
     "Idea" : postButtonsArrayIdConstant + "Idea",
     "Meetup" : postButtonsArrayIdConstant + "Meetup",
     "Social" : postButtonsArrayIdConstant + "Social",
     "Question" : postButtonsArrayIdConstant + "Question",
-    "Interview Prep" : postButtonsArrayIdConstant + "Interview Prep"
+    "Interview Prep" : postButtonsArrayIdConstant + "Interview Prep",
+    "Other" : postButtonsArrayIdConstant + "Other"
 }
 /*
 export enum Category {

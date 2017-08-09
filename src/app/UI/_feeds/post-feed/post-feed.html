@@ -48,7 +48,7 @@
                     </md-option>
                 </md-select>
                 <md-select class="radius" placeholder="Radius" 
-                            *ngIf="selectedPostSearchValue === 'distance-2'"
+                            *ngIf="selectedPostSearchValue === 'searchOption_Distance'"
                             [(ngModel)]="selectedPostSearchRadius">
                         <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value">
                             {{ rad.viewValue }}

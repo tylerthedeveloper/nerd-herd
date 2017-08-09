@@ -17,16 +17,17 @@ export class PostService {
     constructor(private db: AngularFireDatabase, 
                 public afService : AFService,
                 public userService : UserService) {
-        this.posts = db.list('/posts');
-        this.afService.getUser().subscribe(user => {
-            if(user) { 
-                this.user = user;
-                //if( !user.location ) --> get Firebase user !!!
-                this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { this.location = location;
-                    console.log(location);
+                
+                this.posts = db.list('/posts');
+                this.afService.getUser().subscribe(user => {
+                    if(user) { 
+                        this.user = user;
+                        //if( !user.location ) --> get Firebase user !!!
+                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { this.location = location;
+                            console.log(location);
+                        });
+                    }
                 });
-            }
-        });
     }
 
     getAllPosts(): Observable<any> {
@@ -51,11 +52,12 @@ export class PostService {
         var catstring = this.getCategoryString(category);
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
-        this.db.database.ref(`user-posts-ids/${this.user.uid}/${postKey}`).set(postData);
-        this.db.database.ref(`user-posts-names/${this.user.displayName}/${postKey}`).set(postData);
+        this.db.database.ref(`user-posts/ids/${this.user.uid}/${postKey}`).set(postData);
+        this.db.database.ref(`user-posts/names/${this.user.displayName}/${postKey}`).set(postData);
         this.db.database.ref(`post-categories/${catstring}/${postKey}`).set(postData);
     }
 
+    
     updatePost(key: string, newText: string) {
         this.posts.update(key, { text: newText });
     }
@@ -65,7 +67,7 @@ export class PostService {
     }
 
     getPostsByUserID(userID : string): Observable<any> {
-        return this.db.list(`/user-posts-ids/${userID}`);
+        return this.db.list(`/user-posts/ids/${userID}`);
     }
 
     getPostsByUserName(name : string): Observable<any> {
@@ -77,7 +79,7 @@ export class PostService {
             });
         });
         */
-        return this.db.list(`/user-posts-names/${name}`);        
+        return this.db.list(`/user-posts/names/${name}`);        
         
     }
 
