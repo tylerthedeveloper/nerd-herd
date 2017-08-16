@@ -38,7 +38,6 @@ export class PostService {
         
         ////
         ///temp value!!!!!
-        category = "idea";
         /////
         ///
         var postData = {  
@@ -49,7 +48,7 @@ export class PostService {
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             category: category
         }
-        var catstring = this.getCategoryString(category);
+        var catstring = this.getKeyByCategoryId(category);
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
         this.db.database.ref(`user-posts/ids/${this.user.uid}/${postKey}`).set(postData);
@@ -98,8 +97,13 @@ export class PostService {
         }
     }
 
-    private getCategoryString(category: string) : string {
+    private getKeyByCategoryId(_category: string) {
+        var cat = "";
+        return Object.keys(Category).find(key => Category[key] === _category)
+    }
+
         /*
+    private getCategoryString(category: string) : string {
         switch(category) {
             case Category.Project:
                 return "project";
@@ -112,7 +116,7 @@ export class PostService {
             case Category.Meetup:
                 return "meetup";
         }
-        */
         return "idea";
     }
+        */
 }
