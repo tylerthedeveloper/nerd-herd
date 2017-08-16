@@ -18,7 +18,7 @@ export class PostFeedComponent {
 
     public posts : Observable<Post[]>;
     private subject = new Subject<any>();
-    
+
     //lists
     public postTypes : {value: string, viewValue: string }[] = [];
     public postButtonsArray : any = [];
@@ -29,29 +29,42 @@ export class PostFeedComponent {
     public selectedPostSearchValue: string;
     public selectedPostSearchRadius: number;
     public postSearchOptions : any = [];
-    
+
     constructor(public postService: PostService) {
         this.postTypes = Object.keys(Category).map(cat => {
             return { value: Category[cat], viewValue: cat };
         });
 
         this.postButtonsArray = Object.keys(Category).map(cat => {
-             return { category: cat, id: Category[cat] };
+            let iconType = "";
+            if (cat == "Idea") {
+                iconType="lightbulb-o";
+            } else if (cat == "Meetup") {
+                iconType="users";
+            } else if (cat == "Question") {
+                iconType="question-circle";
+            } else if (cat == "Interview Prep") {
+                iconType="black-tie";
+            } else {
+                iconType="globe";
+            }
+            console.log(cat);
+            return { category: cat, id: Category[cat], iconType: iconType };
         });
-        this.postButtonsArray.unshift({category: "All", id: "postCategory_All" });
-        
+        this.postButtonsArray.unshift({category: "All", id: "postCategory_All", iconType: "connectdevelop" });
+
         this.posts = this.postService.getAllPosts();
 
         this.postRadiusSearch = Object.keys(RadiusSearch).map(rad => {
             return { value: rad, viewValue: RadiusSearch[rad].text, radius: RadiusSearch[rad].radius };
         });
-        
+
         this.postSearchOptions = Object.keys(SearchOptions).map(opt => {
             return { value: SearchOptions[opt], viewValue: opt };
         });
 
         this.selectedPostSearchValue = this.postSearchOptions[0].value;
-    } 
+    }
 
     ngOnInit(): void {
         //this.category = "All";
@@ -75,8 +88,8 @@ export class PostFeedComponent {
     }
 
     getPostsByCategory(category: string): void {
-        this.posts = (category !== "All") 
-            ? this.postService.getPostsByCategory(category) 
+        this.posts = (category !== "All")
+            ? this.postService.getPostsByCategory(category)
             : this.posts = this.postService.getAllPosts();
     }
 
@@ -89,7 +102,7 @@ export class PostFeedComponent {
 //
     private clearPost() : void {}
 
-    public handlePostSearch(searchType: string, text: string, radiusLookUp: string) { 
+    public handlePostSearch(searchType: string, text: string, radiusLookUp: string) {
         switch(searchType) {
             case "author-0":
                 this.getPostsByUserName(text);
@@ -109,12 +122,12 @@ export class PostFeedComponent {
         if (this.category !== category.category) {
             let cat = category;
             if (this.category) {
-                let checkCat = (this.category === "All") 
-                    ? "postCategory_All" 
+                let checkCat = (this.category === "All")
+                    ? "postCategory_All"
                     :  Category[this.category];
                 document.getElementById(checkCat).style.backgroundColor = "#2e7c31";
             }
-            
+
             document.getElementById(cat.id).style.backgroundColor = "#445963";
             this.category = cat.category;
             this.getPostsByCategory(cat.category);
@@ -124,7 +137,7 @@ export class PostFeedComponent {
 
 
 ///
-/// relocated consants commented out below 
+/// relocated consants commented out below
 ///
 
   /*
@@ -135,7 +148,7 @@ export class PostFeedComponent {
         {value: 'social-2', viewValue: 'Social'},
         {value: 'conference-3', viewValue: 'Conference'}
     ];
-    
+
     postTypeSearch = [
         {value: 'other-0', viewValue: 'All'},
         {value: 'question-0', viewValue: 'Question'},
@@ -152,7 +165,7 @@ export class PostFeedComponent {
         {value: 'radius-4', viewValue: '100 Miles'},
         {value: 'radius-5', viewValue: 'All'}
     ];
-   
+
     public postRadiusSearch = {
         "radius-0": "10 Miles",
         "radius-1": "20 Miles",
@@ -161,9 +174,9 @@ export class PostFeedComponent {
         "radius-4": "100 Miles",
         "radius-5": "All"
     };
-    
 
-    
+
+
     public postSearchOptions = [
         {value: 'author-0', viewValue: 'Author'},
         {value: 'title-1', viewValue: 'Title'},
