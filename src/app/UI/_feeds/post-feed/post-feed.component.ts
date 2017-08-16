@@ -41,6 +41,8 @@ export class PostFeedComponent {
                 iconType="lightbulb-o";
             } else if (cat == "Meetup") {
                 iconType="users";
+            } else if (cat == "Social") {
+                iconType="comments";
             } else if (cat == "Question") {
                 iconType="question-circle";
             } else if (cat == "Interview Prep") {
