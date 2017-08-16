@@ -18,7 +18,7 @@
                                 </md-input-container>
                             </td>
                             <td>
-                                <md-select class="form-full-width" placeholder="Category">
+                                <md-select class="form-full-width" placeholder="Category" #newPostCategory>
                                     <md-option *ngFor="let type of postTypes" [value]="type.value">
                                         {{ type.viewValue }}
                                     </md-option>
@@ -28,7 +28,7 @@
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #postContent></textarea>
                         </md-input-container>
-                        <button md-raised-button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';">
+                        <button md-raised-button (click)="post(titleContent.value, postContent.value, newPostCategory.selected.value); titleContent.value =''; postContent.value ='';">
                             Post
                         </button>
                     </form>
