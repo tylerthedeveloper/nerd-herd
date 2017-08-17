@@ -12,7 +12,7 @@ button {
 
 button.searchBtn.mat-raised-button {
     float:right;
-    width: 10%;
+    width: 20px;
 }
 
 md-card {
@@ -95,6 +95,10 @@ i.fa.fa-search.fa-lg {
     color: black;
     padding-top: 25px;
     font-family: 'Roboto', sans-serif;
+}
+
+#postCategory_All {
+    background-color: #445963;
 }
 
 @media only screen and (max-width: 440px) {

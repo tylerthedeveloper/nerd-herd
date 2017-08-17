@@ -26,6 +26,7 @@ export class PostFeedComponent {
 
     //active values
     public category : string = "";
+    public selected : string = "postCategory_All";
     public selectedPostSearchValue: string;
     public selectedPostSearchRadius: number;
     public postSearchOptions : any = [];
@@ -50,7 +51,7 @@ export class PostFeedComponent {
             } else {
                 iconType="globe";
             }
-            console.log(cat);
+            console.log(Category[cat]);
             return { category: cat, id: Category[cat], iconType: iconType };
         });
         this.postButtonsArray.unshift({category: "All", id: "postCategory_All", iconType: "connectdevelop" });
@@ -71,7 +72,6 @@ export class PostFeedComponent {
     ngOnInit(): void {
         //this.category = "All";
         //setTimeout(3000, function() {  document.getElementById("postCategory_All").style.backgroundColor = "#445963"; });
-
     }
 
     post(title: string, content: string, category: string) {
@@ -104,7 +104,7 @@ export class PostFeedComponent {
 //
     private clearPost() : void {}
 
-    private handlePostSearch(searchType: string, text: string, radiusLookUp: string) { 
+    private handlePostSearch(searchType: string, text: string, radiusLookUp: string) {
 
         switch(searchType) {
             case "author-0":
@@ -122,22 +122,15 @@ export class PostFeedComponent {
     }
 
     public setCategory(category: any) {
-        if (this.category !== category.category) {
-            let cat = category;
-            if (this.category) {
-                let checkCat = (this.category === "All")
-                    ? "postCategory_All"
-                    :  Category[this.category];
-                document.getElementById(checkCat).style.backgroundColor = "#2e7c31";
-            }
-
-            document.getElementById(cat.id).style.backgroundColor = "#445963";
-            this.category = cat.category;
-            this.getPostsByCategory(cat.category);
+        if (this.selected !== category.id) {
+            document.getElementById(this.selected).style.backgroundColor = "#2e7c31";
+            this.selected = category.id;
+            document.getElementById(this.selected).style.backgroundColor = "#445963";
+            this.getPostsByCategory(category.category);
         }
     }
 
-    
+
 }
 
 
