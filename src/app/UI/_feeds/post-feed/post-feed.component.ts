@@ -6,6 +6,8 @@ import { Category, Post } from '../../../_models/post';
 import { Subject } from 'rxjs/Subject';
 import { RadiusSearch } from "../../../constants/distance";
 import { SearchOptions } from "../../../constants/search-options";
+import { BehaviorSubject  } from "rxjs/Rx";
+
 
 @Component({
     selector: 'post-feed',
@@ -16,7 +18,8 @@ import { SearchOptions } from "../../../constants/search-options";
 
 export class PostFeedComponent {
 
-    public posts : Observable<Post[]>;
+    public posts : BehaviorSubject<Post[]>;
+    //public posts : BehaviorSubject<Array<Post>>;
     private subject = new Subject<any>();
 
     //lists
@@ -31,6 +34,7 @@ export class PostFeedComponent {
     public postSearchOptions : any = [];
 
     constructor(public postService: PostService) {
+
         this.postTypes = Object.keys(Category).map(cat => {
             return { value: Category[cat], viewValue: cat };
         });
@@ -48,12 +52,12 @@ export class PostFeedComponent {
             } else {
                 iconType="globe";
             }
-            console.log(cat);
             return { category: cat, id: Category[cat], iconType: iconType };
         });
         this.postButtonsArray.unshift({category: "All", id: "postCategory_All", iconType: "connectdevelop" });
 
-        this.posts = this.postService.getAllPosts();
+        this.posts = new BehaviorSubject([]);
+        this.postService.getAllPosts().subscribe(post => this.posts.next(post))
 
         this.postRadiusSearch = Object.keys(RadiusSearch).map(rad => {
             return { value: rad, viewValue: RadiusSearch[rad].text, radius: RadiusSearch[rad].radius };
@@ -64,12 +68,11 @@ export class PostFeedComponent {
         });
 
         this.selectedPostSearchValue = this.postSearchOptions[0].value;
+
     }
 
-    ngOnInit(): void {
-        //this.category = "All";
-        //setTimeout(3000, function() {  document.getElementById("postCategory_All").style.backgroundColor = "#445963"; });
 
+    ngOnInit(): void {
     }
 
     post(title: string, content: string, category: string) {
@@ -80,21 +83,31 @@ export class PostFeedComponent {
 /// retrieval
 //
     getPostsByUser(userID: string): void {
-        this.posts = this.postService.getPostsByUserID(userID);
+        //this.posts = this.postService.getPostsByUserID(userID);
+        this.postService.getPostsByUserID(name).subscribe(post => this.posts.next(post));
     }
 
     getPostsByUserName(name: string): void {
-        this.posts = this.postService.getPostsByUserName(name);
+        //this.posts = this.postService.getPostsByUserName(name);
+        this.postService.getPostsByUserName(name).subscribe(post => this.posts.next(post));
     }
 
     getPostsByCategory(category: string): void {
-        this.posts = (category !== "All")
-            ? this.postService.getPostsByCategory(category)
-            : this.posts = this.postService.getAllPosts();
+        if (category !== "All") this.postService.getPostsByCategory(category).subscribe(post => this.posts.next(post))
+        else this.postService.getAllPosts().subscribe(post => this.posts.next(post));
     }
 
     getPostsByUserTitle(title: string): void {
-        this.posts = this.postService.getPostsByUserTitle(title);
+        // this.posts = this.postService.getPostsByUserTitle(title);
+        this.postService.getPostsByUserTitle(title).subscribe(post => this.posts.next(post));        
+    }
+
+    getPostsByDistance(radius: number): void {
+        this.posts.next([]);
+        this.postService.getAllPostsByLocation(radius).subscribe(
+            res => this.posts.next(this.posts.getValue().concat(new Array(res))),
+            err => console.log("Error retrieving location")
+        );
     }
 
 //
@@ -102,17 +115,18 @@ export class PostFeedComponent {
 //
     private clearPost() : void {}
 
-    private handlePostSearch(searchType: string, text: string, radiusLookUp: string) { 
-
+    private handlePostSearch(searchType: string, text: string) { //, radiusLookUp: string) { 
+        searchType = Object.keys(SearchOptions).find(c => SearchOptions[c] === searchType)
+        
         switch(searchType) {
-            case "author-0":
+            case "Author":
                 this.getPostsByUserName(text);
                 break;
-            case "title-1":
+            case "Title":
                 this.getPostsByUserTitle(text);
                 break;
-            case "distance-2":
-                //
+            case "Distance":
+                this.getPostsByDistance(RadiusSearch[this.selectedPostSearchRadius].radius);                
                 break;
             default: //should we do a default?
                 break;
