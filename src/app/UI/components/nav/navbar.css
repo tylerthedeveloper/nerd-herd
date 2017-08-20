@@ -13,7 +13,7 @@
 }
 
 .navbar {
-    background-color: #2e7d32;
+    background-color: #60ac5d;
     border-top: 8px solid #005005;
     color: white;
 }
@@ -23,7 +23,7 @@
 }
 
 button {
-    height: 45px;
+    height: 60px;
     font-family: 'Kanit', sans-serif;
     font-size: 16px;
 }
@@ -41,6 +41,10 @@ button {
 
 .bottom-nav-btn {
     width:20px;
+}
+
+#posts {
+    background-color: #005005;
 }
 
 @media only screen and (min-width:440px) {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { PostService } from '../../../_services/post.service'
@@ -31,8 +32,11 @@ export class PostFeedComponent {
     public category : string = "";
     public selected : string = "postCategory_All";
     public selectedPostSearchValue: string;
-    public selectedPostSearchRadius: number;
+    public selectdPostSearchRadius: number;
     public postSearchOptions : any = [];
+
+    postFormControl = new FormControl('', [
+        Validators.required]);
 
     constructor(public postService: PostService) {
 

@@ -5,7 +5,7 @@
         <div class="col-12 col-md-4">
             <md-card class="example-card">
                 <div class="profile-image">
-                    <img class="main-profile-pic" src="../../../assets/blank-profile-picture.png" />
+                    <img class="main-profile-pic" src="{{userProfile.photoUrl}}" />
                 </div>
                 <div class="profile-image-two">
 
@@ -21,33 +21,28 @@
                         </li>
                     </ul>
                 </md-card-content>
-                <md-card-footer *ngIf="!edit">
-                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="editProfile()"></i>
-                </md-card-footer>
             </md-card>
             <!-- <friends-list></friends-list> -->
         </div>
-        <!--
+
         <div class="col-12 col-md-8">
             <md-tab-group>
                 <md-tab label="Posts">
                     <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
-                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
-                        <md-card-title>{{post.$key }}</md-card-title>
+                        <md-card-title>{{post.title }}</md-card-title>
                         <md-card-subtitle>{{post.author}}</md-card-subtitle>
                         <md-card-content>{{post.content}}</md-card-content>
                     </md-card>
                 </md-tab>
                 <md-tab label="Projects">
                     <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
-                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
-                        <md-card-title>{{project.$key }}</md-card-title>
+                        <md-card-title>{{project.title }}</md-card-title>
                         <md-card-subtitle>{{project.author}}</md-card-subtitle>
                         <md-card-content>{{project.content}}</md-card-content>
                     </md-card>
                 </md-tab>
             </md-tab-group>
         </div>
-        -->
+
     </div>
 </div>

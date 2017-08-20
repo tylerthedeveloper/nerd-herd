@@ -6,14 +6,33 @@
 button {
     width: 100%;
     background-color: #1c313a;
-    font-family: 'Roboto', sans-serif;
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
-button.searchBtn.mat-raised-button {
-    float:right;
-    width: 20px;
+/*button {
+    font-family: 'Roboto', sans-serif;
+  display: inline-block;
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid #445963;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  color:#1b3039;
+  transition: color 0.3s ease-out,
+              background-color 0.3s ease-out,
+              border-color 0.3s ease-out;
 }
+button:hover,
+button:active {
+  background-color: #2e7c31;
+  border-color: #445963;
+  color: #fff;
+  transition: color 0.3s ease-in,
+              background-color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}*/
 
 md-card {
     margin-bottom:20px;
