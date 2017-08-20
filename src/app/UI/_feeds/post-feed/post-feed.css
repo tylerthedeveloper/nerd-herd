@@ -10,6 +10,11 @@ button {
     color: white;
 }
 
+button.searchBtn.mat-raised-button {
+    float:right;
+    width: 20px;
+}
+
 md-card {
     margin-bottom:20px;
     position: static;
@@ -82,8 +87,28 @@ i {
     margin-top: 15px;
 }
 
+i.fa.fa-search.fa-lg {
+    margin-top: 0;
+}
+
 .category-text {
     color: black;
     padding-top: 25px;
     font-family: 'Roboto', sans-serif;
+}
+
+#postCategory_All {
+    background-color: #445963;
+}
+
+@media only screen and (max-width: 440px) {
+    .category-select-container {
+        margin-top: 60px;
+        margin-bottom: 20px;
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+    .circle {
+        display: inline-block;
+    }
 }

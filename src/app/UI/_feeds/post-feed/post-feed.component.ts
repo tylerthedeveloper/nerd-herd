@@ -29,6 +29,7 @@ export class PostFeedComponent {
 
     //active values
     public category : string = "";
+    public selected : string = "postCategory_All";
     public selectedPostSearchValue: string;
     public selectedPostSearchRadius: number;
     public postSearchOptions : any = [];
@@ -45,6 +46,8 @@ export class PostFeedComponent {
                 iconType="lightbulb-o";
             } else if (cat == "Meetup") {
                 iconType="users";
+            } else if (cat == "Social") {
+                iconType="comments";
             } else if (cat == "Question") {
                 iconType="question-circle";
             } else if (cat == "Interview Prep") {
@@ -71,9 +74,7 @@ export class PostFeedComponent {
 
     }
 
-
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     post(title: string, content: string, category: string) {
         this.postService.addPost(title, content, category);
@@ -134,22 +135,15 @@ export class PostFeedComponent {
     }
 
     public setCategory(category: any) {
-        if (this.category !== category.category) {
-            let cat = category;
-            if (this.category) {
-                let checkCat = (this.category === "All")
-                    ? "postCategory_All"
-                    :  Category[this.category];
-                document.getElementById(checkCat).style.backgroundColor = "#2e7c31";
-            }
-
-            document.getElementById(cat.id).style.backgroundColor = "#445963";
-            this.category = cat.category;
-            this.getPostsByCategory(cat.category);
+        if (this.selected !== category.id) {
+            document.getElementById(this.selected).style.backgroundColor = "#2e7c31";
+            this.selected = category.id;
+            document.getElementById(this.selected).style.backgroundColor = "#445963";
+            this.getPostsByCategory(category.category);
         }
     }
 
-    
+
 }
 
 
