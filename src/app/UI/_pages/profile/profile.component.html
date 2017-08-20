@@ -60,16 +60,14 @@
             <md-tab-group>
                 <md-tab label="Posts">
                     <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
-                        <!-- <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/> -->
-                        <md-card-title>{{post.$key }}</md-card-title>
+                        <md-card-title>{{post.title }}</md-card-title>
                         <md-card-subtitle>{{post.author}}</md-card-subtitle>
                         <md-card-content>{{post.content}}</md-card-content>
                     </md-card>
                 </md-tab>
                 <md-tab label="Projects">
                     <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
-                        <!-- <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/> -->
-                        <md-card-title>{{project.$key }}</md-card-title>
+                        <md-card-title>{{project.title }}</md-card-title>
                         <md-card-subtitle>{{project.author}}</md-card-subtitle>
                         <md-card-content>{{project.content}}</md-card-content>
                     </md-card>
