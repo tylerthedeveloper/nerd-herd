@@ -37,7 +37,7 @@
         </div>
         <div class="col-12 col-md-8 col-lg-8">
             <div class="post-search">
-                <md-input-container class="searchInput">
+                <md-input-container class="searchInput" *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
                     <input mdInput #searchText placeholder="Search posts" />
                 </md-input-container>
                 <md-select id="searchOptionType" class="radius"
@@ -56,8 +56,8 @@
                 </md-select>
                 <button class="searchBtn" md-raised-button
                             (click)="handlePostSearch(selectedPostSearchValue,
-                                                        searchText.value,
-                                                        selectedPostSearchRadius)">
+                                                        searchText.value)">
+                            Search
                             <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                 </button>
             </div>
