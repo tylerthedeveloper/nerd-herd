@@ -35,8 +35,8 @@
                 </md-card-content>
             </md-card>
         </div>
-        <div class="col-12 col-md-8 col-lg-8">
-            <div class="post-search">
+        <div class="col-12 col-md-8 col-lg-8" style="display: inline-block"> 
+            <div class="post-search" style="display: inline-block">
                 <md-select id="searchOptionType" class="radius"
                             placeholder="Search Type"
                             [(ngModel)]="selectedPostSearchValue">
@@ -45,10 +45,10 @@
                     </md-option>
                 </md-select>
                 <div style="display: inline-block" *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
-                    <md-input-container class="searchInput">
+                    <md-input-container class="searchInput" style="display: inline-block">
                         <input mdInput #searchText placeholder="Search posts" />
                     </md-input-container>
-                        <button 
+                        <button style="display: inline-block"
                                 class="searchBtn" md-raised-button
                                 (click)="handlePostSearch(selectedPostSearchValue, searchText.value)">
                                 Search
@@ -84,6 +84,7 @@
                    {{post.timestamp | date: 'EEEE M/d HH:mm'}}
                </div>
                 <md-card color="primary">
+                    <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
                     <md-card-title>{{post.title}}</md-card-title>
                     <md-card-subtitle>{{post.author}}</md-card-subtitle>
                     <md-card-content>{{post.content}}</md-card-content>

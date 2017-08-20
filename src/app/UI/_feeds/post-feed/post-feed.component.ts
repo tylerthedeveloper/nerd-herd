@@ -3,7 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 import { PostService } from '../../../_services/post.service'
-import { Category, Post } from '../../../_models/post';
+import { PostCategory, Post } from '../../../_models/post';
 import { Subject } from 'rxjs/Subject';
 import { RadiusSearch } from "../../../constants/distance";
 import { SearchOptions } from "../../../constants/search-options";
@@ -32,7 +32,7 @@ export class PostFeedComponent {
     public category : string = "";
     public selected : string = "postCategory_All";
     public selectedPostSearchValue: string;
-    public selectdPostSearchRadius: number;
+    public selectedPostSearchRadius: number;
     public postSearchOptions : any = [];
 
     postFormControl = new FormControl('', [
@@ -40,11 +40,11 @@ export class PostFeedComponent {
 
     constructor(public postService: PostService) {
 
-        this.postTypes = Object.keys(Category).map(cat => {
-            return { value: Category[cat], viewValue: cat };
+        this.postTypes = Object.keys(PostCategory).map(cat => {
+            return { value: PostCategory[cat], viewValue: cat };
         });
 
-        this.postButtonsArray = Object.keys(Category).map(cat => {
+        this.postButtonsArray = Object.keys(PostCategory).map(cat => {
             let iconType = "";
             if (cat == "Idea") {
                 iconType="lightbulb-o";
@@ -59,7 +59,7 @@ export class PostFeedComponent {
             } else {
                 iconType="globe";
             }
-            return { category: cat, id: Category[cat], iconType: iconType };
+            return { category: cat, id: PostCategory[cat], iconType: iconType };
         });
         this.postButtonsArray.unshift({category: "All", id: "postCategory_All", iconType: "connectdevelop" });
 

@@ -1,6 +1,6 @@
 import { Injectable,  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Category, Post } from '../_models/post';
+import { PostCategory, Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AFService } from './af.service';
@@ -133,8 +133,8 @@ export class PostService {
     }
 
     private getKeyByCategoryId(_category: string) {
-        var cat = "";
-        return Object.keys(Category).find(key => Category[key] === _category)
+        //var cat = "";
+        return Object.keys(PostCategory).find(key => PostCategory[key] === _category)
     }
 
     private setPostLocation(postKey: any, coords: Coordinates) {
