@@ -122,6 +122,8 @@ export class PostFeedComponent {
 
     private handlePostSearch(searchType: string, text: string) { //, radiusLookUp: string) { 
         searchType = Object.keys(SearchOptions).find(c => SearchOptions[c] === searchType)
+        console.log(searchType) 
+        console.log(text) 
         
         switch(searchType) {
             case "Author":
