@@ -74,7 +74,7 @@ export class PostFeedComponent {
             return { value: SearchOptions[opt], viewValue: opt };
         });
 
-        this.selectedPostSearchValue = this.postSearchOptions[0].value;
+        this.selectedPostSearchValue = 'searchOption_Distance';
 
     }
 
@@ -98,13 +98,14 @@ export class PostFeedComponent {
     }
 
     getPostsByCategory(category: string): void {
+        console.log(this.posts);
         if (category !== "All") this.postService.getPostsByCategory(category).subscribe(post => this.posts.next(post))
         else this.postService.getAllPosts().subscribe(post => this.posts.next(post));
     }
 
     getPostsByUserTitle(title: string): void {
         // this.posts = this.postService.getPostsByUserTitle(title);
-        this.postService.getPostsByUserTitle(title).subscribe(post => this.posts.next(post));        
+        this.postService.getPostsByUserTitle(title).subscribe(post => this.posts.next(post));
     }
 
     getPostsByDistance(radius: number): void {
@@ -120,11 +121,11 @@ export class PostFeedComponent {
 //
     private clearPost() : void {}
 
-    private handlePostSearch(searchType: string, text: string) { //, radiusLookUp: string) { 
+    private handlePostSearch(searchType: string, text: string) { //, radiusLookUp: string) {
         searchType = Object.keys(SearchOptions).find(c => SearchOptions[c] === searchType)
-        console.log(searchType) 
-        console.log(text) 
-        
+        console.log(searchType)
+        console.log(text)
+
         switch(searchType) {
             case "Author":
                 this.getPostsByUserName(text);
@@ -133,7 +134,7 @@ export class PostFeedComponent {
                 this.getPostsByUserTitle(text);
                 break;
             case "Distance":
-                this.getPostsByDistance(RadiusSearch[this.selectedPostSearchRadius].radius);                
+                this.getPostsByDistance(RadiusSearch[this.selectedPostSearchRadius].radius);
                 break;
             default: //should we do a default?
                 break;
@@ -165,7 +166,6 @@ export class PostFeedComponent {
         {value: 'social-2', viewValue: 'Social'},
         {value: 'conference-3', viewValue: 'Conference'}
     ];
-
     postTypeSearch = [
         {value: 'other-0', viewValue: 'All'},
         {value: 'question-0', viewValue: 'Question'},
@@ -173,7 +173,6 @@ export class PostFeedComponent {
         {value: 'social-2', viewValue: 'Social'},
         {value: 'conference-3', viewValue: 'Conference'}
     ];
-
     postRadiusSearch = [
         {value: 'radius-0', viewValue: '10 Miles'},
         {value: 'radius-1', viewValue: '20 Miles'},
@@ -182,7 +181,6 @@ export class PostFeedComponent {
         {value: 'radius-4', viewValue: '100 Miles'},
         {value: 'radius-5', viewValue: 'All'}
     ];
-
     public postRadiusSearch = {
         "radius-0": "10 Miles",
         "radius-1": "20 Miles",
@@ -191,9 +189,6 @@ export class PostFeedComponent {
         "radius-4": "100 Miles",
         "radius-5": "All"
     };
-
-
-
     public postSearchOptions = [
         {value: 'author-0', viewValue: 'Author'},
         {value: 'title-1', viewValue: 'Title'},
