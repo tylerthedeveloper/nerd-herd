@@ -28,18 +28,28 @@
         <div class="col-12 col-md-8">
             <md-tab-group>
                 <md-tab label="Posts">
-                    <md-card *ngFor="let post of _posts | async" style="margin-bottom:20px;">
-                        <md-card-title>{{post.title }}</md-card-title>
-                        <md-card-subtitle>{{post.author}}</md-card-subtitle>
-                        <md-card-content>{{post.content}}</md-card-content>
-                    </md-card>
+                    <div *ngFor="let post of _posts | async">
+                        <div class="post-top">
+                            {{post.timestamp | date: 'EEEE M/d HH:mm'}}
+                        </div>
+                        <md-card style="margin-bottom:20px;">
+                            <md-card-title>{{post.title }}</md-card-title>
+                            <md-card-subtitle>{{post.author}}</md-card-subtitle>
+                            <md-card-content>{{post.content}}</md-card-content>
+                        </md-card>
+                    </div>
                 </md-tab>
                 <md-tab label="Projects">
-                    <md-card *ngFor="let project of _projects | async" style="margin-bottom:20px;">
-                        <md-card-title>{{project.title }}</md-card-title>
-                        <md-card-subtitle>{{project.author}}</md-card-subtitle>
-                        <md-card-content>{{project.content}}</md-card-content>
-                    </md-card>
+                    <div *ngFor="let project of _projects | async">
+                        <div class="post-top">
+                            {{project.timestamp | date: 'EEEE M/d HH:mm'}}
+                        </div>
+                        <md-card style="margin-bottom:20px;">
+                            <md-card-title>{{project.title }}</md-card-title>
+                            <md-card-subtitle>{{project.author}}</md-card-subtitle>
+                            <md-card-content>{{project.content}}</md-card-content>
+                        </md-card>
+                    </div>
                 </md-tab>
             </md-tab-group>
         </div>

@@ -57,3 +57,17 @@ md-card {
 .md-tab-header md-ink-bar {
     background-color: #ff0000;
 }
+
+.post-top {
+    /*padding-left: 20px;*/
+    text-align: center;
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    background-color: #445963;
+    width: 175px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
