@@ -1,22 +1,23 @@
 
-
-
 export class User {
-    id: number;
-    
-    //website
-    username: string;
-    password: string;
+    constructor(public uid: string,
+                public name: string,
+                public email: string,
+                public gitUsername: string,
+                private photoUrl: string) {}
 
-    //demographic
-    firstName: string;
-    lastName: string;
-    email: string;
+
+    public location : any = {
+        "latitude" :  "",
+        "longitude" : ""
+    };
+        
+    //public projects: Post[]
     school: string;
     job: string;
     proPic: string;
 
     //activity info
+    // posts: Post[]
     followers: number;
-    posts: number;
 }

@@ -1,0 +1,13 @@
+
+colors:
+Primary main: #2e7c31;
+Primary light: #60ac5d
+Primary dark: #004f04
+
+Secondary main: #445963
+Secondary light: #708690
+Secondary dark: #1b3039
+
+fonts:
+font-family: 'Roboto', sans-serif;
+font-family: 'Kanit', sans-serif;

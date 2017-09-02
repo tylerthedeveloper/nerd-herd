@@ -1,0 +1,91 @@
+md-grid-tile {
+    border: 1px solid;
+    padding-bottom: 20px;
+    width: 85%;
+}
+
+.mat-grid-tile .mat-grid-tile-footer, .mat-grid-tile .mat-grid-tile-header {
+    background-color: #445963;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+md-grid-tile img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+md-grid-list {
+}
+
+button {
+    background-color: #1c313a;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    margin-left: 20px;
+}
+
+md-input-container {
+    width: 50%;
+}
+
+ul {
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+    font-size:  14px;
+    margin-bottom: 20px;
+}
+
+ul li i {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+md-card-header {
+    margin-bottom: 20px;
+}
+
+md-card-title {
+    font-weight: bold;
+}
+
+.user-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.user-card {
+    width: 30%;
+    margin: 20px 10px 0 10px;
+}
+
+.user-card:hover {
+    transition:all 0.3s ease;
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+}
+
+.profile-pic {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    float: left;
+    order: -1;
+    margin-left: -10px;
+    margin-top: -8px;
+}
+
+@media only screen and (max-width: 440px) {
+    .user-card {
+        width: 100%;
+    }
+}

@@ -14,24 +14,28 @@ import { environment } from '../environments/environment';
 
 
 import { MaterialModule } from '@angular/material';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
-import { AuthService, PostService, AFService } from './_services/index';
+import { PostService, ProjectService, AFService, UserService } from './_services/index';
+import { UserStore } from './_stores/user.store';
 import { UIModule } from './UI/ui.app.module';
+import { DataSource } from '@angular/cdk';
 
 @NgModule({
-  imports:      [ BrowserModule, AppRoutingModule, CommonModule, 
-                  NgbModule.forRoot(), HttpModule, UIModule,
-                  AgmCoreModule.forRoot({
-                      apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
-                      libraries: ["places"]
-                    }), AngularFireModule.initializeApp(environment.firebase), 
-                    AngularFireAuthModule, AngularFireDatabaseModule,  MaterialModule
- ],
-  providers: [ PostService, AuthService, AFService ],
-  declarations: [ AppComponent ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  bootstrap:    [ AppComponent ]
+    imports:[
+        BrowserModule, AppRoutingModule, CommonModule,
+        NgbModule.forRoot(), HttpModule, UIModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyCwILuTSkNcFBP9LEjINztg2lKBcRdtAlY',
+            libraries: ["places"]
+        }), AngularFireModule.initializeApp(environment.firebase),
+        AngularFireAuthModule, AngularFireDatabaseModule, MaterialModule
+    ],
+    providers: [ ProjectService, PostService, AFService, UserService, UserStore ],
+    declarations: [ AppComponent ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

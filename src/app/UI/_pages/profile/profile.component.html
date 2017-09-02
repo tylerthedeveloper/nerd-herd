@@ -1,3 +1,106 @@
+<div class="container">
+    <div class="row profile-top">
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <md-card>
+                <div class="profile-image">
+                    <img class="main-profile-pic" src="{{userModel.photoUrl}}" />
+                </div>
+                <div class="profile-image-two">
+
+                </div>
+                <md-card-content *ngIf="!edit">
+                    <h2>{{userModel.name}}</h2>
+                    <ul>
+                        <li>
+                            <i class="fa fa-envelope" aria-hidden="true"></i> {{userModel.email}}
+                        </li>
+                        <li>
+                            <i class="fa fa-github" aria-hidden="true"></i> {{userModel.gitUsername}}
+                        </li>
+                    </ul>
+                </md-card-content>
+                <md-card-content *ngIf="edit">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="name"
+                                [(ngModel)]="userModel.name" name="name">
+                            </md-input-container>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="email"
+                                [(ngModel)]="userModel.email" name="email">
+                            </md-input-container>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gitUsername">Github Username:</label>
+                            <md-input-container>
+                                <input mdInput type="text" id="gitUsername"
+                                [(ngModel)]="userModel.gitUsername" name="gitUsername">
+                            </md-input-container>
+                        </div>
+                        <button md-raised-button (click)="updateProfile()">Submit</button>
+                    </form>
+                    <!-- <a href="https://github.com/{{userModel.gitUsername}}"> git link </a> -->
+                </md-card-content>
+                <md-card-footer *ngIf="!edit">
+                    <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="editProfile()"></i>
+                </md-card-footer>
+            </md-card>
+            <friends-list></friends-list>
+        </div>
+        <div class="col-12 col-md-8">
+            <md-tab-group>
+                <md-tab label="Posts">
+                    <div *ngFor="let post of _posts | async">
+                        <div class="post-top">
+                            {{post.timestamp | date: 'EEEE M/d HH:mm'}}
+                        </div>
+                        <md-card style="margin-bottom:20px;">
+                            <md-card-title>{{post.title }}</md-card-title>
+                            <md-card-subtitle>{{post.author}}</md-card-subtitle>
+                            <md-card-content>{{post.content}}</md-card-content>
+                        </md-card>
+                    </div>
+                </md-tab>
+                <md-tab label="Projects">
+                    <div *ngFor="let project of _projects | async">
+                        <div class="post-top">
+                            {{project.timestamp | date: 'EEEE M/d HH:mm'}}
+                        </div>
+                        <md-card style="margin-bottom:20px;">
+                            <md-card-title>{{project.title }}</md-card-title>
+                            <md-card-subtitle>{{project.author}}</md-card-subtitle>
+                            <md-card-content>{{project.content}}</md-card-content>
+                        </md-card>
+                    </div>
+                </md-tab>
+            </md-tab-group>
+        </div>
+    </div>
+</div>
+<!--
+
 <p>
-  profile works!
+{{ _user.age }}
 </p>
+
+<p>
+{{ _user.school }}
+</p>
+
+<p>
+{{ _user.job }}
+</p>
+
+<p>
+{{ _user.location }}
+</p>
+-->

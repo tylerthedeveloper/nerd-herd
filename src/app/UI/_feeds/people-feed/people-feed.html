@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <h1>Find other engineers</h1>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-4">
+            <div class="example-container mat-elevation-z8">
+                <friends-list></friends-list>
+            </div>
+        </div>
+        <div class="col-12 col-md-8">
+            <div class="user-search">
+                <md-input-container>
+                    <input mdInput #name placeholder="Search users" />
+                </md-input-container>
+                <button md-raised-button (click)="onSearchUserByName(name.value)"><i class="fa fa-search fa-lg" aria-hidden="true"></i></button>
+            </div>
+            <div class="user-cards">
+                <md-card class="user-card" *ngFor="let user of userStore.users | async" [routerLink]="['/people', user.uid]"
+                routerLinkActive="active">
+                    <md-card-header>
+                        <!-- <div md-card-avatar style="backgroundImage:url({{user.photoUrl}});"></div> -->
+                        <img class="profile-pic" src="{{ user.photoUrl }}" />
+                        <md-card-title>{{ user.name }}</md-card-title>
+                    </md-card-header>
+                    <md-card-content>
+                        <ul>
+                            <li>
+                                <i class="fa fa-envelope" aria-hidden="true"></i> {{user.email}}
+                            </li>
+                            <li *ngIf="user.gitUsername">
+                                <i class="fa fa-github" aria-hidden="true"></i> {{user.gitUsername}}
+                            </li>
+                        </ul>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <!-- <md-grid-list cols="2" rowHeight="200px">
+                <md-grid-tile   md-gutter="4px" *ngFor="let user of userStore.users | async"
+                                [routerLink]="['/people', user.uid]"
+                                routerLinkActive="active">
+                      <md-grid-tile-header>
+                          <img src="{{ user.photoUrl }}" />
+                          {{ user.name }}
+                      </md-grid-tile-header>
+                    <p>{{ user.email }}</p>
+                </md-grid-tile>
+            </md-grid-list> -->
+        </div>
+    </div>
+</div>

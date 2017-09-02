@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import * as firebase from 'firebase/app';
 import { HelperService } from '../../../_services/helpers.service';
 
 @Component({
