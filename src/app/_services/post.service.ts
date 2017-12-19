@@ -50,6 +50,8 @@ export class PostService {
         
         ////
         ///temp value!!!!!
+        //category = "Idea";
+
         /////
         ///
         var postData = {  
@@ -156,18 +158,28 @@ export class PostService {
 
 /*
     private getCategoryString(category: string) : string {
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
         switch(category) {
-            case Category.Project:
-                return "project";
-            case Category.News:
-                return "news";
-            case Category.Question:
-                return "question";
             case Category.Idea:
-                return "idea";
+                return "Idea";
             case Category.Meetup:
-                return "meetup";
+                return "Meetup";
+            case Category.Social:
+                return "Social";
+            case Category.Question:
+                return "Question";
+            case Category.Interview:
+                return "Interview";
+            case Category.Other:
+                return "Other";
         }
+<<<<<<< HEAD
+        return "";
+=======
         return "idea";
+>>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
     }
         */

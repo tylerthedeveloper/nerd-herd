@@ -1,5 +1,6 @@
 
 export class Post {
+
     constructor(authorID: string,
                 author: string,
                 title: string,
@@ -13,6 +14,16 @@ export class Post {
 
 
 var postButtonsArrayIdConstant = "postCategory_";
+
+export const PostCategory = {
+    //"All" : postButtonsArrayIdConstant + "All",
+    "Idea" : postButtonsArrayIdConstant + "Idea",
+    "Meetup" : postButtonsArrayIdConstant + "Meetup",
+    "Social" : postButtonsArrayIdConstant + "Social",
+    "Question" : postButtonsArrayIdConstant + "Question",
+    "Interview" : postButtonsArrayIdConstant + "Interview",
+    "Other" : postButtonsArrayIdConstant + "Other"
+};
 
 /*
 export const Category = [
@@ -35,23 +46,4 @@ export const Category = [
         category: "Question", id: postButtonsArrayIdConstant + "Question"
     },
 ]
-*/
-export const PostCategory = {
-    //"All" : postButtonsArrayIdConstant + "All",
-    "Idea" : postButtonsArrayIdConstant + "Idea",
-    "Meetup" : postButtonsArrayIdConstant + "Meetup",
-    "Social" : postButtonsArrayIdConstant + "Social",
-    "Question" : postButtonsArrayIdConstant + "Question",
-    "Interview Prep" : postButtonsArrayIdConstant + "Interview Prep",
-    "Other" : postButtonsArrayIdConstant + "Other"
-}
-/*
-export enum Category {
-    Idea,
-    Meetup,
-    News,
-    Project,
-    Question,
-}
-
 */

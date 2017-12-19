@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-
 import { Observable } from 'rxjs/Observable';
 import { PostService } from '../../../_services/post.service'
 import { PostCategory, Post } from '../../../_models/post';
@@ -78,9 +77,8 @@ export class PostFeedComponent {
 
     }
 
-    ngOnInit(): void {}
-
     post(title: string, content: string, category: string) {
+        //console.log(title + " " + content + " " + category);
         this.postService.addPost(title, content, category);
     }
 

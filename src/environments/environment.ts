@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 import { firebaseConfig } from '../app/constants/firebase';
+
 export const environment = {
   
   production: false, //not in production
