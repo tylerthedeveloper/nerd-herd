@@ -1,15 +1,18 @@
 import { Injectable,  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Post } from '../_models/post';
+import { ProjectCategory, Project } from '../_models/project';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
-import { AFService } from '../_services/af.service';
+import { AFService } from './af.service';
+import { UserService } from './user.service';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ProjectService {
     
     projects: FirebaseListObservable<any>;
     user: firebase.User;
+    location: Position;
 
     constructor(private db: AngularFireDatabase, public afService : AFService) {
         this.projects = db.list('/projects');

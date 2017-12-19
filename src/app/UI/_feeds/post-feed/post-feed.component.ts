@@ -59,8 +59,9 @@ export class PostFeedComponent {
 
     }
 
-    post(title: string, content: string) {
-        this.postService.addPost(title, content, "Category.Idea");
+    post(title: string, content: string, category: string) {
+        //console.log(title + " " + content + " " + category);
+        this.postService.addPost(title, content, category);
     }
 
 //
