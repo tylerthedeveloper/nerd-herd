@@ -15,7 +15,7 @@ export class Post {
 
 var postButtonsArrayIdConstant = "postCategory_";
 
-export const Category = {
+export const PostCategory = {
     //"All" : postButtonsArrayIdConstant + "All",
     "Idea" : postButtonsArrayIdConstant + "Idea",
     "Meetup" : postButtonsArrayIdConstant + "Meetup",

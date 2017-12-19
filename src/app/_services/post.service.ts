@@ -1,11 +1,14 @@
 import { Injectable,  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Category, Post } from '../_models/post';
+import { PostCategory, Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AFService } from './af.service';
 import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
+import { StateStore } from "../_stores/state.store";
+
+declare var GeoFire: any;
 
 @Injectable()
 export class PostService {
@@ -13,6 +16,9 @@ export class PostService {
     posts: FirebaseListObservable<any>;
     user: firebase.User;
     location: Position;
+    firebaseRef : firebase.database.Reference;
+    geoFire : any;
+    geoFireRef : any;
 
     constructor(private db: AngularFireDatabase, 
                 public afService : AFService,
@@ -23,11 +29,17 @@ export class PostService {
                     if(user) { 
                         this.user = user;
                         //if( !user.location ) --> get Firebase user !!!
-                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { this.location = location;
+                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
+                            this.location = location;
                             console.log(location);
                         });
+
                     }
                 });
+      
+                this.firebaseRef = firebase.database().ref('locations/posts');
+                this.geoFire = new GeoFire(this.firebaseRef);
+                this.geoFireRef = this.geoFire.ref(); 
     }
 
     getAllPosts(): Observable<any> {
@@ -50,12 +62,14 @@ export class PostService {
             timestamp: firebase.database.ServerValue.TIMESTAMP,
             category: category
         }
-        var catstring = this.getCategoryString(category);
+        var catstring = this.getKeyByCategoryId(category);
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
         this.db.database.ref(`user-posts/ids/${this.user.uid}/${postKey}`).set(postData);
         this.db.database.ref(`user-posts/names/${this.user.displayName}/${postKey}`).set(postData);
         this.db.database.ref(`post-categories/${catstring}/${postKey}`).set(postData);
+    
+        this.setPostLocation(postKey, this.location.coords);
     }
 
     
@@ -99,8 +113,55 @@ export class PostService {
         }
     }
 
-    private getCategoryString(category: string) : string {
+    public getAllPostsByLocation(radius: number) : Observable<any> { //: FirebaseListObservable<any> { 
+
+        let _coords = this.location.coords;
+
+        var geoQuery = this.geoFire.query({
+            center: [_coords.latitude, _coords.longitude],
+            radius: radius //kilometers
+        });
+
+    
+        return Observable.create((observer : any) => {
+            var self = this.db;
+            geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
+                self.object(`/posts/${key}`).subscribe(post => {
+                    console.log(post);
+                    observer.next(post);
+                });
+            })
+        });
+    }
+
+    private getKeyByCategoryId(_category: string) {
+        //var cat = "";
+        return Object.keys(PostCategory).find(key => PostCategory[key] === _category)
+    }
+
+    private setPostLocation(postKey: any, coords: Coordinates) {
+        this.db.object(`posts/${postKey}`).update({                 
+            latitude : coords.latitude,
+            longitude : coords.longitude
+        });
         
+        this.geoFire.set(postKey, [coords.latitude, coords.longitude])
+            .then(
+                () => console.log("Provided key has been added to GeoFire") , 
+                (error: any) => console.log("Error: " + error)
+            );
+    }
+
+}
+
+
+
+/*
+    private getCategoryString(category: string) : string {
+<<<<<<< HEAD
+        
+=======
+>>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
         switch(category) {
             case Category.Idea:
                 return "Idea";
@@ -115,6 +176,10 @@ export class PostService {
             case Category.Other:
                 return "Other";
         }
+<<<<<<< HEAD
         return "";
+=======
+        return "idea";
+>>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
     }
-}
+        */

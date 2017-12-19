@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
 
   /*
   set profile(userProfile: User) {
-    this.userProfile = userProfile; 
+    this.userProfile = userProfile;
     console.log("setter");
   }
   get profile(): User { return this.userProfile; }
@@ -29,17 +29,15 @@ export class UserProfileComponent implements OnInit {
   constructor(public userService: UserService,
               private postService : PostService,
               private projectService : ProjectService,
-              private route: ActivatedRoute) {
-
-              let userUid : string = this.route.snapshot.paramMap.get('uid');
-              this.userService.getUserByID(userUid).subscribe((user) => {
-                  this.userProfile = user;
-              });
-    } 
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
-    //this._posts = this.postService.getPostsByUserID(this.userProfile.uid);
-    //this._projects = this.projectService.getProjectsByUserID(this.userProfile.uid);
+      let userUid : string = this.route.snapshot.paramMap.get('uid');
+      this.userService.getUserByID(userUid).subscribe((user) => {
+          this.userProfile = user;
+      });
+      this._posts = this.postService.getPostsByUserID(userUid);
+      this._projects = this.projectService.getProjectsByUserID(userUid);
   }
 
 }

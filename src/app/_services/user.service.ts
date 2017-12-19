@@ -18,11 +18,11 @@ export class UserService {
   constructor(public database: AngularFireDatabase) {
       this.firebaseRef = firebase.database().ref('locations');
       this.geoFire = new GeoFire(this.firebaseRef);
-      this.geoFireRef = this.geoFire.ref(); 
+      this.geoFireRef = this.geoFire.ref();
 
   }
 
-  getAllUsers() : FirebaseListObservable<any> { 
+  getAllUsers() : FirebaseListObservable<any> {
       return this.database.list('/users');
   }
 
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   getUserByName(name : string) : Observable<any> {
-      if(name !== "") { 
+      if(name !== "") {
         return this.database.list('/users', {
           query: {
             orderByChild: 'name',
@@ -47,7 +47,7 @@ export class UserService {
   }
 
 public getOrUpdateUserLocation(uid : string) : Observable<any> {
-    if(navigator.geolocation) {      
+    if(navigator.geolocation) {
         return Observable.create((observer : any) => {
             navigator.geolocation.getCurrentPosition(position => {
                 observer.next(position);
@@ -57,23 +57,23 @@ public getOrUpdateUserLocation(uid : string) : Observable<any> {
     }
     else {
         return Observable.create((observer : any) => {
-          this.database.object(`users/${uid}`).subscribe(user => 
+          this.database.object(`users/${uid}`).subscribe(user =>
               observer.next(
                   {
                     "latitude": user.latitude,
                     "longitude": user.longitude
-                }));              
+                }));
       })
     }
   }
 
-  public getAllUsersByLocation(location: any, radius: number) : Observable<any> { //: FirebaseListObservable<any> { 
+  public getAllUsersByLocation(location: any, radius: number) : Observable<any> { //: FirebaseListObservable<any> {
       var geoQuery = this.geoFire.query({
           center: [location.latitude, location.longitude],
           radius: radius //kilometers
         });
 
-   
+
     return Observable.create((observer : any) => {
         var self = this.database;
         geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
@@ -85,20 +85,20 @@ public getOrUpdateUserLocation(uid : string) : Observable<any> {
         })});
   }
 
-  
-  
+
+
   private updateLocation(userKey: any, coords: Coordinates) {
-      this.database.object(`users/${userKey}`).update({                 
+      this.database.object(`users/${userKey}`).update({
         latitude : coords.latitude,
         longitude : coords.longitude
     });
-      
+
     //console.log("2222pub get or update")
 
       // 39.9601469,-86.0903699
     this.geoFire.set(userKey, [coords.latitude, coords.longitude])
           .then(
-            () => console.log("Provided key has been added to GeoFire") , 
+            () => console.log("Provided key has been added to GeoFire") ,
             (error: any) => console.log("Error: " + error)
           );
 
