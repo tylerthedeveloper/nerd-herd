@@ -28,7 +28,8 @@
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #postContent></textarea>
                         </md-input-container>
-                        <button md-raised-button (click)="post(titleContent.value, postContent.value, newPostCategory.selected.value); titleContent.value =''; postContent.value ='';">
+                        <button md-raised-button (click)="post(titleContent.value, postContent.value, categoryContent.selected.value); 
+                                                                titleContent.value =''; postContent.value ='';">
                             Post
                         </button>
                     </form>
@@ -44,11 +45,12 @@
                        {{ type.viewValue }}
                    </md-option>
                </md-select>
-               <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'" class="searchInput">
-                   <md-input-container>
+               <!-- <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'" class="searchInput"> -->
+               <div class="searchInput" *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
+                   <md-input-container >
                        <input mdInput #searchText placeholder="Search posts" />
                    </md-input-container>
-               </div>
+                </div>
                <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
                    <md-select class="radius" placeholder="Radius"
                                    *ngIf="selectedPostSearchValue === 'searchOption_Distance'"
@@ -68,6 +70,20 @@
                     </md-select>
                 </div> -->
             </div>
+            <br />
+            <br />
+            <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
+                <button class="searchBtn" md-raised-button
+                        (click)="handlePostSearch(selectedPostSearchValue, searchText.value)">
+                        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
+                <button class="searchBtn" md-raised-button
+                    (click)="handlePostSearch(selectedPostSearchValue, '')">
+                    <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                </button>
+            </div>
             <div class="category-select-container">
                 <div id="postButtonsArray" *ngFor="let postCatButton of postButtonsArray">
                     <div class="circle" id="{{postCatButton.id}}" (click)="setCategory(postCatButton)">
@@ -76,11 +92,6 @@
                     </div>
                 </div>
             </div>
-            <button
-                    class="searchBtn" md-raised-button
-                    (click)="handlePostSearch(selectedPostSearchValue, '')">
-                    <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-            </button>
             <div *ngFor="let post of posts | async">
                <div class="post-top">
                    {{post.timestamp | date: 'EEEE M/d HH:mm'}}

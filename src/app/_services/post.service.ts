@@ -72,7 +72,6 @@ export class PostService {
         this.setPostLocation(postKey, this.location.coords);
     }
 
-    
     updatePost(key: string, newText: string) {
         this.posts.update(key, { text: newText });
     }
@@ -103,13 +102,19 @@ export class PostService {
     }
     
     getPostsByUserTitle(title : string): Observable<any> {
-        if(title !== "") { 
-            return this.db.list('/posts', {
-            query: {
-                orderByChild: 'title',
-                equalTo: title
-            }
-            }).take(1);
+        if(title !== "") {
+            return Observable.create((observer : any) => {
+                var self = this.db;
+                this.db.list('/posts', {
+                    query: {
+                        orderByChild: 'title',
+                        equalTo: title
+                    }
+                }).subscribe(post => {
+                    console.log(post);
+                    observer.next(post);
+                });
+            });
         }
     }
 
@@ -122,7 +127,6 @@ export class PostService {
             radius: radius //kilometers
         });
 
-    
         return Observable.create((observer : any) => {
             var self = this.db;
             geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
@@ -158,10 +162,6 @@ export class PostService {
 
 /*
     private getCategoryString(category: string) : string {
-<<<<<<< HEAD
-        
-=======
->>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
         switch(category) {
             case Category.Idea:
                 return "Idea";
@@ -176,10 +176,6 @@ export class PostService {
             case Category.Other:
                 return "Other";
         }
-<<<<<<< HEAD
         return "";
-=======
-        return "idea";
->>>>>>> 8a4cebaccfb5dcf89cb0f06da573f6a29f2de6af
     }
         */
