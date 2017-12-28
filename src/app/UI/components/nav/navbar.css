@@ -13,16 +13,42 @@
 }
 
 .navbar {
-    background-color: #60ac5d;
-    border-top: 8px solid #005005;
-    color: white;
+    background-color: #005005;
+    border-top: 8px solid #005005; 
 }
 
+.main-nav {
+    /*
+    background-color: #60ac5d;
+    border-top: 8px solid #005005;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    */
+    /* fxLayoutAlign="space-around center"> */
+}
+
+.main-nav-button {
+    background-color: #60ac5d;
+    padding: 0 4 0 4px;
+    margin: 0 4 0 4px;
+}
+
+.example-fill-remaining-space {
+    /*
+        This fills the remaining space, by using flexbox. 
+        Every toolbar row uses a flexbox row layout.
+    */
+    flex: 1 1 auto;
+}
+  
 .nav-spacing {
     margin-bottom: 50px;
 }
 
 button {
+    color: white;
     height: 60px;
     font-family: 'Kanit', sans-serif;
     font-size: 16px;

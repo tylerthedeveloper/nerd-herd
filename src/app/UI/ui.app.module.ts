@@ -53,7 +53,6 @@ import { CdkTableModule } from '@angular/cdk';
                     NgbModule, 
                     MaterialDesignModule, 
 
-
                     //pages
                     HomeComponent,
                     ContactComponent, 

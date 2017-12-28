@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { PostService, ProjectService, UserService } from '../../../_services/index';
+import { GitService, HttpService, PostService, ProjectService, UserService } from '../../../_services/index';
 import { Post, User } from "../../../_models/index";
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
+import { Http, Response } from '@angular/http';
+
 // --> import { DialogComponent } from '../../components/dialog/dialog.component';
 import { MdDialogRef, MdDialog } from '@angular/material';
 
@@ -20,9 +22,13 @@ export class ProfileComponent implements OnInit {
   //_posts: Observable<any>;
   _posts : Observable<any[]>;
   _projects : Observable<any[]>;
-  userModel = new User("","","","","");
+  userModel = new User("","","","","", {});
+  _gitApi = "https://api.github.com/users/";
+  
   
   constructor(private route: ActivatedRoute, public userService: UserService,
+        private httpService : HttpService,
+        private githubService: GitService,
         private postService : PostService,
         private projectService : ProjectService) {
           //private dialog: MdDialog
@@ -42,25 +48,49 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserByID(userUid).subscribe((user) => {
       this.userModel = user;
     });
-    //console.log(this.userModel);
     this._posts = this.postService.getPostsByUserID(userUid);
     this._projects = this.projectService.getProjectsByUserID(userUid);
-
   }
 
   updateProfile() {
     this.userService.updateProfile(this.userModel);
     this.edit = false;
+    this.checkUpdateGitInfo();
+  }
+  
+  checkUpdateGitInfo () {
+    if (this.userModel.gitUsername != "") {
+      //if (!this.userModel.gitInfo) {
+          this.httpService
+            .httpGetRequest(this._gitApi + this.userModel.gitUsername)
+            .subscribe(res => {
+                let tempGit = {
+                  "login" : res["login"],
+                  "avatar_url" : res["avatar_url"],
+                  "repos_url" : res["repos_url"],
+                  "company" : res["company"],
+                  "blog" : res["blog"],
+                  "bio" : res["bio"]
+                };
+                this.userModel.gitInfo = tempGit;
+                this.userService.updateGitProfile(this.userModel.uid, tempGit);
+                this.getRepos(tempGit.repos_url);
+            });
+      //}
+    } 
   }
 
+  getRepos(url : string) {
+    this.githubService.getAndParseRepos(url).subscribe(repos => console.log(repos));
+    
+  } 
   public edit = false;
-  editProfile(): void {
-   this.edit = true;
+    editProfile(): void {
+    this.edit = true;
   }
 
 }
-
-    /*
+/*
 
     var nestedPosts = this.postService.getPostsByUserID(userUid)
 
@@ -97,8 +127,8 @@ export class ProfileComponent implements OnInit {
       //alert(nestedPosts);
     //this._posts = Array(nestedPosts);
     //this._posts = Observable.of(collection);
-    */
     //this._posts = this.postService.getAllPosts();
+    */
 
 
 
@@ -106,10 +136,7 @@ export class ProfileComponent implements OnInit {
 
 
 
-
-
-/* Beach
-
+/* 
   Beach
   how was it
   it was nice
@@ -121,9 +148,9 @@ export class ProfileComponent implements OnInit {
   t
   j
   jos
-*/
 
-/* current project status
+
+ current project status
   t
   j
   y
@@ -131,9 +158,9 @@ export class ProfileComponent implements OnInit {
   t
   j
   tj
-*/
 
-/* biking
+
+  biking
   workout
   questions
   t
@@ -141,4 +168,5 @@ export class ProfileComponent implements OnInit {
   t
   j
   tj
+
 */

@@ -31,7 +31,7 @@ export class PostService {
                         //if( !user.location ) --> get Firebase user !!!
                         this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
                             this.location = location;
-                            console.log(location);
+                            //console.log(location);
                         });
 
                     }
@@ -111,7 +111,7 @@ export class PostService {
                         equalTo: title
                     }
                 }).subscribe(post => {
-                    console.log(post);
+                    //console.log(post);
                     observer.next(post);
                 });
             });
@@ -131,7 +131,7 @@ export class PostService {
             var self = this.db;
             geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
                 self.object(`/posts/${key}`).subscribe(post => {
-                    console.log(post);
+                    //console.log(post);
                     observer.next(post);
                 });
             })

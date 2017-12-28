@@ -5,20 +5,12 @@ export class User {
                 public name: string,
                 public email: string,
                 public gitUsername: string,
-                private photoUrl: string) {}
+                private photoUrl: string,
+                public gitInfo: {}) {}
 
     public location : any = {
         "latitude" :  "",
         "longitude" : ""
-    };
-    
-    gitInfo = {
-        "username" : "",
-        "avatar_url" : "",
-        "repos_url" : "",
-        "company" : "",
-        "blog" : "",
-        "bio" : ""
     };
     
     school: string;
@@ -31,3 +23,11 @@ export class User {
     //followers: number;
 }
 
+const gitInfo = {
+    "login" : "",
+    "avatar_url" : "",
+    "repos_url" : "",
+    "company" : "",
+    "blog" : "",
+    "bio" : ""
+};

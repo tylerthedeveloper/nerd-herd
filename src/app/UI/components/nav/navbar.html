@@ -36,27 +36,44 @@ firebase.initializeApp(config);
                 <!-- <button md-button [routerLink]="['/home']" routerLinkActive="active">
                 <md-icon class="dark"> HOME </md-icon>
             </button> -->
-            <button md-button id="profile" *ngIf="loggedIn" (click)="changePage('profile')" [routerLink]="['/profile', user.uid]" routerLinkActive="active">
-                <md-icon class="dark"> PROFILE </md-icon>
-            </button>
-            <button md-button id="posts" [routerLink]="['/posts']" (click)="changePage('posts')" routerLinkActive="active">
-                <md-icon class="dark"> POSTS </md-icon>
-            </button>
-            <button md-button id="people" [routerLink]="['/people']" (click)="changePage('people')" routerLinkActive="active">
-                <md-icon class="dark"> PEOPLE </md-icon>
-            </button>
-            <button md-button id="projects" [routerLink]="['/projects']" (click)="changePage('projects')" routerLinkActive="active">
-                <md-icon class="dark"> PROJECTS </md-icon>
-            </button>
-            <button md-button style="float:right;">
-                <md-icon class="dark">
-                    <span *ngIf="!loggedIn; else logswitch" (click)="login()">LOGIN / SIGNUP</span>
-                    <ng-template #logswitch> <span (click)="logout()">LOGOUT </span> </ng-template>
-                </md-icon>
-            </button>
-            <button md-button id="contact" style="float:right;" [routerLink]="['/contact']" (click)="changePage('contact')" routerLinkActive="active">
-                <md-icon class="dark"> CONTACT </md-icon>
-            </button>
+                <button md-raised-button id="profile" *ngIf="loggedIn" 
+                (click)="changePage('profile')" [routerLink]="['/profile', user.uid]" 
+                routerLinkActive="active" class="main-nav-button">
+                PROFILE
+                </button>
+                <button md-raised-button id="posts" [routerLink]="['/posts']" 
+                        (click)="changePage('posts')" routerLinkActive="active"
+                        class="main-nav-button">
+                    <!-- <md-icon class="dark"> POSTS </md-icon> -->
+                    POSTS
+                </button>
+                <button md-raised-button id="people" [routerLink]="['/people']" 
+                        (click)="changePage('people')" routerLinkActive="active"
+                        class="main-nav-button">
+                    <!-- <md-icon class="dark"> PEOPLE </md-icon> -->
+                    PEOPLE
+                </button>
+                <button md-raised-button id="projects" [routerLink]="['/projects']" 
+                        (click)="changePage('projects')" routerLinkActive="active"
+                        class="main-nav-button">
+                    <!-- <md-icon class="dark"> PROJECTS </md-icon> -->
+                    PROJECTS
+                </button>
+                <span class="example-fill-remaining-space"></span>  
+                <div style="float:right;">
+                    <button md-raised-button id="contact" [routerLink]="['/contact']" 
+                        (click)="changePage('contact')" routerLinkActive="active"
+                        class="main-nav-button">
+                        <!-- <md-icon class="dark"> CONTACT </md-icon> -->
+                        CONTACT
+                    </button>
+                    <button md-raised-button class="main-nav-button">
+                        <!-- <md-icon class="dark"> -->
+                            <span *ngIf="!loggedIn; else logswitch" (click)="login()">LOGIN / SIGNUP</span>
+                            <ng-template #logswitch> <span (click)="logout()">LOGOUT </span> </ng-template>
+                        <!-- </md-icon> -->
+                    </button>
+                </div>
             </md-toolbar>
         </div>
     </div>

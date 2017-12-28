@@ -23,11 +23,7 @@ export class AFService {
             var token = result.credential.accessToken; // This gives you a Google Access Token. 
             var user = result.user; // The signed-in user info.
             //this.addUser(user).then( () => this.router.navigate(['/posts']));
-            
-            
             this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
-
-
       }).catch(function (error) {
         alert( error.name + " : " + error.message + " : " + error.stack);
       });
@@ -40,7 +36,7 @@ export class AFService {
 
     // add google info to db
     private addUser(user: any) : firebase.Promise<any> {
-        return firebase.database().ref(`users/${user.uid}`).set({ 
+        return firebase.database().ref(`users/${user.uid}`).update({ 
                 name: user.displayName,          
                 email: user.email,
                 photoUrl: user.photoURL,
