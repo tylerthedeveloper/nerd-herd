@@ -74,7 +74,7 @@ import { CdkTableModule } from '@angular/cdk';
                     FriendsListComponent,
                     DialogComponent
                 ],
-    //--entryComponents: [DialogComponent],
+    entryComponents: [DialogComponent],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })

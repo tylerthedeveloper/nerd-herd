@@ -46,14 +46,7 @@ export class ProjectService {
         return this.db.list('/projects', { query: { orderByChild: 'timestamp' }});
     }
     
-    addProject(title: string, content: string, category: string) {
-        
-        ////
-        ///temp value!!!!!
-        //category = "Idea";
-
-        /////
-        ///
+    addProject(title: string, content: string, category: string) {        
         var projectData = {  
             authorID: this.user.uid,            
             author: this.user.displayName,
@@ -68,7 +61,6 @@ export class ProjectService {
         this.db.database.ref(`user-projects/ids/${this.user.uid}/${projectKey}`).set(projectData);
         this.db.database.ref(`user-projects/names/${this.user.displayName}/${projectKey}`).set(projectData);
         this.db.database.ref(`project-categories/${catstring}/${projectKey}`).set(projectData);
-    
         this.setProjectLocation(projectKey, this.location.coords);
     }
 

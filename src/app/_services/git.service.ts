@@ -9,6 +9,6 @@ export class GitService {
   constructor(private http: Http) { }
   
   getAndParseRepos(url: string) {
-    return this.http.get(url).map(response => response.json());
+    return this.http.get(url).map(response => response.json() );
   }
 }

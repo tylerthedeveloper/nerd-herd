@@ -1,7 +1,16 @@
-<p>{{ title }}</p>
-<p>{{ message }}</p>
+<p>{{ title }} _ {{ content }} </p>
 
-<button type="button" mat-raised-button 
+<button type="button" md-raised-button 
     (click)="dialogRef.close(true)">OK</button>
-<button type="button" mat-button 
+<button type="button" md-button 
     (click)="dialogRef.close()">Cancel</button>
+
+    <!-- <h1 md-dialog-title class="primary-color"> {{ title }}</h1>
+    <md-dialog-content class="accent-color">
+      {{ content }}
+    </md-dialog-content>
+    <md-dialog-actions>
+      <button md-raised-button color="primary" md-dialog-close>
+        close button
+      </button>  
+    </md-dialog-actions> -->

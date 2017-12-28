@@ -8,8 +8,8 @@ import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 
-// --> import { DialogComponent } from '../../components/dialog/dialog.component';
-import { MdDialogRef, MdDialog } from '@angular/material';
+import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material'; 
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
 @Component({
   selector: 'profile-page',
@@ -25,37 +25,39 @@ export class ProfileComponent implements OnInit {
   userModel = new User("","","","","", {});
   _gitApi = "https://api.github.com/users/";
   
-  
-  constructor(private route: ActivatedRoute, public userService: UserService,
-        private httpService : HttpService,
-        private githubService: GitService,
-        private postService : PostService,
-        private projectService : ProjectService) {
-          //private dialog: MdDialog
-                /*
+  constructor(private route: ActivatedRoute,      public userService: UserService,
+              private httpService : HttpService,  private githubService: GitService,
+              private postService : PostService,  private projectService : ProjectService,
+              public dialog: MdDialog) {
 
                 let dialogRef: MdDialogRef<DialogComponent>;
 
-                dialogRef = this.dialog.open(DialogComponent);
+                dialogRef = this.dialog.open(DialogComponent, {
+                    data : {
+                        title: "title",
+                        content: "content"
+                    }
+                });
         
+                dialogRef = this.dialog.open(DialogComponent);
                 dialogRef.componentInstance.title = "title";
-                dialogRef.componentInstance.message = "message";
-                */
+                dialogRef.componentInstance.content = "message";
+                
               }
 
   ngOnInit() {
-    let userUid : string = this.route.snapshot.paramMap.get('uid');
-    this.userService.getUserByID(userUid).subscribe((user) => {
-      this.userModel = user;
-    });
-    this._posts = this.postService.getPostsByUserID(userUid);
-    this._projects = this.projectService.getProjectsByUserID(userUid);
+      let userUid : string = this.route.snapshot.paramMap.get('uid');
+      this.userService.getUserByID(userUid).subscribe((user) => {
+        this.userModel = user;
+      });
+      this._posts = this.postService.getPostsByUserID(userUid);
+      this._projects = this.projectService.getProjectsByUserID(userUid);
   }
 
   updateProfile() {
-    this.userService.updateProfile(this.userModel);
-    this.edit = false;
-    this.checkUpdateGitInfo();
+      this.userService.updateProfile(this.userModel);
+      this.edit = false;
+      this.checkUpdateGitInfo();
   }
   
   checkUpdateGitInfo () {
@@ -81,12 +83,39 @@ export class ProfileComponent implements OnInit {
   }
 
   getRepos(url : string) {
-    this.githubService.getAndParseRepos(url).subscribe(repos => console.log(repos));
-    
-  } 
+      var selectRepo = true; 
+      this.githubService.getAndParseRepos(url).subscribe(repos => {
+        let _repos = Array<any>();
+        repos.forEach((repo : any) => {
+            let _repo = {
+                gitID: repo["id"],
+                author: this.userModel.uid,
+                title: repo["name"],
+                createdAt: repo["created_at"],
+                updatedAt: repo["updated_at"],
+                text: repo["description"],
+                picture: repo[""],
+                html_url: repo["html_url"],
+                language: repo["language"]
+            };
+          _repos.push(_repo);
+        });
+        var confirmedRepos = [];
+        _repos.forEach(_repo => {
+            let dialogRef: MdDialogRef<DialogComponent>;
+            dialogRef = this.dialog.open(DialogComponent);
+            dialogRef.componentInstance.title = "Do you want to include this repo?";
+            dialogRef.componentInstance.content = _repo.title;
+            //if confirmed
+            //confirmedRepos.push(_repo);
+        });
+      }); 
+    } 
+
+
   public edit = false;
-    editProfile(): void {
-    this.edit = true;
+      editProfile(): void {
+      this.edit = true;
   }
 
 }

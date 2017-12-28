@@ -1,16 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
+//selector: 'dialog',
 @Component({
-  selector: 'dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent {
+export class DialogComponent implements OnInit {
 
     public title: string;
-    public message: string;
+    public content: string;
+    public list: Array<any[]>;
 
-    constructor(public dialogRef: MdDialogRef<DialogComponent>) {}
+    constructor(public dialogRef: MdDialogRef<DialogComponent>) {} //public dialogRef: MdDialogRef<DialogComponent>
+    ngOnInit() {}
 }
 
