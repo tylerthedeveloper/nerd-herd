@@ -1,78 +1,110 @@
 <div class="container">
-    <div class="row">
-        <h1>Projects</h1>
-    </div>
-    <div class="row">
-        <div class="col-12 col-md-4">
-            <md-card class="submit-post-card">
-                <md-card-title>
-                    <h3>Share your thoughts</h3>
-                </md-card-title>
-                <md-card-content>
-                    <form class="postForm">
-                        <table>
-                            <td>
-                                <md-input-container class="form-full-width">
-                                    <input mdInput type="text" required placeholder="Title" #titleContent>
-                                </md-input-container>
-                            </td>
-                            <td>
-                                <md-select class="form-full-width" placeholder="Category">
-                                    <md-option *ngFor="let type of projectTypes" [value]="type.value">
-                                        {{ type.viewValue }}
-                                    </md-option>
-                                </md-select>
-                            </td>
-                        </table>
-                        <md-input-container class="form-full-width">
-                            <textarea mdInput required placeholder="Your Message" #postContent></textarea>
-                        </md-input-container>
-                        <button md-raised-button (click)="post(titleContent.value, postContent.value); titleContent.value =''; postContent.value ='';">
-                            Post
-                        </button>
-                    </form>
-                </md-card-content>
-            </md-card>
+        <div class="row">
+            <h1>Nerd forum</h1>
         </div>
-        <div class="col-12 col-md-8">
-            <div class="project-search">
-                <md-input-container class="searchInput">
-                    <input mdInput #name placeholder="Search posts" />
-                </md-input-container>
-                <md-select  placeholder="Category">
-                    <md-option *ngFor="let type of projectTypes" [value]="type.value">
-                        {{ type.viewValue }}
-                    </md-option>
-                </md-select>
-                <button class="searchBtn" md-raised-button (click)="onSearchUserByName(name.value)">Search</button>
-            </div>
-            <div class="category-select-container">
-                <div class="circle" id="connect" (click)="setCategory('connect')">
-                    <i class="fa fa-connectdevelop fa-2x" aria-hidden="true"></i>
-                    <div class="category-text">Connect</div>
-                </div>
-                <div class="circle" id="social" (click)="setCategory('social')">
-                    <i class="fa fa-users fa-2x" aria-hidden="true"></i>
-                    <div class="category-text">Social</div>
-                </div>
-                <div class="circle" id="question" (click)="setCategory('question')">
-                    <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
-                    <div class="category-text">Question</div>
-                </div>
-                <div class="circle" id="interviewPrep" (click)="setCategory('interviewPrep')">
-                    <i class="fa fa-black-tie fa-2x" aria-hidden="true"></i>
-                    <div class="category-text">Interview Prep</div>
-                </div>
-            </div>
-            <div *ngFor="let project of projects | async">
-                <div class="post-top">{{project.timestamp | date: 'EEEE M/d HH:mm'}}</div>
-                <md-card style="margin-bottom:20px;">
-                    <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
-                    <md-card-title>{{project.title}}</md-card-title>
-                    <md-card-subtitle>{{project.author}}</md-card-subtitle>
-                    <md-card-content>{{project.content}}</md-card-content>
+        <div class="row">
+            <div class="col-12 col-md-4 col-lg-4">
+                <!-- <profile-box></profile-box> -->
+                <md-card class="submit-project-card">
+                    <md-card-title>
+                        <h3>Share your thoughts</h3>
+                    </md-card-title>
+                    <md-card-content>
+                        <form class="projectForm">
+                            <table>
+                                <td>
+                                    <md-input-container class="form-full-width">
+                                        <input mdInput required placeholder="Title" #titleContent>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-select class="form-full-width" placeholder="Category" #categoryContent>
+                                        <md-option *ngFor="let type of projectTypes" [value]="type.value">
+                                            {{ type.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </td>
+                            </table>
+                            <md-input-container class="form-full-width">
+                                <textarea mdInput required placeholder="Your Message" #projectContent></textarea>
+                            </md-input-container>
+                            <button md-raised-button (click)="project(titleContent.value, projectContent.value, categoryContent.selected.value); 
+                                                                    titleContent.value =''; projectContent.value ='';">
+                                Project
+                            </button>
+                        </form>
+                    </md-card-content>
                 </md-card>
             </div>
+            <div class="col-12 col-md-8 col-lg-8">
+                <div class="project-search" style="display: flex">
+                    <md-select id="searchOptionType" class="radius"
+                               placeholder="Search Type"
+                               [(ngModel)]="selectedProjectSearchValue">
+                       <md-option *ngFor="let type of projectSearchOptions" [value]="type.value">
+                           {{ type.viewValue }}
+                       </md-option>
+                   </md-select>
+                    <div [style.visibility] = "(selectedProjectSearchValue !== 'searchOption_Distance') ? 'visible' : 'hidden' "
+                            style="float:middle;">
+                   <!-- <div class="searchInput" *ngIf="selectedProjectSearchValue !== 'searchOption_Distance'"> -->
+                       <md-input-container>
+                           <input mdInput #searchText placeholder="Search projects"/>
+                       </md-input-container>
+                    </div>
+                   <!-- <div *ngIf="selectedProjectSearchValue === 'searchOption_Distance'"> -->
+                    <div [style.visibility] = "(selectedProjectSearchValue === 'searchOption_Distance') ? 'visible' : 'hidden' ">
+                       <md-select class="radius" placeholder="Radius" [(ngModel)]="selectedProjectSearchRadius">
+                                   <md-option *ngFor="let rad of projectRadiusSearch" [value]="rad.value" style="position: fixed; float:left;">
+                                       {{ rad.viewValue }}
+                                   </md-option>
+                           </md-select>
+                   </div>
+                    <!-- <div>
+                        <md-select class="radius" placeholder="Radius"
+                                        *ngIf="selectedProjectSearchValue === 'searchOption_Distance'"
+                                        [(ngModel)]="selectedProjectSearchRadius">
+                                    <md-option *ngFor="let rad of projectRadiusSearch" [value]="rad.value" (click)="handleProjectSearch(selectedProjectSearchValue, '')">
+                                        {{ rad.viewValue }}
+                                    </md-option>
+                        </md-select>
+                    </div> -->
+                </div>
+                <br />
+                <br />
+                <div *ngIf="selectedProjectSearchValue !== 'searchOption_Distance'">
+                <!-- <div [style.visibility] = "(selectedProjectSearchValue !== 'searchOption_Distance') ? 'visible' : 'hidden' "> -->
+                    <button class="searchBtn" md-raised-button
+                            (click)="handleProjectSearch(selectedProjectSearchValue, searchText?.value)">
+                            <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div *ngIf="selectedProjectSearchValue === 'searchOption_Distance'">
+                    <button class="searchBtn" md-raised-button
+                        (click)="handleProjectSearch(selectedProjectSearchValue, '')">
+                        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="category-select-container">
+                    <div id="projectButtonsArray" *ngFor="let projectCatButton of projectButtonsArray">
+                        <div class="circle" id="{{projectCatButton.id}}" (click)="setCategory(projectCatButton)">
+                            <i class="fa fa-{{projectCatButton.iconType}} fa-2x" aria-hidden="true"></i>
+                            <div class="category-text">{{ projectCatButton.category }} </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngFor="let project of projects | async">
+                   <div class="project-top">
+                       {{project.timestamp | date: 'EEEE M/d HH:mm'}}
+                   </div>
+                    <md-card color="primary">
+                        <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;"/>
+                        <md-card-title>{{project.title}}</md-card-title>
+                        <md-card-subtitle>{{project.author}}</md-card-subtitle>
+                        <md-card-content>{{project.content}}</md-card-content>
+                    </md-card>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+    

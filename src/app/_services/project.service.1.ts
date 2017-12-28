@@ -50,8 +50,6 @@ export class ProjectService {
         
         ////
         ///temp value!!!!!
-        //category = "Idea";
-
         /////
         ///
         var projectData = {  
@@ -72,6 +70,7 @@ export class ProjectService {
         this.setProjectLocation(projectKey, this.location.coords);
     }
 
+    
     updateProject(key: string, newText: string) {
         this.projects.update(key, { text: newText });
     }
@@ -85,14 +84,6 @@ export class ProjectService {
     }
 
     getProjectsByUserName(name : string): Observable<any> {
-        /*
-        Observable.create((observer : any) => {
-            this.userService.getUserByName(name).first().subscribe(user => {
-                //console.log(user[0].uid);
-                observer.next(new Array(this.db.list(`/user-projects/${user[0].uid}`)));        
-            });
-        });
-        */
         return this.db.list(`/user-projects/names/${name}`);        
         
     }
@@ -102,19 +93,13 @@ export class ProjectService {
     }
     
     getProjectsByUserTitle(title : string): Observable<any> {
-        if(title !== "") {
-            return Observable.create((observer : any) => {
-                var self = this.db;
-                this.db.list('/projects', {
-                    query: {
-                        orderByChild: 'title',
-                        equalTo: title
-                    }
-                }).subscribe(project => {
-                    console.log(project);
-                    observer.next(project);
-                });
-            });
+        if(title !== "") { 
+            return this.db.list('/projects', {
+            query: {
+                orderByChild: 'title',
+                equalTo: title
+            }
+            }).take(1);
         }
     }
 
@@ -127,6 +112,7 @@ export class ProjectService {
             radius: radius //kilometers
         });
 
+    
         return Observable.create((observer : any) => {
             var self = this.db;
             geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
@@ -139,7 +125,7 @@ export class ProjectService {
     }
 
     private getKeyByCategoryId(_category: string) {
-        //var cat = "";
+        var cat = "";
         return Object.keys(ProjectCategory).find(key => ProjectCategory[key] === _category)
     }
 
@@ -157,3 +143,4 @@ export class ProjectService {
     }
 
 }
+

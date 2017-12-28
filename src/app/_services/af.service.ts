@@ -21,9 +21,13 @@ export class AFService {
   loginWithGoogle() : firebase.Promise<any> {    
         return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then( (result) => {
             var token = result.credential.accessToken; // This gives you a Google Access Token. 
-            var user = result.user; // The signed-in user info.     
-            this.addUser(user).then( () => this.router.navigate(['/posts']));
-            //this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
+            var user = result.user; // The signed-in user info.
+            //this.addUser(user).then( () => this.router.navigate(['/posts']));
+            
+            
+            this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
+
+
       }).catch(function (error) {
         alert( error.name + " : " + error.message + " : " + error.stack);
       });
@@ -41,7 +45,7 @@ export class AFService {
                 email: user.email,
                 photoUrl: user.photoURL,
                 uid: user.uid,
-            }).then(() => this.router.navigate(['/posts']));
+        }).then(() => this.router.navigate(['/posts']));
     }
 
     public getOrUpdateUserLocation(uid : string) : Observable<any> {

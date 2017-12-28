@@ -45,17 +45,17 @@
                        {{ type.viewValue }}
                    </md-option>
                </md-select>
-               <!-- <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'" class="searchInput"> -->
-               <div class="searchInput" *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
-                   <md-input-container >
-                       <input mdInput #searchText placeholder="Search posts" />
+                <div [style.visibility] = "(selectedPostSearchValue !== 'searchOption_Distance') ? 'visible' : 'hidden' "
+                        style="float:middle;">
+               <!-- <div class="searchInput" *ngIf="selectedPostSearchValue !== 'searchOption_Distance'"> -->
+                   <md-input-container>
+                       <input mdInput #searchText placeholder="Search posts"/>
                    </md-input-container>
                 </div>
-               <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
-                   <md-select class="radius" placeholder="Radius"
-                                   *ngIf="selectedPostSearchValue === 'searchOption_Distance'"
-                                   [(ngModel)]="selectedPostSearchRadius">
-                               <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value">
+               <!-- <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'"> -->
+                <div [style.visibility] = "(selectedPostSearchValue === 'searchOption_Distance') ? 'visible' : 'hidden' ">
+                   <md-select class="radius" placeholder="Radius" [(ngModel)]="selectedPostSearchRadius">
+                               <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value" style="position: fixed; float:left;">
                                    {{ rad.viewValue }}
                                </md-option>
                        </md-select>
@@ -73,8 +73,9 @@
             <br />
             <br />
             <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
+            <!-- <div [style.visibility] = "(selectedPostSearchValue !== 'searchOption_Distance') ? 'visible' : 'hidden' "> -->
                 <button class="searchBtn" md-raised-button
-                        (click)="handlePostSearch(selectedPostSearchValue, searchText.value)">
+                        (click)="handlePostSearch(selectedPostSearchValue, searchText?.value)">
                         <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                 </button>
             </div>

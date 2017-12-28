@@ -6,6 +6,8 @@ import { Post, User } from "../../../_models/index";
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/take';
 import { Observable } from 'rxjs/Observable';
+// --> import { DialogComponent } from '../../components/dialog/dialog.component';
+import { MdDialogRef, MdDialog } from '@angular/material';
 
 @Component({
   selector: 'profile-page',
@@ -19,9 +21,21 @@ export class ProfileComponent implements OnInit {
   _posts : Observable<any[]>;
   _projects : Observable<any[]>;
   userModel = new User("","","","","");
+  
   constructor(private route: ActivatedRoute, public userService: UserService,
-              private postService : PostService,
-              private projectService : ProjectService) {}
+        private postService : PostService,
+        private projectService : ProjectService) {
+          //private dialog: MdDialog
+                /*
+
+                let dialogRef: MdDialogRef<DialogComponent>;
+
+                dialogRef = this.dialog.open(DialogComponent);
+        
+                dialogRef.componentInstance.title = "title";
+                dialogRef.componentInstance.message = "message";
+                */
+              }
 
   ngOnInit() {
     let userUid : string = this.route.snapshot.paramMap.get('uid');

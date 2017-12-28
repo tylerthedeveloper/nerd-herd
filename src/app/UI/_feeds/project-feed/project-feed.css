@@ -1,5 +1,5 @@
 .projectForm {
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     margin-bottom: 100px;
 }
 
@@ -7,19 +7,49 @@ button {
     width: 100%;
     background-color: #1c313a;
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
-.project-search {
-    margin-bottom: 40px;
+md-card {
+    margin-bottom:20px;
+    position: static;
+}
+
+md-card.submit-project-card.mat-card {
+    /*height: 400px;*/
+}
+
+.project-top {
+    /*padding-left: 20px;*/
+    text-align: center;
+    font-weight: 500;
+    padding-top: 4px;
+    height: 30px;
+    background-color: #445963;
+    width: 175px;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px 5px 0 0;
+}
+
+img {
+    width:40px;
+    height:40px;
 }
 
 .searchBtn {
-    margin-left: 20px;
-    width: 50px;
+    margin-bottom: 50px;
 }
 
 .searchInput {
-    width: 50%;
+    margin-left: 30px;
+    margin-top: -14px;
+}
+
+.radius {
+    width:20%;
+    margin-left: 20px;
 }
 
 .category-select-container {
@@ -57,8 +87,28 @@ i {
     margin-top: 15px;
 }
 
+i.fa.fa-search.fa-lg {
+    margin-top: 0;
+}
+
 .category-text {
     color: black;
     padding-top: 25px;
     font-family: 'Roboto', sans-serif;
+}
+
+#projectCategory_All {
+    background-color: #445963;
+}
+
+@media only screen and (max-width: 440px) {
+    .category-select-container {
+        margin-top: 60px;
+        margin-bottom: 20px;
+        overflow-x: scroll;
+        white-space: nowrap;
+    }
+    .circle {
+        display: inline-block;
+    }
 }

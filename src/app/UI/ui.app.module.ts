@@ -11,7 +11,7 @@ import { PostFeedComponent, ProjectFeedComponent, PeopleFeedComponent } from './
 import { ContactComponent, HomeComponent, ProfileComponent, UserProfileComponent } from './_pages/index';
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
 import { BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
-import { ProfileBoxComponent, FriendsListComponent } from './components/index';
+import { DialogComponent, FriendsListComponent, ProfileBoxComponent } from './components/index';
 import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
@@ -42,7 +42,8 @@ import { CdkTableModule } from '@angular/cdk';
                         GoogleMapComponent,
                         ProjectPostComponent, 
                         PeopleFeedComponent, 
-                        FriendsListComponent
+                        FriendsListComponent,
+                        DialogComponent
                     ],
     exports: [ 
                     //angular modules
@@ -71,8 +72,10 @@ import { CdkTableModule } from '@angular/cdk';
                     ProjectPostComponent, 
                     UserFeedCardComponent, 
                     PeopleFeedComponent, 
-                    FriendsListComponent, 
+                    FriendsListComponent,
+                    DialogComponent
                 ],
+    //--entryComponents: [DialogComponent],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })
