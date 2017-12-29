@@ -8,10 +8,16 @@ import { RouterModule, Router } from '@angular/router';
 
 import { NavBarComponent, GoogleMapComponent } from './index';
 import { PostFeedComponent, ProjectFeedComponent, PeopleFeedComponent } from './_feeds/index';
-import { ContactComponent, HomeComponent, ProfileComponent, UserProfileComponent } from './_pages/index';
+import { 
+            ContactComponent, HomeComponent, 
+            ProfileComponent, UserProfileComponent 
+        } from './_pages/index';
 import { PageHeaderComponent, SubscribeComponent } from './_templates/index';
 import { BlogPostComponent, ProjectPostComponent, UserFeedCardComponent } from './_cards/index';
-import { DialogComponent, FriendsListComponent, ProfileBoxComponent } from './components/index';
+import { 
+            DialogComponent, ConfirmDialogComponent, ProjCatDialogComponent, 
+            FriendsListComponent, ProfileBoxComponent 
+        } from './components/index';
 import { CdkTableModule } from '@angular/cdk';
 
 @NgModule({
@@ -43,7 +49,11 @@ import { CdkTableModule } from '@angular/cdk';
                         ProjectPostComponent, 
                         PeopleFeedComponent, 
                         FriendsListComponent,
-                        DialogComponent
+                        
+                        //Dialogs
+                        DialogComponent,
+                        ProjCatDialogComponent,
+                        ConfirmDialogComponent
                     ],
     exports: [ 
                     //angular modules
@@ -72,9 +82,13 @@ import { CdkTableModule } from '@angular/cdk';
                     UserFeedCardComponent, 
                     PeopleFeedComponent, 
                     FriendsListComponent,
-                    DialogComponent
+
+                    //Dialogs
+                    DialogComponent,
+                    ProjCatDialogComponent,
+                    ConfirmDialogComponent
                 ],
-    entryComponents: [DialogComponent],
+    entryComponents: [ DialogComponent, ConfirmDialogComponent, ProjCatDialogComponent ],
     schemas: [ NO_ERRORS_SCHEMA ],
 
 })

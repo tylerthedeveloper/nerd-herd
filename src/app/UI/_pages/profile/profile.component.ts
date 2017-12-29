@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 
 import { MdDialog, MdDialogRef, MdDialogConfig } from '@angular/material'; 
-import { DialogComponent } from '../../components/dialog/dialog.component';
+import { ConfirmDialogComponent, DialogComponent, ProjCatDialogComponent } from '../../components/index';
 
 @Component({
   selector: 'profile-page',
@@ -25,25 +25,10 @@ export class ProfileComponent implements OnInit {
   userModel = new User("","","","","", {});
   _gitApi = "https://api.github.com/users/";
   
-  constructor(private route: ActivatedRoute,      public userService: UserService,
+  constructor(private route: ActivatedRoute, public userService: UserService,
               private httpService : HttpService,  private githubService: GitService,
               private postService : PostService,  private projectService : ProjectService,
-              public dialog: MdDialog) {
-
-                let dialogRef: MdDialogRef<DialogComponent>;
-
-                dialogRef = this.dialog.open(DialogComponent, {
-                    data : {
-                        title: "title",
-                        content: "content"
-                    }
-                });
-        
-                dialogRef = this.dialog.open(DialogComponent);
-                dialogRef.componentInstance.title = "title";
-                dialogRef.componentInstance.content = "message";
-                
-              }
+              public dialog: MdDialog) {}
 
   ngOnInit() {
       let userUid : string = this.route.snapshot.paramMap.get('uid');
@@ -83,42 +68,75 @@ export class ProfileComponent implements OnInit {
   }
 
   getRepos(url : string) {
-      var selectRepo = true; 
+      var confirmedRepos = Array<any>();      
       this.githubService.getAndParseRepos(url).subscribe(repos => {
-        let _repos = Array<any>();
-        repos.forEach((repo : any) => {
-            let _repo = {
-                gitID: repo["id"],
-                author: this.userModel.uid,
-                title: repo["name"],
-                createdAt: repo["created_at"],
-                updatedAt: repo["updated_at"],
-                text: repo["description"],
-                picture: repo[""],
-                html_url: repo["html_url"],
-                language: repo["language"]
-            };
-          _repos.push(_repo);
-        });
-        var confirmedRepos = [];
-        _repos.forEach(_repo => {
-            let dialogRef: MdDialogRef<DialogComponent>;
-            dialogRef = this.dialog.open(DialogComponent);
+          let _repos = Array<any>();
+          repos.forEach((repo : any) => {
+              let _repo = {
+                  gitID: repo["id"],
+                  author: this.userModel.uid,
+                  title: repo["name"],
+                  createdAt: repo["created_at"],
+                  updatedAt: repo["updated_at"],
+                  text: repo["description"] || "none",
+                  html_url: repo["html_url"],
+                  language: repo["language"]
+              };
+            _repos.push(_repo);
+          });
+        _repos.forEach(_repo =>  {
+            let dialogRef: MdDialogRef<ConfirmDialogComponent>;
+            dialogRef = this.dialog.open(ConfirmDialogComponent);
             dialogRef.componentInstance.title = "Do you want to include this repo?";
             dialogRef.componentInstance.content = _repo.title;
-            //if confirmed
-            //confirmedRepos.push(_repo);
+            dialogRef.afterClosed().subscribe((result: string) => {
+                if (result) {
+                  //confirmedRepos.push(_repo);
+                  let catDialogRef: MdDialogRef<ProjCatDialogComponent>;
+                  catDialogRef = this.dialog.open(ProjCatDialogComponent);
+                  catDialogRef.componentInstance.title = "Please pick a project category";
+                  catDialogRef.componentInstance.content = _repo.title;
+                  catDialogRef.afterClosed().subscribe((result: string) => {
+                      _repo["category"] = result;
+                      //confirmedRepos.push(_repo);
+                      this.projectService.addGitProject(_repo);
+                        //console.log("res " + result);
+                    });
+                }
+            });
         });
-      }); 
-    } 
-
+        //console.log(confirmedRepos[0]);
+        });
+        /*
+        confirmedRepos.forEach(repo => {
+            console.log(repo);
+            this.projectService.addGitProject(repo);
+        });
+        this.projectService.addGitProject(confirmedRepos[0]);
+        */
+    }
 
   public edit = false;
       editProfile(): void {
       this.edit = true;
   }
-
 }
+
+  /*
+                let dialogRef: MdDialogRef<DialogComponent>;
+
+                dialogRef = this.dialog.open(DialogComponent, {
+                    data : {
+                        title: "title",
+                        content: "content"
+                    }
+                });
+        
+                dialogRef = this.dialog.open(DialogComponent);
+                dialogRef.componentInstance.title = "title";
+                dialogRef.componentInstance.content = "message";
+                */
+
 /*
 
     var nestedPosts = this.postService.getPostsByUserID(userUid)

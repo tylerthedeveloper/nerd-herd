@@ -64,6 +64,17 @@ export class ProjectService {
         this.setProjectLocation(projectKey, this.location.coords);
     }
 
+    addGitProject(gitData : {}) {
+        console.log(gitData);
+        var catstring = this.getKeyByCategoryId(gitData["category"]);
+        var projectKey = this.db.database.ref("/projects").push().key;
+        this.db.database.ref(`projects/${projectKey}`).update(gitData);
+        this.db.database.ref(`user-projects/ids/${this.user.uid}/${projectKey}`).update(gitData);
+        this.db.database.ref(`user-projects/names/${this.user.displayName}/${projectKey}`).update(gitData);
+        this.db.database.ref(`project-categories/${catstring}/${projectKey}`).update(gitData);
+        this.setProjectLocation(projectKey, this.location.coords);
+    }
+
     updateProject(key: string, newText: string) {
         this.projects.update(key, { text: newText });
     }
@@ -102,10 +113,7 @@ export class ProjectService {
                         orderByChild: 'title',
                         equalTo: title
                     }
-                }).subscribe(project => {
-                    //console.log(project);
-                    observer.next(project);
-                });
+                }).subscribe(project => observer.next(project));
             });
         }
     }
@@ -113,7 +121,6 @@ export class ProjectService {
     public getAllProjectsByLocation(radius: number) : Observable<any> { //: FirebaseListObservable<any> { 
 
         let _coords = this.location.coords;
-
         var geoQuery = this.geoFire.query({
             center: [_coords.latitude, _coords.longitude],
             radius: radius //kilometers
@@ -122,17 +129,13 @@ export class ProjectService {
         return Observable.create((observer : any) => {
             var self = this.db;
             geoQuery.on("key_entered", function(key: any, location: any, distance: any) {
-                self.object(`/projects/${key}`).subscribe(project => {
-                    //console.log(project);
-                    observer.next(project);
-                });
-            })
+                self.object(`/projects/${key}`).subscribe(project => observer.next(project));
+            });
         });
     }
 
     private getKeyByCategoryId(_category: string) {
-        //var cat = "";
-        return Object.keys(ProjectCategory).find(key => ProjectCategory[key] === _category)
+        return Object.keys(ProjectCategory).find(key => ProjectCategory[key] === _category);
     }
 
     private setProjectLocation(projectKey: any, coords: Coordinates) {
@@ -147,5 +150,4 @@ export class ProjectService {
                 (error: any) => console.log("Error: " + error)
             );
     }
-
 }

@@ -14,9 +14,6 @@ export class Project {
     
     //not git
     picture: string;
-
-
-
 }
 
 var projectButtonsArrayIdConstant = "projectCategory_";
