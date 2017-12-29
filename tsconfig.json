@@ -19,3 +19,9 @@
     ]
   }
 }
+//        "module": "commonjs",
+//        "noImplicitAny": true,
+//        "suppressImplicitAnyIndexErrors": true,
+//    "exclude": [
+        //"node_modules/*"
+    //]

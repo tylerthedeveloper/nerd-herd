@@ -2,12 +2,18 @@
 export class Project {
     
     id: number;
+    gitID: number;
     author: string;
-    date: string;
+    title: string;
+    createdAt: string;
+    updatedAt: string;
     text: string;
-    picture: string;
     category: string;
-    //tags : Category[];
+    html_url: string;
+    language: string;
+    
+    //not git
+    picture: string;
 }
 
 var projectButtonsArrayIdConstant = "projectCategory_";
@@ -19,6 +25,17 @@ export const ProjectCategory = {
     "Buisness" : projectButtonsArrayIdConstant + "Business",
     "Idea" : projectButtonsArrayIdConstant + "Idea",
     "Other" : projectButtonsArrayIdConstant + "Other"
+};
+
+export const Language = {
+    "C++" : "C++", 
+    "Java" : "Java",
+    "C#" : "C#", 
+    "HTML/CSS" : "HTML/CSS", 
+    "JavaScipt" : "JavaScipt", 
+    "Python": "Python",
+    "Angular": "Angular",
+    "Other": "Other"
 };
 
 /*

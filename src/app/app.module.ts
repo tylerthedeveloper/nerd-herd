@@ -20,13 +20,15 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
-import { PostService, ProjectService, AFService, UserService } from './_services/index';
+import { 
+            AFService, GitService, HttpService, 
+            PostService, ProjectService, UserService 
+        } from './_services/index';
 import { UserStore } from './_stores/user.store';
 import { UIModule } from './UI/ui.app.module';
 
     // '@angular/cdk/table'???;
 import { DataSource } from '@angular/cdk';
-
 
 
 @NgModule({
@@ -39,7 +41,11 @@ import { DataSource } from '@angular/cdk';
         }), AngularFireModule.initializeApp(environment.firebase),
         AngularFireAuthModule, AngularFireDatabaseModule, MaterialModule
     ], 
-    providers: [ ProjectService, PostService, AFService, UserService, UserStore ],
+    providers: [ 
+                    AFService, HttpService, GitService,
+                    ProjectService, PostService, UserService, 
+                    UserStore 
+                ],
     declarations: [ AppComponent ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
     bootstrap:    [ AppComponent ]

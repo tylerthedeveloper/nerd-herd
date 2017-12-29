@@ -103,13 +103,25 @@ export class PostFeedComponent {
 
     getPostsByUserTitle(title: string): void {
         // this.posts = this.postService.getPostsByUserTitle(title);
-        this.postService.getPostsByUserTitle(title).subscribe(post => this.posts.next(post));
+        //this.postService.getPostsByUserTitle(title).subscribe(post => this.posts.next(post));
+        this.posts.next([]);
+        this.postService.getPostsByUserTitle(title).subscribe(
+            res => {
+                console.log("res " + res);
+                //this.posts.next(this.posts.getValue().concat(new Array(res)))
+                this.posts.next(res);
+            },
+            err => console.log("Error retrieving posts with that title")
+        );
     }
 
     getPostsByDistance(radius: number): void {
         this.posts.next([]);
         this.postService.getAllPostsByLocation(radius).subscribe(
-            res => this.posts.next(this.posts.getValue().concat(new Array(res))),
+            res =>  {
+                console.log("res " + res);
+                this.posts.next(this.posts.getValue().concat(new Array(res)))
+            },
             err => console.log("Error retrieving location")
         );
     }
@@ -120,10 +132,7 @@ export class PostFeedComponent {
     private clearPost() : void {}
 
     private handlePostSearch(searchType: string, text: string) { //, radiusLookUp: string) {
-        searchType = Object.keys(SearchOptions).find(c => SearchOptions[c] === searchType)
-        console.log(searchType)
-        console.log(text)
-
+        searchType = Object.keys(SearchOptions).find(c => SearchOptions[c] === searchType);
         switch(searchType) {
             case "Author":
                 this.getPostsByUserName(text);

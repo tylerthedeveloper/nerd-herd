@@ -29,6 +29,11 @@ export class UserService {
   updateProfile(user : User) : Observable<any> {
       return Observable.fromPromise(this.database.object(`/users/${user.uid}`).update(user));
   }
+  
+  updateGitProfile(uid: string, gitInfo : {}) : Observable<any> {
+    return Observable.fromPromise(this.database.object(`/users/${uid}/gitInfo`).update(gitInfo));
+  }
+  
 
   getUserByID(uid : string) : Observable<any> {
     return this.database.object(`/users/${uid}`).take(1);
@@ -46,7 +51,7 @@ export class UserService {
     else return this.getAllUsers();
   }
 
-public getOrUpdateUserLocation(uid : string) : Observable<any> {
+  public getOrUpdateUserLocation(uid : string) : Observable<any> {
     if(navigator.geolocation) {
         return Observable.create((observer : any) => {
             navigator.geolocation.getCurrentPosition(position => {

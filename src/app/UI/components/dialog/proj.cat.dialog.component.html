@@ -1,0 +1,19 @@
+<h1 md-dialog-title class="primary-color"> {{ title }}</h1>
+<md-dialog-content class="accent-color">
+    {{ content }}
+</md-dialog-content>
+<br />
+<md-dialog-actions>
+    <md-select class="form-full-width" placeholder="Category" #catSelect>
+        <md-option *ngFor="let type of projectTypes" [value]="type.value" #catSelectOption>
+            {{ type.viewValue }}
+        </md-option>
+    </md-select>
+    <br />
+<br />
+    
+    <button md-raised-button color="primary" md-dialog-close 
+        (click)="dialogRef.close(catSelect.selected.value)">
+        yes
+    </button>
+</md-dialog-actions>
