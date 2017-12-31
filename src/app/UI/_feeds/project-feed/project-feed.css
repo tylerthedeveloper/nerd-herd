@@ -1,6 +1,16 @@
 .projectForm {
     /*margin-top: 50px;*/
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
+}
+
+.title {
+    width: 100%;
+}
+
+.projectTypeSelect {
+    width: 100%;
+    margin-left: 14px;
+    margin-top: -4px;
 }
 
 button {
@@ -11,8 +21,16 @@ button {
 }
 
 md-card {
-    margin-bottom:20px;
+    /* margin-bottom:20px; */
     position: static;
+}
+
+.projectCard {
+    margin-bottom: 20px;
+}
+
+.submit-project-card {
+    margin-bottom: 30px;
 }
 
 md-card.submit-project-card.mat-card {
@@ -110,5 +128,9 @@ i.fa.fa-search.fa-lg {
     }
     .circle {
         display: inline-block;
+    }
+    .searchInput {
+        float: right;
+        width: 70%;
     }
 }

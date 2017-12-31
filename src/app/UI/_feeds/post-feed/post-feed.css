@@ -1,6 +1,12 @@
 .postForm {
     /*margin-top: 50px;*/
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
+}
+
+.postTypeSelect {
+    width: 100%;
+    margin-left: 14px;
+    margin-top: -6px;
 }
 
 button {
@@ -11,8 +17,15 @@ button {
 }
 
 md-card {
-    margin-bottom:20px;
     position: static;
+}
+
+.submit-post-card {
+    margin-bottom: 30px;
+}
+
+.postCard {
+    margin-bottom:20px;
 }
 
 md-card.submit-post-card.mat-card {
@@ -38,18 +51,24 @@ img {
     height:40px;
 }
 
+.post-search {
+    display: flex;
+}
+
 .searchBtn {
+    width: 100%;
+    margin-left: 20px;
     margin-bottom: 50px;
 }
 
 .searchInput {
-    margin-left: 30px;
-    margin-top: -14px;
+    margin-left: 20px;
+    margin-right: auto;
+    margin-top: -16px;
 }
 
 .radius {
-    width:20%;
-    margin-left: 20px;
+    margin-top: -2px;
 }
 
 .category-select-container {

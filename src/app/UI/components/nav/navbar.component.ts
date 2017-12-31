@@ -37,9 +37,9 @@ export class NavBarComponent {
   }
 
   changePage(nextPage: string) {
-      document.getElementById(this.currentPage).style.backgroundColor = "#60ac5d";
+      document.getElementById(this.currentPage).style.textDecoration = "none";
       this.currentPage = nextPage;
-      document.getElementById(this.currentPage).style.backgroundColor = "#004f04";
+      document.getElementById(this.currentPage).style.textDecoration = "underline";
   }
 
 }
