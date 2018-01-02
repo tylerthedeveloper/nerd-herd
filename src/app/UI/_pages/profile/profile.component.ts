@@ -33,7 +33,16 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
       let userUid : string = this.route.snapshot.paramMap.get('uid');
       this.userService.getUserByID(userUid).subscribe((user) => {
-        this.userModel = user;
+          this.userModel = user;
+          if (this.userModel.gitUsername === "") {
+              let dialogRef: MdDialogRef<DialogComponent>;
+              dialogRef = this.dialog.open(DialogComponent);
+              dialogRef.componentInstance.title = "Welcome User";
+              dialogRef.componentInstance.content = 
+                  "Please edit your profile on the left and " +
+                  "enter your git username " + 
+                  "to automatically import your projects";
+            }
       });
       this._posts = this.postService.getPostsByUserID(userUid);
       this._projects = this.projectService.getProjectsByUserID(userUid);
@@ -48,6 +57,7 @@ export class ProfileComponent implements OnInit {
   checkUpdateGitInfo () {
     if (this.userModel.gitUsername != "") {
       //if (!this.userModel.gitInfo) {
+          //this.githubService.gitGetRequest(this._gitApi + this.userModel.gitUsername)
           this.httpService
             .httpGetRequest(this._gitApi + this.userModel.gitUsername)
             .subscribe(res => {
@@ -69,51 +79,12 @@ export class ProfileComponent implements OnInit {
 
   getRepos(url : string) {
       var confirmedRepos = Array<any>();      
-      this.githubService.getAndParseRepos(url).subscribe(repos => {
-          let _repos = Array<any>();
-          repos.forEach((repo : any) => {
-              let _repo = {
-                  gitID: repo["id"],
-                  author: this.userModel.uid,
-                  title: repo["name"],
-                  createdAt: repo["created_at"],
-                  updatedAt: repo["updated_at"],
-                  text: repo["description"] || "none",
-                  html_url: repo["html_url"],
-                  language: repo["language"]
-              };
-            _repos.push(_repo);
-          });
-        _repos.forEach(_repo =>  {
-            let dialogRef: MdDialogRef<ConfirmDialogComponent>;
-            dialogRef = this.dialog.open(ConfirmDialogComponent);
-            dialogRef.componentInstance.title = "Do you want to include this repo?";
-            dialogRef.componentInstance.content = _repo.title;
-            dialogRef.afterClosed().subscribe((result: string) => {
-                if (result) {
-                  //confirmedRepos.push(_repo);
-                  let catDialogRef: MdDialogRef<ProjCatDialogComponent>;
-                  catDialogRef = this.dialog.open(ProjCatDialogComponent);
-                  catDialogRef.componentInstance.title = "Please pick a project category";
-                  catDialogRef.componentInstance.content = _repo.title;
-                  catDialogRef.afterClosed().subscribe((result: string) => {
-                      _repo["category"] = result;
-                      //confirmedRepos.push(_repo);
-                      this.projectService.addGitProject(_repo);
-                        //console.log("res " + result);
-                    });
-                }
-            });
-        });
-        //console.log(confirmedRepos[0]);
-        });
-        /*
-        confirmedRepos.forEach(repo => {
+      this.githubService
+        .getAndParseRepos(url, this.userModel.uid)
+        .forEach(repo => {
             console.log(repo);
             this.projectService.addGitProject(repo);
         });
-        this.projectService.addGitProject(confirmedRepos[0]);
-        */
     }
 
   public edit = false;
@@ -124,7 +95,6 @@ export class ProfileComponent implements OnInit {
 
   /*
                 let dialogRef: MdDialogRef<DialogComponent>;
-
                 dialogRef = this.dialog.open(DialogComponent, {
                     data : {
                         title: "title",

@@ -12,18 +12,20 @@
                 <md-card-content>
                     <form class="postForm">
                         <table>
-                            <td>
-                                <md-input-container class="form-full-width">
-                                    <input mdInput required placeholder="Title" #titleContent>
-                                </md-input-container>
-                            </td>
-                            <td>
-                                <md-select class="postTypeSelect" placeholder="Category" #categoryContent>
-                                    <md-option *ngFor="let type of postTypes" [value]="type.value">
-                                        {{ type.viewValue }}
-                                    </md-option>
-                                </md-select>
-                            </td>
+                            <tr>
+                                <td>
+                                    <md-input-container class="form-full-width">
+                                        <input mdInput required placeholder="Title" #titleContent>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-select class="postTypeSelect" placeholder="Category" #categoryContent>
+                                        <md-option *ngFor="let type of postTypes" [value]="type.value">
+                                            {{ type.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </td>
+                            </tr>                                
                         </table>
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #postContent></textarea>
@@ -49,8 +51,8 @@
                     </md-input-container>
                 </div>
                 <div [style.display]="(selectedPostSearchValue === 'searchOption_Distance') ? '' : 'none' ">
-                    <md-select class="searchInput radius" placeholder="Radius" [(ngModel)]="selectedPostSearchRadius">
-                        <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value" style="position: fixed; float:left;">
+                        <md-select class="searchInput radius" placeholder="Radius" [(ngModel)]="selectedPostSearchRadius">
+                        <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value">
                             {{ rad.viewValue }}
                         </md-option>
                     </md-select>
@@ -81,11 +83,11 @@
                         <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                     </button>
                 </div>
-                <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
-                    <button class="searchBtn" md-raised-button (click)="handlePostSearch(selectedPostSearchValue, '')">
-                        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
-                    </button>
-                </div>
+            <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
+                <button class="searchBtn" md-raised-button (click)="handlePostSearch(selectedPostSearchValue, '')">
+                    <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+                </button>
+            </div>
             <div *ngFor="let post of posts | async">
                 <div class="post-top">
                     {{post.timestamp | date: 'EEEE M/d HH:mm'}}

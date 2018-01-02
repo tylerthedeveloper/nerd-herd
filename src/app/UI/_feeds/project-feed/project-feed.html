@@ -1,29 +1,31 @@
 <div class="container">
     <div class="row">
-        <h1>Nerd forum</h1>
+        <h1>Nerd projects</h1>
     </div>
     <div class="row">
         <div class="col-12 col-md-4 col-lg-4 submit-project-card">
             <!-- <profile-box></profile-box> -->
             <md-card>
                 <md-card-title>
-                    <h3>Share your thoughts</h3>
+                    <h3>Add a new project</h3>
                 </md-card-title>
                 <md-card-content>
                     <form class="projectForm">
                         <table>
-                            <td>
-                                <md-input-container class="title">
-                                    <input mdInput required placeholder="Title" #titleContent>
-                                </md-input-container>
-                            </td>
-                            <td>
-                                <md-select class="projectTypeSelect" placeholder="Category" #categoryContent>
-                                    <md-option *ngFor="let type of projectTypes" [value]="type.value">
-                                        {{ type.viewValue }}
-                                    </md-option>
-                                </md-select>
-                            </td>
+                            <tr>
+                                <td>
+                                    <md-input-container class="title">
+                                        <input mdInput required placeholder="Title" #titleContent>
+                                    </md-input-container>
+                                </td>
+                                <td>
+                                    <md-select class="projectTypeSelect" placeholder="Category" #categoryContent>
+                                        <md-option *ngFor="let type of projectTypes" [value]="type.value">
+                                            {{ type.viewValue }}
+                                        </md-option>
+                                    </md-select>
+                                </td>
+                            </tr>
                         </table>
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #projectContent></textarea>
@@ -43,8 +45,8 @@
                         {{ type.viewValue }}
                     </md-option>
                 </md-select>
+                <!-- <div class="searchInput" *ngIf="selectedProjectSearchValue !== 'searchOption_Distance'"> -->
                 <div [style.display]="(selectedProjectSearchValue !== 'searchOption_Distance') ? '' : 'none' " style="float:middle;">
-                    <!-- <div class="searchInput" *ngIf="selectedProjectSearchValue !== 'searchOption_Distance'"> -->
                     <md-input-container class="searchInput">
                         <input mdInput #searchText placeholder="Search projects" />
                     </md-input-container>
@@ -52,7 +54,7 @@
                 <!-- <div *ngIf="selectedProjectSearchValue === 'searchOption_Distance'"> -->
                 <div [style.display]="(selectedProjectSearchValue === 'searchOption_Distance') ? '' : 'none' ">
                     <md-select class="radius" placeholder="Radius" [(ngModel)]="selectedProjectSearchRadius">
-                        <md-option *ngFor="let rad of projectRadiusSearch" [value]="rad.value" style="position: fixed; float:left;">
+                        <md-option *ngFor="let rad of projectRadiusSearch" [value]="rad.value">
                             {{ rad.viewValue }}
                         </md-option>
                     </md-select>

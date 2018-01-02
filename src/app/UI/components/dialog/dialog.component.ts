@@ -10,7 +10,7 @@ export class DialogComponent implements OnInit {
 
     public title: string;
     public content: string;
-    public list: Array<any[]>;
+    // public list: Array<any[]>;
 
     constructor(public dialogRef: MdDialogRef<DialogComponent>) {} //public dialogRef: MdDialogRef<DialogComponent>
     ngOnInit() {}
