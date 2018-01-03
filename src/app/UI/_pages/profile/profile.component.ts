@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
               private postService : PostService,  private projectService : ProjectService,
               public dialog: MdDialog) {}
 
+              
   ngOnInit() {
       let userUid : string = this.route.snapshot.paramMap.get('uid');
       this.userService.getUserByID(userUid).subscribe((user) => {

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { UserService } from "../_services";
 import { Observable } from 'rxjs/Observable';
-import { Subject,  } from "rxjs/Subject";
+import { Subject  } from "rxjs/Subject";
 import { User } from "../_models";
 import { BehaviorSubject  } from "rxjs/Rx";
 import { StateStore } from "./state.store";
@@ -20,10 +20,8 @@ export class UserStore extends StateStore {
                     //this.location.subscribe((pos: Position) => this.loadInitialData(pos.coords));
                     this.location.subscribe(
                         (pos: any) => {
-                            if ( pos.coords )  
-                                this.loadInitialData(pos.coords)
-                            else               
-                                this.loadInitialData(pos)
+                            if ( pos.coords ) this.loadInitialData(pos.coords)
+                            else this.loadInitialData(pos)
                     });
     }
 
@@ -40,7 +38,6 @@ export class UserStore extends StateStore {
             },
             err => console.log("Error retrieving location")
         );
-        
     }
   
     storeSearchUserByName(userName : string): Observable<Array<User>> {

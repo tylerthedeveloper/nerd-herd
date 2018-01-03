@@ -22,6 +22,8 @@
                     </ul>
                 </md-card-content>
             </md-card>
+            <button *ngIf="!isFollowing" md-raised-button (click)="followUser()">Follow</button>
+            <button *ngIf="isFollowing" md-raised-button (click)="unfollowUser()">Unfollow</button>
             <!-- <friends-list></friends-list> -->
         </div>
 

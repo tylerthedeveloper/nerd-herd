@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     //{ path: 'login', component: LoginComponent },
     //{ path: 'sign-up', component: SignUpComponent },
     { path: 'contact', component: ContactComponent },
+    { path: '*', redirectTo: '/posts', pathMatch: 'full' },
     { path: '', redirectTo: '/posts', pathMatch: 'full' },
     //{ path: '**', redirectTo: 'home' }
 ];

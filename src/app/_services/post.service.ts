@@ -1,4 +1,4 @@
-import { Injectable,  } from '@angular/core';
+import { Injectable  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { PostCategory, Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
@@ -33,7 +33,6 @@ export class PostService {
                             this.location = location;
                             //console.log(location);
                         });
-
                     }
                 });
       

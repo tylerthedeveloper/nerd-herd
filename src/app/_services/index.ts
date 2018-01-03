@@ -1,5 +1,6 @@
 export * from './authentication.service';
 export * from './af.service';
+export * from './follower.service';
 export * from './git.service';
 export * from './group.service';
 export * from './http.service';
