@@ -48,8 +48,6 @@ export class UserProfileComponent implements OnInit {
     });
     this._following = this.followerService.getFollowing(userUid);
     }
-    
-    
 
   followUser() {
       this.followerService.addFollower(this._userID, this._profileID);

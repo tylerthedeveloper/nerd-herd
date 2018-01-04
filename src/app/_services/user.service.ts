@@ -16,16 +16,15 @@ export class UserService implements OnInit {
     geoFire : any;
     geoFireRef : any;
 
-    constructor(public database: AngularFireDatabase,
-                public followerService: FollowerService) 
-                {
+    constructor(public database: AngularFireDatabase, 
+                public followerService: FollowerService) {
                     this.firebaseRef = firebase.database().ref('locations');
                     this.geoFire = new GeoFire(this.firebaseRef);
                     this.geoFireRef = this.geoFire.ref();
+                    
                 }
 
     ngOnInit(): void {}
-
 
     //                  //
     //    Other Users   //
@@ -58,6 +57,17 @@ export class UserService implements OnInit {
     
     updateGitProfile(uid: string, gitInfo : {}) : Observable<any> {
         return Observable.fromPromise(this.database.object(`/users/${uid}/gitInfo`).update(gitInfo));
+    }
+
+    //                  //
+    //    Follow        //
+    //                  //  
+    getFollowers(userID : string) : Observable<any> {
+        return this.followerService.getFollowers(userID);   
+    }
+
+    getFollowing(userID : string) : Observable<any> {
+        return this.followerService.getFollowing(userID);   
     }
 
 

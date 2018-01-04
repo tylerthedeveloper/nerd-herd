@@ -54,7 +54,9 @@
                     <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" (click)="editProfile()"></i>
                 </md-card-footer>
             </md-card>
-            <friends-list></friends-list>
+            <friends-list [dSource]="dSource" 
+                            [followerList]="followerList" 
+                            [followingList]="followingList"></friends-list>
         </div>
         <div class="col-12 col-md-8">
             <md-tab-group>

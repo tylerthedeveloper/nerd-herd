@@ -4,3 +4,9 @@ export class Follower {
                 public followerid: string) {}
 
 }
+
+export interface FollowerFriend {
+    id: string;
+    name: string;
+    photoUrl: string;
+}

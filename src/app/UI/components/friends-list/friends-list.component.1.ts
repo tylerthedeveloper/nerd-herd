@@ -9,7 +9,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import { FollowerFriend } from '../../../_models/follower';
 
 @Component({
     selector: 'friends-list',
@@ -20,10 +19,6 @@ export class FriendsListComponent {
     displayedColumns = ['userId', 'userName', 'color'];
     exampleDatabase = new ExampleDatabase();
     dataSource: ExampleDataSource | null;
-    
-    @Input() dSource: string = "change me";
-    @Input() followerList : FollowerFriend[];
-    @Input() followingList : FollowerFriend[];
 
     @ViewChild('filter') filter: ElementRef;
 
@@ -37,18 +32,14 @@ export class FriendsListComponent {
             this.dataSource.filter = this.filter.nativeElement.value;
         });
     }
-
-    // public setTitle(_title : string) : void {
-    //     this.Ftitle = _title;
-    // }
 }
 
 /** Constants used to fill up our data base. */
 const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-                'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
+'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
 const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-                'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-                'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
+'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
 export interface UserData {
     id: string;

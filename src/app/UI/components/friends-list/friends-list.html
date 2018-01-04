@@ -1,5 +1,6 @@
 <div class="friends-list-container mat-elevation-z6">
-    <h3>Your Friends</h3>
+    <h3 [text]="dSource"> {{ dSource }} </h3>
+    <h3 *ngFor="let fl of followerList"></h3>
     <div class="friends-list-header">
         <md-input-container floatPlaceholder="never">
             <input mdInput #filter placeholder="Search">
