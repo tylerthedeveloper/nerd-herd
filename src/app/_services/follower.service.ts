@@ -38,10 +38,16 @@ export class FollowerService implements OnInit {
         // return this._following;
     }
     
-    addFollower(followerID: string, followingID: string) {
-        var followKey = this.db.database.ref(`/follow/${followerID}`).push().key;
-        this.db.database.ref(`/follow/${followerID}/following/${followKey}`).update({followingID : followingID})
-        this.db.database.ref(`/follow/${followingID}/followers/${followKey}`).update({followerID : followerID})
+    // addFollower(followerID: string, followingID: string) {
+    //     var followKey = this.db.database.ref(`/follow/${followerID}`).push().key;
+    //     this.db.database.ref(`/follow/${followerID}/following/${followKey}`).update({followingID : followingID})
+    //     this.db.database.ref(`/follow/${followingID}/followers/${followKey}`).update({followerID : followerID})
+    // }
+
+    addFollower(follower: {}, followee: {}) {
+        var followKey = this.db.database.ref(`/follow/${follower["id"]}`).push().key;
+        this.db.database.ref(`/follow/${follower["id"]}/following/${followKey}`).update(followee);
+        this.db.database.ref(`/follow/${followee["id"]}/followers/${followKey}`).update(follower);
     }
 
     removeFollower(followerID: string, followingID: string) {

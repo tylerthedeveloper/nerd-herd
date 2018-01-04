@@ -13,25 +13,23 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  
-  userProfile : User;
-  _posts : Observable<any[]>;
-  _projects : Observable<any[]>;
-  _userID : string;
-  _profileID : string;
+  userProfile: User;
+  _posts: Observable<any[]>;
+  _projects: Observable<any[]>;
+  _userID: string;
+  _fbUser: firebase.User;
+  _profileID: string;
   _followers: Observable<any>;
   _following: Observable<any>;
   isFollowing: boolean;
-  
   constructor(public userService: UserService,
-              private postService : PostService,
-              private projectService : ProjectService,
-              private followerService : FollowerService,
-              private afService : AFService,
-              private route: ActivatedRoute) {}
-    
-  ngOnInit () {
-    let userUid : string = this.route.snapshot.paramMap.get('uid');
+    private postService: PostService,
+    private projectService: ProjectService,
+    private followerService: FollowerService,
+    private afService: AFService,
+    private route: ActivatedRoute) { }
+  ngOnInit() {
+    let userUid: string = this.route.snapshot.paramMap.get('uid');
     this._profileID = userUid;
     this.userService.getUserByID(userUid).subscribe((user) => this.userProfile = user);
     this._posts = this.postService.getPostsByUserID(userUid);
@@ -40,18 +38,31 @@ export class UserProfileComponent implements OnInit {
       this._followers = followers;
       this.afService.getUser().subscribe(user => {
         this._userID = user.uid;
-        followers.forEach((follower : string) => {
+        this._fbUser = user;
+        followers.forEach((follower: string) => {
           //check if already following
-          if (follower["followerID"] === user.uid) this.isFollowing = true;
+          console.log(follower);
+          if (follower["id"] === user.uid) this.isFollowing = true;
         });
       });
     });
     this._following = this.followerService.getFollowing(userUid);
-    }
+  }
 
   followUser() {
-      this.followerService.addFollower(this._userID, this._profileID);
-      this.isFollowing = true;
+    var followerData = {
+      id: this._userID,
+      name: this._fbUser.displayName,
+      photoUrl: this._fbUser.photoURL
+    };
+
+    var followeeData = {
+      id: this._profileID,
+      name: this.userProfile.name,
+      photoUrl: this.userProfile.photoUrl
+    };
+    this.followerService.addFollower(followerData, followeeData);
+    this.isFollowing = true;
   }
 
   unfollowUser() {

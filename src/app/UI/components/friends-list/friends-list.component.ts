@@ -10,6 +10,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
 import { FollowerFriend } from '../../../_models/follower';
+import {NoConflictStyleCompatibilityMode} from '@angular/material';
 
 @Component({
     selector: 'friends-list',
@@ -36,6 +37,7 @@ export class FriendsListComponent {
             if (!this.dataSource) { return; }
             this.dataSource.filter = this.filter.nativeElement.value;
         });
+        console.log(this.followerList);
     }
 
     // public setTitle(_title : string) : void {

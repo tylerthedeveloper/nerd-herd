@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { GitService, HttpService, PostService, ProjectService, UserService } from '../../../_services/index';
+import { GitService, HttpService, PostService, ProjectService, UserService, FollowerService } from '../../../_services/index';
 import { Post, User, FollowerFriend } from "../../../_models/index";
 import * as firebase from 'firebase/app';
 import 'rxjs/add/operator/take';
@@ -25,12 +25,13 @@ export class ProfileComponent implements OnInit {
     userModel = new User("","","","","", {});
     _gitApi = "https://api.github.com/users/";
     dSource : string = "";
-    followerList : FollowerFriend[];
-    followingList : FollowerFriend[];
+    _followers: Observable<any>;
+    _following: Observable<any>;
 
     constructor(private route: ActivatedRoute,      public userService: UserService,
                 private httpService : HttpService,  private githubService: GitService,
                 private postService : PostService,  private projectService : ProjectService,
+                private followerService: FollowerService,
                 public dialog: MdDialog) {}
 
                 
@@ -51,8 +52,26 @@ export class ProfileComponent implements OnInit {
         this._posts = this.postService.getPostsByUserID(userUid);
         this._projects = this.projectService.getProjectsByUserID(userUid);
         this.dSource = "testing title";
-        this.userService.getFollowers(userUid).map(followers => this.followerList = followers);
-        this.userService.getFollowing(userUid).map(following => this.followingList = following);
+        // this.userService.getFollowers(userUid).map(followers => this.followerList = followers);
+        // console.log(this.followerList);
+        // this.userService.getFollowing(userUid).map(following => this.followingList = following);
+        this.followerService.getFollowers(userUid).subscribe(followers => {
+            this._followers = followers;
+            // this.afService.getUser().subscribe(user => {
+            //   this._userID = user.uid;
+            //   this._fbUser = user;
+            //   followers.forEach((follower: string) => {
+            //     //check if already following
+            //     console.log(follower);
+            //     if (follower["followerID"] === user.uid) this.isFollowing = true;
+            //   });
+            // });
+        });
+        this.followerService.getFollowing(userUid).subscribe(following => {
+            this._following = following;
+            console.log(this._following);
+        });
+        // this._following = this.followerService.getFollowing(userUid);
     }
 
     updateProfile() {
