@@ -54,6 +54,7 @@ export class PostFeedComponent {
             } else if (cat == "Question") {
                 iconType="question-circle";
             } else if (cat == "Interview Prep") {
+            } else if (cat == "Interview") {
                 iconType="black-tie";
             } else {
                 iconType="globe";

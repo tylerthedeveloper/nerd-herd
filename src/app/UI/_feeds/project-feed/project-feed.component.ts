@@ -47,15 +47,15 @@ export class ProjectFeedComponent {
         this.projectButtonsArray = Object.keys(ProjectCategory).map(cat => {
             let iconType = "";
             if (cat == "School") {
-                iconType="lightbulb-o";
+                iconType="graduation-cap";
             } else if (cat == "Personal") {
-                iconType="users";
+                iconType="user";
             } else if (cat == "Social") {
                 iconType="comments";
             } else if (cat == "Business") {
-                iconType="question-circle";
-            } else if (cat == "Idea") {
                 iconType="black-tie";
+            } else if (cat == "Idea") {
+                iconType="lightbulb-o";
             } else {
                 iconType="globe";
             }
