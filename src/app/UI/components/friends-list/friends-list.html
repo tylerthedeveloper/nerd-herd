@@ -1,17 +1,32 @@
-<div class="friends-list-container mat-elevation-z6">
-    <!-- <h3 [text]="dSource"> {{ dSource }} </h3> -->
-    <h2>Follwers:</h2>
+<md-tab-group>
+    <md-tab label="Followers">
+        <div class="friends-list-container mat-elevation-z6">
+            <!-- <h3 [text]="dSource"> {{ dSource }} </h3> -->
+            <!-- <h2>Follwers:</h2>
     <h3 *ngFor="let fl of followerList"> {{ fl.name }} </h3>
     <h2>Following:</h2>
-    <h3 *ngFor="let fl of followingList"> {{ fl.name }} </h3>
-    <!-- <div class="friends-list-header">
+    <h3 *ngFor="let fl of followingList"> {{ fl.name }} </h3> -->
+            <!-- <div class="friends-list-header">
         <md-input-container floatPlaceholder="never">
             <input mdInput #filter placeholder="Search">
         </md-input-container>
     </div> -->
-    <mat-list role="list">
-            <mat-list-item role="listitem">Item 1</mat-list-item>
-            <mat-list-item role="listitem">Item 2</mat-list-item>
-            <mat-list-item role="listitem">Item 3</mat-list-item>
-          </mat-list>
-</div>
+            <!-- <h3>Follwers:</h3> -->
+            <md-list role="list">
+                <md-list-item role="listitem" *ngFor="let fl of followerList"
+                [routerLink]="['/people', fl.id]"
+                routerLinkActive="active"><img class="profile-pic" src="{{ fl.photoUrl }}" />{{ fl.name }}</md-list-item>
+            </md-list>
+        </div>
+    </md-tab>
+    <md-tab label="Following">
+        <div class="friends-list-container mat-elevation-z6">
+            <!-- <h3>Following:</h3> -->
+            <md-list role="list">
+                <md-list-item role="listitem" *ngFor="let fl of followingList"
+                [routerLink]="['/people', fl.id]"
+                routerLinkActive="active"><img class="profile-pic" src="{{ fl.photoUrl }}" /> {{ fl.name }}</md-list-item>
+            </md-list>
+        </div>
+    </md-tab>
+</md-tab-group>

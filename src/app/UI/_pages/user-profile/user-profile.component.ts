@@ -36,6 +36,7 @@ export class UserProfileComponent implements OnInit {
     this._projects = this.projectService.getProjectsByUserID(userUid);
     this.followerService.getFollowers(userUid).subscribe(followers => {
       this._followers = followers;
+      console.log(followers);
       this.afService.getUser().subscribe(user => {
         this._userID = user.uid;
         this._fbUser = user;
@@ -46,7 +47,10 @@ export class UserProfileComponent implements OnInit {
         });
       });
     });
-    this._following = this.followerService.getFollowing(userUid);
+    this.followerService.getFollowing(userUid).subscribe(following => {
+      this._following = following;
+      console.log(following);
+    });
   }
 
   followUser() {
