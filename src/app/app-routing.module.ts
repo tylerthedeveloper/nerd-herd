@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ContactComponent, HomeComponent, ProfileComponent, UserProfileComponent } from './UI/_pages/index';
 import { PostFeedComponent, PeopleFeedComponent, ProjectFeedComponent} from './UI/_feeds/index';
 
-//import { SignUpComponent } from './account/index';
+// --> import { SignUpComponent } from './account/index';
 import { UIModule } from './UI/ui.app.module';
 
 const appRoutes: Routes = [
@@ -19,6 +19,7 @@ const appRoutes: Routes = [
     //{ path: 'login', component: LoginComponent },
     //{ path: 'sign-up', component: SignUpComponent },
     { path: 'contact', component: ContactComponent },
+    { path: '*', redirectTo: '/posts', pathMatch: 'full' },
     { path: '', redirectTo: '/posts', pathMatch: 'full' },
     //{ path: '**', redirectTo: 'home' }
 ];
@@ -27,7 +28,6 @@ const appRoutes: Routes = [
   imports: [ RouterModule.forRoot(appRoutes) ],
   exports: [ RouterModule ]
 })
-
 
 export class AppRoutingModule {}
 

@@ -5,7 +5,7 @@ export class User {
                 public name: string,
                 public email: string,
                 public gitUsername: string,
-                private photoUrl: string,
+                public photoUrl: string,
                 public gitInfo: {}) {}
 
     public location : any = {
