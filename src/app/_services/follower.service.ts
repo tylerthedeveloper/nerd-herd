@@ -51,7 +51,22 @@ export class FollowerService implements OnInit {
     }
 
     removeFollower(followerID: string, followingID: string) {
-        this._following.remove(followingID);
-        //this.db.database.ref(`/follow/${followingID}/followers/`).update(followingID);
+        var query = firebase.database().ref(`follow/${followerID}/following`).orderByKey();
+        var followerKey = "";
+        query.once("value").then(snapshot => {
+            snapshot.forEach((childSnapshot : any) => {
+                var curKey = childSnapshot.key;
+                var childID = childSnapshot.val().id;
+                console.log("not yet true");              
+                console.log(childID + " " + followingID);
+                if (followingID === childID) { 
+                    followerKey = curKey;
+                    console.log("true");
+                    firebase.database().ref(`follow/${followerID}/following/${curKey}`).remove();
+                    firebase.database().ref(`follow/${followingID}/followers/${curKey}`).remove();
+                    return true;
+                }
+          });
+        });
     }
 }

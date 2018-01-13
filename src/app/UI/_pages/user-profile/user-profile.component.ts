@@ -70,7 +70,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   unfollowUser() {
-    this.followerService.addFollower(this._userID, this._profileID);
+    this.followerService.removeFollower(this._userID, this._profileID);
     this.isFollowing = false;
   }
 
