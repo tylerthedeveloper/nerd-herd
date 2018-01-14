@@ -1,12 +1,10 @@
 import { Injectable  } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { PostCategory, Post } from '../_models/post';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import * as firebase from 'firebase/app';
 import { AFService } from './af.service';
-import { UserService } from './user.service';
+// --> import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
-import { StateStore } from "../_stores/state.store";
 
 @Injectable()
 export class ChatService {
@@ -17,8 +15,8 @@ export class ChatService {
     messagesFirebaseRef : firebase.database.Reference;
 
     constructor(private db: AngularFireDatabase, 
-                public afService : AFService,
-                public userService : UserService) {
+                public afService : AFService) //public userService : UserService
+                {
 
                 this.afService.getUser().subscribe(user => {
                     if(user) {
@@ -30,23 +28,25 @@ export class ChatService {
                 this.messagesFirebaseRef = firebase.database().ref('messages');
     }
 
-//    getChats(userID: String): Observable<any> {
-    //let uid = (this.userID) ? this.userID : _userID;
-    getChats(): Observable<any> {
-        return this.db.list(`/chats/${this.userID}`);
+    // getChats(): Observable<any> {
+        //let uid = (this.userID) ? this.userID : _userID;
+    getChats(userID: String): FirebaseListObservable<any> {
+        return this.db.list(`/chats/${userID}`);
     }
     
-    getChatById(recipientID: string): Observable<any> {
-        return this.db.list(`/chats/${this.userID}/${recipientID}`);
+    getChatById(userID: string, recipientID: string): FirebaseListObservable<any> {
+        return this.db.list(`/chats/${userID}/${recipientID}`);
     }
 
-    // checkChatExists(outUID: string) {
-    //     //.orderByChild("ID").equalTo(outUID).
-    //     this.db.database.ref(`chats/${this.userID}/${outUID}`).once('value').then(function(snapshot) {
-    //         console.log(snapshot.val());
-    //         return (snapshot.val() !== null)
-    //     });
-    // }
+    /*
+    checkChatExists(outUID: string) {
+        //.orderByChild("ID").equalTo(outUID).
+        this.db.database.ref(`chats/${this.userID}/${outUID}`).once('value').then(function(snapshot) {
+            console.log(snapshot.val());
+            return (snapshot.val() !== null)
+        });
+    }
+    */
 
     createChat(outUID: string) : string {
         let uid = this.userID;
@@ -56,12 +56,21 @@ export class ChatService {
         return chatKey;
     }
 
-    getMessagesByChatID(outUID: string) {
-        return this.getChatById(outUID).subscribe(chatID => this.messagesFirebaseRef.child(chatID));
+    // getMessagesByChatID(chatID: string) {
+        //return this.db.database.list(`messages/${chatID}`);        
+        //return this.messagesFirebaseRef.child(chatID);
+    //}
+    
+    getMessagesByChatID(userID: string, outID: string) {
+        return Observable.create((observer : any) => {
+            this.getChatById(userID, outID).subscribe(chatID => 
+                observer.next(this.messagesFirebaseRef.child(chatID))
+            );
+        });
     }
     
-    sendMessage(outUID: string, message: {}) {
-        this.getChatById(outUID).subscribe(chatID => {
+    sendMessage(userID: string, outUID: string, message: {}) {
+        this.getChatById(userID, outUID).subscribe(chatID => {
             let chatKey = (chatID) ? chatID : this.createChat(outUID);
             this.db.database.ref(`messages/${chatKey}`).update(message);
         });

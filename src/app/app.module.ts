@@ -21,8 +21,8 @@ import { CommonModule } from '@angular/common';
 import 'hammerjs';
 
 import { 
-            AFService, FollowerService, GitService, HttpService, 
-            PostService, ProjectService, UserService 
+            AFService, ChatService, FollowerService, GitService, 
+            HttpService, PostService, ProjectService, UserService 
         } from './_services/index';
 import { UserStore } from './_stores/user.store';
 import { UIModule } from './UI/ui.app.module';
@@ -42,8 +42,8 @@ import { DataSource } from '@angular/cdk';
         AngularFireAuthModule, AngularFireDatabaseModule, MaterialModule
     ], 
     providers: [ 
-                    AFService, FollowerService, HttpService, GitService,
-                    ProjectService, PostService, UserService, 
+                    AFService, ChatService, FollowerService, HttpService, 
+                    GitService, ProjectService, PostService, UserService, 
                     UserStore 
                 ],
     declarations: [ AppComponent ],
