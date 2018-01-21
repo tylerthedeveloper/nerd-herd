@@ -45,7 +45,7 @@ export class UserProfileComponent implements OnInit {
         this._projects = this.projectService.getProjectsByUserID(userUid);
         this.followerService.getFollowers(userUid).subscribe(followers => {
           this._followers = followers;
-          console.log(followers);
+          //console.log(followers);
           this.afService.getUser().subscribe(user => {
             this._userID = user.uid;
             this._fbUser = user;
@@ -56,13 +56,21 @@ export class UserProfileComponent implements OnInit {
             });
           });
         });
-        this.chatService.getChatById(this._userID, userUid).subscribe(chatRoom => {
-          console.log(chatRoom);
-          if (chatRoom === "") {
-            this.chatRoom = this.chatService.createChat(userUid);
-          } else {
-            this.chatRoom = chatRoom;
-          }
+        //this.chatRoom = this.chatService.createChat(userUid);  
+        //this.chatService.getChatById(this._userID, userUid).take(1).subscribe(chatRoom => {
+        this.chatService.getChats(userUid).subscribe(chatRooms => {
+          chatRooms.forEach((chat: any) => {
+              console.log(this._userID);  
+              if (chat.$key === this._userID) {
+                this.chatRoom = chat.$value;
+                console.log(this.chatRoom);  
+              }
+          });
+          // if (chatRoom === "") {
+          //   this.chatRoom = this.chatService.createChat(userUid);
+          // } else {
+          //   this.chatRoom = chatRoom;
+          // }
         });
         this._messages = this.chatService.getMessagesByChatID(this._userID, userUid);
         this.followerService.getFollowing(userUid).subscribe(following => {
@@ -104,9 +112,14 @@ export class UserProfileComponent implements OnInit {
     // }
 
     sendMessage(message: string) {
-      console.log("User-profile log:");
-      console.log(this.chatRoom);
-      this.chatService.sendMessage(this.chatRoom, message);
+      // console.log("User-profile log:");
+      // console.log(this.chatRoom);
+      var _message = {};
+      _message["text"] = message;
+      _message["sender"] = this._userID;
+      _message["recipient"] = this._profileID;
+      _message["timestamp"] = firebase.database.ServerValue.TIMESTAMP;
+      this.chatService.sendMessage(this.chatRoom, _message);
     }
 
 }
