@@ -22,10 +22,35 @@
                     </ul>
                 </md-card-content>
             </md-card>
+            <md-card class="example-card">
+                <md-card-title>
+                    <h3>Send A Message</h3>
+                </md-card-title>
+                <md-card-content>
+                    <form class="postForm">
+                        <!-- <table>
+                            <tr>
+                                <td>
+                                    <md-input-container class="form-full-width">
+                                        <input mdInput required placeholder="Title" #titleContent>
+                                    </md-input-container>
+                                </td>
+                            </tr>
+                        </table> -->
+                        <md-input-container class="form-full-width">
+                            <textarea mdInput required placeholder="Your Message" #messageContent></textarea>
+                        </md-input-container>
+                        <button md-raised-button (click)="sendMessage(messageContent.value); messageContent.value='';">Message</button>
+                        <!-- <button md-raised-button (click)="post(titleContent.value, postContent.value, categoryContent.selected.value);
+                                                                titleContent.value =''; postContent.value ='';"> -->
+                        <!-- </button> -->
+                    </form>
+                </md-card-content>
+            </md-card>
             <button *ngIf="!isFollowing" md-raised-button (click)="followUser()">Follow</button>
             <button *ngIf="isFollowing" md-raised-button (click)="unfollowUser()">Unfollow</button>
-            <friends-list [dSource]="dSource" 
-            [followerList]="_followers" 
+            <friends-list [dSource]="dSource"
+            [followerList]="_followers"
             [followingList]="_following"></friends-list>
         </div>
 

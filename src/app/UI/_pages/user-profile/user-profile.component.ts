@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-import { 
-          ChatService, FollowerService, PostService,  
-          ProjectService, UserService, AFService 
+import {
+          ChatService, FollowerService, PostService,
+          ProjectService, UserService, AFService
         } from '../../../_services/index';
 import { Post, User } from "../../../_models/index";
 import * as firebase from 'firebase/app';
@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
     _followers: Observable<any>;
     _following: Observable<any>;
     isFollowing: boolean;
+    chatRoom: string;
 
     _messages: Observable<any[]>;
 
@@ -35,14 +36,13 @@ export class UserProfileComponent implements OnInit {
                 private afService: AFService,
                 private route: ActivatedRoute,
                 private chatService: ChatService) { }
-    
+
     ngOnInit() {
         let userUid: string = this.route.snapshot.paramMap.get('uid');
         this._profileID = userUid;
         this.userService.getUserByID(userUid).subscribe((user) => this.userProfile = user);
         this._posts = this.postService.getPostsByUserID(userUid);
         this._projects = this.projectService.getProjectsByUserID(userUid);
-        this._messages = this.chatService.getMessagesByChatID(userUid, userUid);
         this.followerService.getFollowers(userUid).subscribe(followers => {
           this._followers = followers;
           console.log(followers);
@@ -56,6 +56,15 @@ export class UserProfileComponent implements OnInit {
             });
           });
         });
+        this.chatService.getChatById(this._userID, userUid).subscribe(chatRoom => {
+          console.log(chatRoom);
+          if (chatRoom === "") {
+            this.chatRoom = this.chatService.createChat(userUid);
+          } else {
+            this.chatRoom = chatRoom;
+          }
+        });
+        this._messages = this.chatService.getMessagesByChatID(this._userID, userUid);
         this.followerService.getFollowing(userUid).subscribe(following => {
           this._following = following;
           //console.log(following);
@@ -94,8 +103,10 @@ export class UserProfileComponent implements OnInit {
     //   return this._messages;
     // }
 
-    sendMessages(message: {}) {
-      this.chatService.sendMessage(this._userID, this._profileID, message);
+    sendMessage(message: string) {
+      console.log("User-profile log:");
+      console.log(this.chatRoom);
+      this.chatService.sendMessage(this.chatRoom, message);
     }
 
 }
