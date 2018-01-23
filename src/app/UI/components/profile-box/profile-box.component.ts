@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ProfileBoxComponent {
     
-    user: Observable<firebase.User>;
+    user: firebase.User;
     constructor(public afService : AFService) {
         this.user = this.afService.getUser(); //.subscribe(user => this.user = user);
     }

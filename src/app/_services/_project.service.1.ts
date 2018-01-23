@@ -25,23 +25,23 @@ export class ProjectService {
                 public userService : UserService) {
                 
                 this.projects = db.list('/projects');
-                this.afService.getUser().subscribe(user => {
-                    if(user) { 
-                        this.user = user;
-                        //if( !user.location ) --> get Firebase user !!!
-                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
-                            this.location = location;
-                            console.log(location);
-                        });
+                // this.afService.getUser().subscribe(user => {
+                //     if(user) { 
+                //         this.user = user;
+                //         //if( !user.location ) --> get Firebase user !!!
+                //         this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
+                //             this.location = location;
+                //             console.log(location);
+                //         });
 
-                    }
-                });
+                //     }
+                // });
       
                 this.firebaseRef = firebase.database().ref('locations/projects');
                 this.geoFire = new GeoFire(this.firebaseRef);
                 this.geoFireRef = this.geoFire.ref(); 
     }
-
+    /*
     getAllProjects(): Observable<any> {
         return this.db.list('/projects', { query: { orderByChild: 'timestamp' }});
     }
@@ -141,6 +141,6 @@ export class ProjectService {
                 (error: any) => console.log("Error: " + error)
             );
     }
-
+    */
 }
 

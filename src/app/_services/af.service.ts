@@ -3,45 +3,71 @@ import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Router } from "@angular/router";
 import * as firebase from 'firebase/app';
+import { User } from '../_models/user';
 
 @Injectable()
 export class AFService {
   
-  user: Observable<firebase.User>;
+    //user: Observable<firebase.User>;
+    user: firebase.User;
+    appUser: User;
 
-  constructor(public afAuth: AngularFireAuth, private router: Router) {
-    this.user = afAuth.authState;
-  }
-
-  getUser(): Observable<firebase.User> {
-      return this.user;
-  }
-
-  //login user with google auth on firebase
-  loginWithGoogle() : firebase.Promise<any> {    
-        return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then( (result) => {
-            var token = result.credential.accessToken; // This gives you a Google Access Token. 
-            var user = result.user; // The signed-in user info.
-            //this.addUser(user).then( () => this.router.navigate(['/posts']));
-            this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
-      }).catch(function (error) {
-        alert( error.name + " : " + error.message + " : " + error.stack);
-      });
+    constructor(public afAuth: AngularFireAuth, private router: Router) {
+        // this.user = afAuth.authState;
+        // this.appUser = new User(afAuth.auth.currentUser.displayName, 
+        //                         afAuth.auth.currentUser.email,
+        //                         "",
+        //                         afAuth.auth.currentUser.photoURL,
+        //                         afAuth.auth.currentUser.uid,
+        //                         {});
+        afAuth.authState.subscribe( user => {
+            this.user = user;
+            this.appUser = new User(afAuth.auth.currentUser.displayName, 
+                                afAuth.auth.currentUser.email,
+                                "",
+                                afAuth.auth.currentUser.photoURL,
+                                afAuth.auth.currentUser.uid,
+                                {});
+        });
     }
 
-    
+    //getUser(): Observable<firebase.User> {
+    getUser(): firebase.User {
+        return this.user;
+    }
+
+    getAppUser(): User {
+        return this.appUser;
+    }
+
+    //login user with google auth on firebase
+    loginWithGoogle() : firebase.Promise<any> {    
+            return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then( (result) => {
+                var token = result.credential.accessToken; // This gives you a Google Access Token. 
+                var user = result.user; // The signed-in user info.
+                this.addUser(user).then( () => this.router.navigate(['/people']));
+                // this.addUser(user).then( () => this.router.navigate(['/profile', user.uid]));
+        }).catch(function (error) {
+            alert( error.name + " : " + error.message + " : " + error.stack);
+        });
+        }
+
+        
     logout() : firebase.Promise<any> {
-      return this.afAuth.auth.signOut().then(() => this.router.navigate(['/posts']));
+        return this.afAuth.auth.signOut().then(() => this.router.navigate(['/posts']));
     }
 
     // add google info to db
     private addUser(user: any) : firebase.Promise<any> {
-        return firebase.database().ref(`users/${user.uid}`).update({ 
+        let _user = { 
                 name: user.displayName,          
                 email: user.email,
                 photoUrl: user.photoURL,
                 uid: user.uid,
-        }).then(() => this.router.navigate(['/posts']));
+        };
+        return firebase.database().ref(`users/${user.uid}`)
+                .update({_user })
+                .then(() => this.router.navigate(['/posts']));
     }
 
     public getOrUpdateUserLocation(uid : string) : Observable<any> {

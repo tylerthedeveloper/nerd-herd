@@ -7,6 +7,7 @@ import { AFService } from './af.service';
 import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
 import { StateStore } from "../_stores/state.store";
+import { User } from '../_models/user';
 
 declare var GeoFire: any;
 
@@ -14,7 +15,8 @@ declare var GeoFire: any;
 export class ProjectService {
 
     projects: FirebaseListObservable<any>;
-    user: firebase.User;
+    //user: firebase.User;
+    user: User;
     location: Position;
     firebaseRef : firebase.database.Reference;
     geoFire : any;
@@ -25,17 +27,13 @@ export class ProjectService {
                 public userService : UserService) {
                 
                 this.projects = db.list('/projects');
-                this.afService.getUser().subscribe(user => {
-                    if(user) { 
-                        this.user = user;
-                        //if( !user.location ) --> get Firebase user !!!
-                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
-                            this.location = location;
-                            //console.log(location);
-                        });
-
-                    }
-                });
+                let _user = this.afService.getAppUser();
+                if(_user) { 
+                    this.user = _user;
+                    this.afService.getOrUpdateUserLocation(_user.uid).take(1).subscribe(location => { 
+                        this.location = location;
+                    });
+                }
       
                 this.firebaseRef = firebase.database().ref('locations/projects');
                 this.geoFire = new GeoFire(this.firebaseRef);
@@ -49,7 +47,7 @@ export class ProjectService {
     addProject(title: string, content: string, category: string) {        
         var projectData = {  
             authorID: this.user.uid,            
-            author: this.user.displayName,
+            author: this.user.name,
             title: title,
             content: content,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -59,7 +57,7 @@ export class ProjectService {
         var projectKey = this.db.database.ref("/projects").push().key;
         this.db.database.ref(`projects/${projectKey}`).set(projectData);
         this.db.database.ref(`user-projects/ids/${this.user.uid}/${projectKey}`).set(projectData);
-        this.db.database.ref(`user-projects/names/${this.user.displayName}/${projectKey}`).set(projectData);
+        this.db.database.ref(`user-projects/names/${this.user.name}/${projectKey}`).set(projectData);
         this.db.database.ref(`project-categories/${catstring}/${projectKey}`).set(projectData);
         this.setProjectLocation(projectKey, this.location.coords);
     }
@@ -70,7 +68,7 @@ export class ProjectService {
         var projectKey = this.db.database.ref("/projects").push().key;
         this.db.database.ref(`projects/${projectKey}`).update(gitData);
         this.db.database.ref(`user-projects/ids/${this.user.uid}/${projectKey}`).update(gitData);
-        this.db.database.ref(`user-projects/names/${this.user.displayName}/${projectKey}`).update(gitData);
+        this.db.database.ref(`user-projects/names/${this.user.name}/${projectKey}`).update(gitData);
         this.db.database.ref(`project-categories/${catstring}/${projectKey}`).update(gitData);
         this.setProjectLocation(projectKey, this.location.coords);
     }

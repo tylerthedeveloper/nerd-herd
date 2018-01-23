@@ -29,15 +29,23 @@ export class UserProfileComponent implements OnInit {
 
     _messages: Observable<any[]>;
 
+    tempUser: User;
+
     constructor(public userService: UserService,
                 private postService: PostService,
                 private projectService: ProjectService,
                 private followerService: FollowerService,
                 private afService: AFService,
                 private route: ActivatedRoute,
-                private chatService: ChatService) { }
+                private chatService: ChatService) { 
+                  
+                  this.tempUser = this.afService.getAppUser();
+                  console.log(this.tempUser);
+                }
 
     ngOnInit() {
+        
+        
         let userUid: string = this.route.snapshot.paramMap.get('uid');
         this._profileID = userUid;
         this.userService.getUserByID(userUid).subscribe((user) => this.userProfile = user);
@@ -46,33 +54,32 @@ export class UserProfileComponent implements OnInit {
         this.followerService.getFollowers(userUid).subscribe(followers => {
           this._followers = followers;
           //console.log(followers);
-          this.afService.getUser().subscribe(user => {
-            this._userID = user.uid;
-            this._fbUser = user;
+          let NEWUSERHERE = this.afService.getAppUser();
+          //this.afService.getUser().subscribe(user => {
+          this._userID = NEWUSERHERE.uid;
+          //this._fbUser = user;
             followers.forEach((follower: string) => {
               //check if already following
               //console.log(follower);
-              if (follower["id"] === user.uid) this.isFollowing = true;
-            });
+              if (follower["id"] === NEWUSERHERE.uid) this.isFollowing = true;
           });
         });
         //this.chatRoom = this.chatService.createChat(userUid);  
         //this.chatService.getChatById(this._userID, userUid).take(1).subscribe(chatRoom => {
         this.chatService.getChats(userUid).subscribe(chatRooms => {
+          let bool = false;
           chatRooms.forEach((chat: any) => {
-              console.log(this._userID);  
+              //console.log(this._userID);  
               if (chat.$key === this._userID) {
                 this.chatRoom = chat.$value;
-                console.log(this.chatRoom);  
+                bool = true;
+                //console.log(this.chatRoom);  
               }
+              if (!bool) this.chatRoom = this.chatService.createChat(userUid);
+              this._messages = this.chatService.getMessagesByChatID(this._userID, userUid);
           });
-          // if (chatRoom === "") {
-          //   this.chatRoom = this.chatService.createChat(userUid);
-          // } else {
-          //   this.chatRoom = chatRoom;
-          // }
         });
-        this._messages = this.chatService.getMessagesByChatID(this._userID, userUid);
+        //this._messages = this.chatService.getMessagesByChatID(this._userID, userUid);
         this.followerService.getFollowing(userUid).subscribe(following => {
           this._following = following;
           //console.log(following);

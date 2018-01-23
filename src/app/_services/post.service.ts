@@ -7,6 +7,7 @@ import { AFService } from './af.service';
 import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
 import { StateStore } from "../_stores/state.store";
+import { User } from '../_models/user';
 
 declare var GeoFire: any;
 
@@ -14,7 +15,8 @@ declare var GeoFire: any;
 export class PostService {
 
     posts: FirebaseListObservable<any>;
-    user: firebase.User;
+    //user: firebase.User;
+    user: User;
     location: Position;
     firebaseRef : firebase.database.Reference;
     geoFire : any;
@@ -25,16 +27,13 @@ export class PostService {
                 public userService : UserService) {
                 
                 this.posts = db.list('/posts');
-                this.afService.getUser().subscribe(user => {
-                    if(user) { 
-                        this.user = user;
-                        //if( !user.location ) --> get Firebase user !!!
-                        this.afService.getOrUpdateUserLocation(user.uid).take(1).subscribe(location => { 
-                            this.location = location;
-                            //console.log(location);
-                        });
-                    }
-                });
+                let _user = this.afService.getAppUser();
+                if(_user) { 
+                    this.user = _user;
+                    this.afService.getOrUpdateUserLocation(_user.uid).take(1).subscribe(location => { 
+                        this.location = location;
+                    });
+                }
       
                 this.firebaseRef = firebase.database().ref('locations/posts');
                 this.geoFire = new GeoFire(this.firebaseRef);
@@ -55,7 +54,7 @@ export class PostService {
         ///
         var postData = {  
             authorID: this.user.uid,            
-            author: this.user.displayName,
+            author: this.user.name,
             title: title,
             content: content,
             timestamp: firebase.database.ServerValue.TIMESTAMP,
@@ -65,7 +64,7 @@ export class PostService {
         var postKey = this.db.database.ref("/posts").push().key;
         this.db.database.ref(`posts/${postKey}`).set(postData);
         this.db.database.ref(`user-posts/ids/${this.user.uid}/${postKey}`).set(postData);
-        this.db.database.ref(`user-posts/names/${this.user.displayName}/${postKey}`).set(postData);
+        this.db.database.ref(`user-posts/names/${this.user.name}/${postKey}`).set(postData);
         this.db.database.ref(`post-categories/${catstring}/${postKey}`).set(postData);
     
         this.setPostLocation(postKey, this.location.coords);

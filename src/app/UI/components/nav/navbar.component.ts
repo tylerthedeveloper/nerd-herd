@@ -18,12 +18,9 @@ export class NavBarComponent {
   user: firebase.User;
   public currentPage: string = "posts";
   constructor(public afService : AFService, private router: Router) {
-    this.afService.getUser().subscribe(
-      (auth) => {
-        this.user = auth;
-        if (auth != null) this.loggedIn = true;
-        else this.loggedIn = false;
-      });
+    let user = this.afService.getUser();
+    if (user != null) this.loggedIn = true;
+    else this.loggedIn = false;
   }
 
   // call auth service to logout

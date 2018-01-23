@@ -5,11 +5,13 @@ import * as firebase from 'firebase/app';
 import { AFService } from './af.service';
 // --> import { UserService } from './user.service';
 import { Subject } from 'rxjs/Subject';
+import { User } from '../_models/user';
 
 @Injectable()
 export class ChatService {
 
-    user: firebase.User;
+    //user: firebase.User;
+    user: User;
     userID: string;
     chatsFirebaseRef : firebase.database.Reference;
     messagesFirebaseRef : firebase.database.Reference;
@@ -18,12 +20,11 @@ export class ChatService {
                 public afService : AFService) //public userService : UserService
                 {
 
-                this.afService.getUser().subscribe(user => {
-                    if(user) {
-                        this.user = user;
-                        this.userID = user.uid;
-                    }
-                });
+                let _user = this.afService.getAppUser();
+                if(_user) {
+                    this.user = _user;
+                    this.userID = _user.uid;
+                }
                 this.chatsFirebaseRef = firebase.database().ref('chats');
                 this.messagesFirebaseRef = firebase.database().ref('messages');
     }

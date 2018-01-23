@@ -5,27 +5,27 @@ import * as firebase from 'firebase/app';
 import { AFService } from './af.service';
 import { Subject } from 'rxjs/Subject';
 import { StateStore } from "../_stores/state.store";
+import { User } from '../_models/user';
 
 @Injectable()
 export class FollowerService implements OnInit {
 
     _followers: FirebaseListObservable<any>;
     _following: FirebaseListObservable<any>;
-    user: firebase.User;
+    user: User;
     firebaseRef : firebase.database.Reference;
 
     constructor(private db: AngularFireDatabase, 
                 public afService : AFService) {}
 
     ngOnInit(): void {
-        this.afService.getUser().subscribe(user => {
-            this.user = (user) ? user : null;
-            let userID = user.uid;
-            this._followers = this.db.list(`/follow/${userID}/followers`);
-            this._following = this.db.list(`/follow/${userID}/following`);
+        let _user = this.afService.getAppUser();
+        this.user = (_user) ? _user : null;
+        let userID = _user.uid;
+        this._followers = this.db.list(`/follow/${userID}/followers`);
+        this._following = this.db.list(`/follow/${userID}/following`);
             // this._followers = this.getFollowers(this.user.uid);
             // this._following = this.getFollowing(this.user.uid);
-        });
     }
 
     getFollowers(userID : string): FirebaseListObservable<any> {
