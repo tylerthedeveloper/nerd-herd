@@ -40,6 +40,7 @@ ul {
 
 li {
     list-style: none;
+    height: 100%;
     font-size: 20px;
     margin-bottom: 20px;
 }
@@ -48,6 +49,13 @@ i {
     height: 20px;
     width: 20px;
     margin-right: 10px;
+}
+
+.message {
+    text-align: center;
+    margin: 0 auto;
+    height: 100%;
+    vertical-align: none;
 }
 
 md-card {
@@ -70,4 +78,37 @@ md-card {
     font-size: 16px;
     color: white;
     border-radius: 5px 5px 0 0;
+}
+
+.fullwidth-btn {
+    width: 100%;
+}
+
+/* CHAT */
+
+.message-box {
+    max-height: 250px;
+    overflow: auto;
+}
+
+.speech-bubble-in {
+    background: #004f04;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    float: left;
+    padding: 3px 10px 3px 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.speech-bubble-out {
+    background: #60ac5d;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    float: right;
+    padding: 3px 10px 3px 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

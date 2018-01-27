@@ -11,6 +11,7 @@ export class ChatService {
 
     user: firebase.User;
     userID: string;
+    currChatID: string;
     chatsFirebaseRef : firebase.database.Reference;
     messagesFirebaseRef : firebase.database.Reference;
 
@@ -30,8 +31,33 @@ export class ChatService {
 
     // getChats(): Observable<any> {
         //let uid = (this.userID) ? this.userID : _userID;
-    getChats(userID: String): FirebaseListObservable<any> {
-        return this.db.list(`/chats/${userID}`);
+    getChats(userID: string, senderID: string): Observable<any> {
+        let chatRooms = this.db.object(`/chats/${userID}/${senderID}`, {preserveSnapshot: true});
+        return chatRooms;
+        // return chatRooms.map(snapshots => {
+        //     console.log(snapshots);
+        //     // return snapshots.find((chat) : any => {
+        //     //     chat.key === senderID;
+        //     // }).node_.value_;
+        //     snapshots.forEach((snapShot: any) => {
+        //         console.log(snapShot.key)
+        //         if (snapShot.key == senderID) {
+        //             console.log(snapShot.node_.value_);
+        //             return snapShot.node_.value_;
+        //         };
+        //     });
+        // });
+        // console.log(this.currChatID);
+        // return this.currChatID;
+            // snapshots.forEach(snapshot => {
+            //     if (snapshot.$key == senderID) {
+            //         chatRoom = snapshot.$value;
+            //         console.log(chatRoom);
+            //         bool = false;
+            //     }
+            // });
+            // if (bool) chatRoom = this.createChat(userID);
+        // });
     }
 
     // getChatById(userID: string, recipientID: string): FirebaseListObservable<any> {
@@ -39,7 +65,7 @@ export class ChatService {
     // }
     getChatById(userID: string, recipientID: string)  {
         //return this.db.list(`chats/${recipientID}`);
-        return this.db.list(`chats/${userID}/${recipientID}`);
+        return this.db.list(`/chats/${userID}/${recipientID}`);
         //return this.db.object(`/chats/${userID}/${recipientID}`);
     }
 
@@ -66,12 +92,15 @@ export class ChatService {
         //return this.messagesFirebaseRef.child(chatID);
     //}
 
-    getMessagesByChatID(userID: string, outID: string) {
-        return Observable.create((observer : any) => {
-            this.getChatById(userID, outID).take(1).subscribe(chatID =>
-                observer.next(this.messagesFirebaseRef.child(chatID))
-            );
-        });
+    getMessagesByChatID(chatID: string): FirebaseListObservable<any> {
+        console.log(chatID);
+        console.log(this.db.list(`/messages/${chatID}`)[0]);
+        return this.db.list(`/messages/${chatID}`);
+        // return Observable.create((observer : any) => {
+        //     this.getChatById(userID, outID).take(1).subscribe(chatID =>
+        //         observer.next(this.messagesFirebaseRef.child(chatID))
+        //     );
+        // });
     }
 
     // sendMessage(userID: string, outUID: string, message: string) {
