@@ -20,6 +20,8 @@
                             <i class="fa fa-github" aria-hidden="true"></i> {{userProfile?.gitUsername}}
                         </li>
                     </ul>
+                    <button class="fullwidth-btn" *ngIf="!isFollowing" md-raised-button (click)="followUser()">Follow</button>
+                    <button class="fullwidth-btn" *ngIf="isFollowing" md-raised-button (click)="unfollowUser()">Unfollow</button>
                 </md-card-content>
             </md-card>
             <md-card class="example-card">
@@ -27,28 +29,25 @@
                     <h3>Send A Message</h3>
                 </md-card-title>
                 <md-card-content>
+                    <ul class="message-box">
+                        <li *ngFor="let message of _messages | async">
+                            <div *ngIf="message.recipient != this._userID" class="speech-bubble-out">
+                                <div>{{message.text}}</div>
+                            </div>
+                            <div *ngIf="message.recipient == this._userID" class="speech-bubble-in">{{message.text}}</div>
+                            <!-- <br> -->
+                        </li>
+                    </ul>
                     <form class="postForm">
-                        <!-- <table>
-                            <tr>
-                                <td>
-                                    <md-input-container class="form-full-width">
-                                        <input mdInput required placeholder="Title" #titleContent>
-                                    </md-input-container>
-                                </td>
-                            </tr>
-                        </table> -->
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #messageContent></textarea>
                         </md-input-container>
-                        <button md-raised-button (click)="sendMessage(messageContent.value); messageContent.value='';">Message</button>
-                        <!-- <button md-raised-button (click)="post(titleContent.value, postContent.value, categoryContent.selected.value);
-                                                                titleContent.value =''; postContent.value ='';"> -->
-                        <!-- </button> -->
+                        <button class="fullwidth-btn" md-raised-button (click)="sendMessage(messageContent.value); messageContent.value='';">
+                            Send
+                        </button>
                     </form>
                 </md-card-content>
             </md-card>
-            <button *ngIf="!isFollowing" md-raised-button (click)="followUser()">Follow</button>
-            <button *ngIf="isFollowing" md-raised-button (click)="unfollowUser()">Unfollow</button>
             <friends-list [dSource]="dSource"
             [followerList]="_followers"
             [followingList]="_following"></friends-list>
