@@ -100,15 +100,17 @@ export class UserProfileComponent implements OnInit {
   //   return this._messages;
   // }
 
-  sendMessage(message: string) {
-    // console.log("User-profile log:");
-    console.log(this.chatRoom);
-    var _message = {};
-    _message["text"] = message;
-    _message["sender"] = this._userID;
-    _message["recipient"] = this._profileID;
-    _message["timestamp"] = firebase.database.ServerValue.TIMESTAMP;
-    this.chatService.sendMessage(this.chatRoom, _message);
+  sendMessage(event : KeyboardEvent) {
+    if (event.keyCode == 13) {
+      var messageContent = (<HTMLInputElement>document.getElementById("messageContent")).value;
+      (<HTMLInputElement>document.getElementById("messageContent")).value = '';
+      var _message = {};
+      _message["text"] = messageContent;
+      _message["sender"] = this._userID;
+      _message["recipient"] = this._profileID;
+      _message["timestamp"] = firebase.database.ServerValue.TIMESTAMP;
+      this.chatService.sendMessage(this.chatRoom, _message);
+    }
   }
 
 }

@@ -24,33 +24,31 @@
                     <button class="fullwidth-btn" *ngIf="isFollowing" md-raised-button (click)="unfollowUser()">Unfollow</button>
                 </md-card-content>
             </md-card>
+            <friends-list [dSource]="dSource" [followerList]="_followers" [followingList]="_following"></friends-list>
             <md-card class="example-card">
-                <md-card-title>
-                    <h3>Send A Message</h3>
-                </md-card-title>
                 <md-card-content>
-                    <ul class="message-box">
-                        <li *ngFor="let message of _messages | async">
+                    <ul class="message-box" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                        <li *ngFor="let message of _messages | async" class="message-li">
                             <div *ngIf="message.recipient != this._userID" class="speech-bubble-out">
                                 <div>{{message.text}}</div>
+                                <div class="message-time-right">{{message.timestamp | date: 'MM/dd hh:ss'}}</div>
                             </div>
-                            <div *ngIf="message.recipient == this._userID" class="speech-bubble-in">{{message.text}}</div>
-                            <!-- <br> -->
+                            <div *ngIf="message.recipient == this._userID" class="speech-bubble-in">
+                                <div>{{message.text}}</div>
+                                <div class="message-time-left">{{message.timestamp | date: 'MM/dd hh:ss'}}</div>
+                            </div>
                         </li>
                     </ul>
-                    <form class="postForm">
+                    <form (keydown)="sendMessage($event)" class="postForm">
                         <md-input-container class="form-full-width">
-                            <textarea mdInput required placeholder="Your Message" #messageContent></textarea>
+                            <textarea mdInput required placeholder="Your Message" id="messageContent"></textarea>
                         </md-input-container>
-                        <button class="fullwidth-btn" md-raised-button (click)="sendMessage(messageContent.value); messageContent.value='';">
+                        <!-- <button class="fullwidth-btn" md-raised-button (click)="sendMessage(messageContent.value); messageContent.value='';">
                             Send
-                        </button>
+                        </button> -->
                     </form>
                 </md-card-content>
             </md-card>
-            <friends-list [dSource]="dSource"
-            [followerList]="_followers"
-            [followingList]="_following"></friends-list>
         </div>
 
         <div class="col-12 col-md-8">

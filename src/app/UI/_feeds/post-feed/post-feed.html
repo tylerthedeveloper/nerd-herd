@@ -25,12 +25,12 @@
                                         </md-option>
                                     </md-select>
                                 </td>
-                            </tr>                                
+                            </tr>
                         </table>
                         <md-input-container class="form-full-width">
                             <textarea mdInput required placeholder="Your Message" #postContent></textarea>
                         </md-input-container>
-                        <button md-raised-button (click)="post(titleContent.value, postContent.value, categoryContent.selected.value); 
+                        <button md-raised-button (click)="post(titleContent.value, postContent.value, categoryContent.selected.value);
                                                                 titleContent.value =''; postContent.value ='';">
                             Post
                         </button>
@@ -40,16 +40,17 @@
         </div>
         <div class="col-12 col-md-8 col-lg-8">
             <div class="post-search" style="display: flex">
-                <md-select id="searchOptionType" class="radius" placeholder="Search Type" [(ngModel)]="selectedPostSearchValue">
+                <span class="post-within">Posts within:</span>
+                <!-- <md-select id="searchOptionType" class="radius" placeholder="Search Type" [(ngModel)]="selectedPostSearchValue">
                     <md-option *ngFor="let type of postSearchOptions" [value]="type.value">
                         {{ type.viewValue }}
                     </md-option>
-                </md-select>
-                <div [style.display]="(selectedPostSearchValue !== 'searchOption_Distance') ? '' : 'none' ">
+                </md-select> -->
+                <!-- <div [style.display]="(selectedPostSearchValue !== 'searchOption_Distance') ? '' : 'none' ">
                     <md-input-container class="searchInput">
                         <input mdInput #searchText placeholder="Search posts" />
                     </md-input-container>
-                </div>
+                </div> -->
                 <div [style.display]="(selectedPostSearchValue === 'searchOption_Distance') ? '' : 'none' ">
                         <md-select class="searchInput radius" placeholder="Radius" [(ngModel)]="selectedPostSearchRadius">
                         <md-option *ngFor="let rad of postRadiusSearch" [value]="rad.value">
@@ -71,29 +72,27 @@
             <br />
             <div class="category-select-container">
                 <div id="postButtonsArray" *ngFor="let postCatButton of postButtonsArray">
-                    <div class="circle" id="{{postCatButton.id}}" (click)="setCategory(postCatButton)">
+                    <div class="circle" id="{{postCatButton.id}}" (click)="setCategory(postCatButton); handlePostSearch(selectedPostSearchValue, '')">
                         <i class="fa fa-{{postCatButton.iconType}} fa-2x" aria-hidden="true"></i>
                         <div class="category-text">{{ postCatButton.category }} </div>
                     </div>
                 </div>
             </div>
-            <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
-                    <!-- <div [style.visibility] = "(selectedPostSearchValue !== 'searchOption_Distance') ? 'visible' : 'hidden' "> -->
+            <!-- <div *ngIf="selectedPostSearchValue !== 'searchOption_Distance'">
                     <button class="searchBtn" md-raised-button (click)="handlePostSearch(selectedPostSearchValue, searchText?.value)">
                         <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                     </button>
-                </div>
-            <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
+                </div> -->
+            <!-- <div *ngIf="selectedPostSearchValue === 'searchOption_Distance'">
                 <button class="searchBtn" md-raised-button (click)="handlePostSearch(selectedPostSearchValue, '')">
                     <i class="fa fa-search fa-lg" aria-hidden="true"></i>
                 </button>
-            </div>
+            </div> -->
             <div *ngFor="let post of posts | async">
                 <div class="post-top">
                     {{post.timestamp | date: 'EEEE M/d HH:mm'}}
                 </div>
                 <md-card color="primary" class="postCard">
-                    <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;" />
                     <md-card-title>{{post.title}}</md-card-title>
                     <md-card-subtitle>{{post.author}}</md-card-subtitle>
                     <md-card-content>{{post.content}}</md-card-content>

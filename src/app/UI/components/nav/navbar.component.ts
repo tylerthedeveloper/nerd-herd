@@ -37,9 +37,9 @@ export class NavBarComponent {
   }
 
   changePage(nextPage: string) {
-      document.getElementById(this.currentPage).style.textDecoration = "none";
+      document.getElementById(this.currentPage).style.fontWeight = "normal";
       this.currentPage = nextPage;
-      document.getElementById(this.currentPage).style.textDecoration = "underline";
+      document.getElementById(this.currentPage).style.fontWeight = "bold";
   }
 
 }

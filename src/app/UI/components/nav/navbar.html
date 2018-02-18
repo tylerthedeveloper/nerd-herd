@@ -1,24 +1,25 @@
 <script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-});
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
 </script>
 
 <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
 <script>
-// Initialize Firebase
-var config = {
-    apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
-    authDomain: "ewf-nh.firebaseapp.com",
-    databaseURL: "https://ewf-nh.firebaseio.com",
-    projectId: "ewf-nh",
-    storageBucket: "",
-    messagingSenderId: "1056076336153"
-};
-firebase.initializeApp(config);
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCwgf7Aa2sma4E5d8XKh-lOwrcKVkkDOoA",
+        authDomain: "ewf-nh.firebaseapp.com",
+        databaseURL: "https://ewf-nh.firebaseio.com",
+        projectId: "ewf-nh",
+        storageBucket: "",
+        messagingSenderId: "1056076336153"
+    };
+    firebase.initializeApp(config);
 </script>
 <span class="top-space"></span>
-<div class="nav-spacing"> <!-- style="position: fixed;"" -->
+<div class="nav-spacing">
+    <!-- style="position: fixed;"" -->
     <md-toolbar class="bottom-nav">
         <button md-button [routerLink]="['/posts']" routerLinkActive="active">
             POSTS
@@ -32,45 +33,43 @@ firebase.initializeApp(config);
     </md-toolbar>
     <div class="navbar">
         <div class="container">
+            <!-- <img md-card-image src="../../../assets/cat.png" style="width:20px;height:20px;" /> -->
             <md-toolbar class="main-nav">
                 <!-- <button md-button [routerLink]="['/home']" routerLinkActive="active">
                 <md-icon class="dark"> HOME </md-icon>
             </button> -->
-                <button md-raised-button id="profile" *ngIf="loggedIn" 
-                (click)="changePage('profile')" [routerLink]="['/profile', user.uid]" 
-                routerLinkActive="active" class="main-nav-button">
-                PROFILE
+                <img src="../../../assets/logo2.png" class="logo" />
+                <div class="logo-text">Nerd-Herd</div>
+                <button md-raised-button id="profile" *ngIf="loggedIn" (click)="changePage('profile')" [routerLink]="['/profile', user.uid]"
+                    routerLinkActive="active" class="main-nav-button hvr-underline-from-center">
+                    PROFILE
                 </button>
-                <button md-raised-button id="posts" [routerLink]="['/posts']" 
-                        (click)="changePage('posts')" routerLinkActive="active"
-                        class="main-nav-button">
+                <button md-raised-button id="posts" [routerLink]="['/posts']" (click)="changePage('posts')" routerLinkActive="active" class="main-nav-button">
                     <!-- <md-icon class="dark"> POSTS </md-icon> -->
                     POSTS
                 </button>
-                <button md-raised-button id="people" [routerLink]="['/people']" 
-                        (click)="changePage('people')" routerLinkActive="active"
-                        class="main-nav-button">
+                <button md-raised-button id="people" [routerLink]="['/people']" (click)="changePage('people')" routerLinkActive="active"
+                    class="main-nav-button">
                     <!-- <md-icon class="dark"> PEOPLE </md-icon> -->
                     PEOPLE
                 </button>
-                <button md-raised-button id="projects" [routerLink]="['/projects']" 
-                        (click)="changePage('projects')" routerLinkActive="active"
-                        class="main-nav-button">
+                <button md-raised-button id="projects" [routerLink]="['/projects']" (click)="changePage('projects')" routerLinkActive="active"
+                    class="main-nav-button">
                     <!-- <md-icon class="dark"> PROJECTS </md-icon> -->
                     PROJECTS
                 </button>
-                <span class="example-fill-remaining-space"></span>  
+                <span class="example-fill-remaining-space"></span>
                 <div style="float:right;">
-                    <button md-raised-button id="contact" [routerLink]="['/contact']" 
-                        (click)="changePage('contact')" routerLinkActive="active"
+                    <!-- <button md-raised-button id="contact" [routerLink]="['/contact']" (click)="changePage('contact')" routerLinkActive="active"
                         class="main-nav-button">
-                        <!-- <md-icon class="dark"> CONTACT </md-icon> -->
                         CONTACT
-                    </button>
+                    </button> -->
                     <button md-raised-button class="main-nav-button">
                         <!-- <md-icon class="dark"> -->
-                            <span *ngIf="!loggedIn; else logswitch" (click)="login()">LOGIN / SIGNUP</span>
-                            <ng-template #logswitch> <span (click)="logout()">LOGOUT </span> </ng-template>
+                        <span *ngIf="!loggedIn; else logswitch" (click)="login()">LOGIN / SIGNUP</span>
+                        <ng-template #logswitch>
+                            <span (click)="logout()">LOGOUT </span>
+                        </ng-template>
                         <!-- </md-icon> -->
                     </button>
                 </div>

@@ -80,6 +80,10 @@ md-card {
     border-radius: 5px 5px 0 0;
 }
 
+.post-within {
+    font-size: 20px;
+}
+
 .fullwidth-btn {
     width: 100%;
 }
@@ -91,24 +95,44 @@ md-card {
     overflow: auto;
 }
 
+.message-li {
+    min-height: 40px;
+}
+
 .speech-bubble-in {
-    background: #004f04;
+    background: #445963;
     color: white;
     display: inline-block;
     font-size: 16px;
     float: left;
     padding: 3px 10px 3px 10px;
-    margin-bottom: 10px;
     margin-right: 10px;
+    border-radius: 4px;
 }
 
 .speech-bubble-out {
-    background: #60ac5d;
+    background: #004f04;
     color: white;
     display: inline-block;
     font-size: 16px;
     float: right;
     padding: 3px 10px 3px 10px;
-    margin-bottom: 10px;
     margin-left: 10px;
+    border-radius: 4px;
+}
+
+.message-time-right {
+    margin-top: 6px;
+    font-size: 10px;
+    float: right;
+}
+
+.message-time-left {
+    margin-top: 6px;
+    font-size: 10px;
+    float: left;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
